@@ -33,7 +33,7 @@ const AuthState = props => {
 	const loginUser = async formData => {
 		const res = {
 			data: {
-				user: user[1],
+				user: users[1],
 				token: "faketoken"
 			}
 		};
