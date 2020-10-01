@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../context/auth/authContext";
 
 const Login = props => {
+	const authContext = useContext(AuthContext);
+
+	const { loginUser, isAuthenticated } = authContext;
+
 	const [user, setUser] = useState({
 		email: "",
 		password: ""
