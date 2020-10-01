@@ -29,12 +29,28 @@ const AuthState = props => {
 		});
 	};
 
+	// Login User
+	const loginUser = async formData => {
+		const res = {
+			data: {
+				user: user[1],
+				token: "faketoken"
+			}
+		};
+
+		dispatch({
+			type: LOGIN_SUCCESS,
+			payload: res.data
+		});
+	};
+
 	return (
 		<AuthContext.Provider
 			value={{
 				isAuthenticated: state.isAuthenticated,
 				user: state.user,
-				loadUser
+				loadUser,
+				loginUser
 			}}
 		>
 			{props.children}
