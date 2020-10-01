@@ -25,7 +25,7 @@ const AuthState = props => {
 	const loadUser = async () => {
 		dispatch({
 			type: USER_LOADED,
-			payload: users[1]
+			payload: users[0]
 		});
 	};
 
@@ -33,7 +33,7 @@ const AuthState = props => {
 	const loginUser = async formData => {
 		const res = {
 			data: {
-				user: users[1],
+				user: users[0],
 				token: "faketoken"
 			}
 		};
