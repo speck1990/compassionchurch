@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import PrivateRoute from "./routing/PrivateRoute";
 
 import Dashboard from "./pages/Dashboard";
 import Login from "./auth/Login";
@@ -14,7 +15,7 @@ const App = () => {
 					<h1>Compassion Network</h1>
 					<Link to="/">Home</Link>
 					<Switch>
-						<Route exact path="/" component={Dashboard} />
+						<PrivateRoute exact path="/" component={Dashboard} />
 						<Route exact path="/login" component={Login} />
 					</Switch>
 				</div>
