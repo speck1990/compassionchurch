@@ -6,20 +6,23 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./auth/Login";
 
 import AuthState from "./context/auth/AuthState";
+import PageState from "./context/page/PageState";
 
 const App = () => {
 	return (
 		<AuthState>
-			<Router>
-				<div>
-					<h1>Compassion Network</h1>
-					<Link to="/">Home</Link>
-					<Switch>
-						<PrivateRoute exact path="/" component={Dashboard} />
-						<Route exact path="/login" component={Login} />
-					</Switch>
-				</div>
-			</Router>
+			<PageState>
+				<Router>
+					<div>
+						<h1>Compassion Network</h1>
+						<Link to="/">Home</Link>
+						<Switch>
+							<PrivateRoute exact path="/" component={Dashboard} />
+							<Route exact path="/login" component={Login} />
+						</Switch>
+					</div>
+				</Router>
+			</PageState>
 		</AuthState>
 	);
 };
