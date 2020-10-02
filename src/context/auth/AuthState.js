@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
-import { USER_LOADED, LOGIN_SUCCESS } from "../types";
+import { USER_LOADED, LOGIN_SUCCESS, LOGOUT_USER } from "../types";
 
 const AuthState = props => {
 	const users = [
@@ -44,13 +44,21 @@ const AuthState = props => {
 		});
 	};
 
+	// Logout User
+	const logoutUser = () => {
+		dispatch({
+			type: LOGOUT_USER
+		});
+	};
+
 	return (
 		<AuthContext.Provider
 			value={{
 				isAuthenticated: state.isAuthenticated,
 				user: state.user,
 				loadUser,
-				loginUser
+				loginUser,
+				logoutUser
 			}}
 		>
 			{props.children}
