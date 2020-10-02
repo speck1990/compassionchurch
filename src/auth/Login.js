@@ -38,7 +38,7 @@ const Login = props => {
 				<br />
 				<input type="password" name="password" value={password} placeholder="Password" onChange={onChange} />
 				<br />
-				<button>Login</button>
+				<button type="submit">Login</button>
 			</form>
 		</div>
 	);
