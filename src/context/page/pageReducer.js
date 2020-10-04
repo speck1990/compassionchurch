@@ -1,10 +1,11 @@
-import {} from "../types";
+import { ADD_ELEMENT } from "../types";
 
 const pageReducer = (state, action) => {
 	switch (action.type) {
-		case true:
+		case ADD_ELEMENT:
 			return {
-				...state
+				...state,
+				content: action.payload.content
 			};
 
 		default:
