@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import PageContext from "../context/page/pageContext";
+import PageBuilder from "./PageBuilder.js";
 
 const AddPage = () => {
 	const pageContext = useContext(PageContext);
 
 	const [pageInfo, setPageInfo] = useState({
-		title: "",
-		subtitle: ""
+		title: pageContext.title,
+		subtitle: pageContext.subtitle,
+		content: pageContext.content
 	});
 
 	const { title, subtitle } = pageInfo;
@@ -27,7 +29,8 @@ const AddPage = () => {
 					<br />
 					<input type="text" name="subtitle" value={subtitle} onChange={onTextChange} />
 				</div>
-
+				<br />
+				<PageBuilder />
 				<button>Save & Publish</button>
 			</form>
 		</div>
