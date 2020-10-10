@@ -4,7 +4,7 @@ import PageContext from "../context/page/pageContext";
 
 const Pages = () => {
 	const pageContext = useContext(PageContext);
-	console.log("object");
+
 	const { pages, getPages, setCurrent } = pageContext;
 
 	useEffect(() => {
