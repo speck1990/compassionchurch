@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import PrivateRoute from "./routing/PrivateRoute";
 
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./dashboard/Dashboard";
+import Pages from "./pages/Pages";
 import AddPage from "./pages/AddPage";
 import Login from "./auth/Login";
 
@@ -16,10 +17,11 @@ const App = () => {
 				<Router>
 					<div>
 						<h1>Compassion Network</h1>
-						<Link to="/">Home</Link> | <Link to="/addpage">Add Page</Link>
+						<Link to="/">Home</Link> | <Link to="/pages">Pages</Link>
 						<Switch>
 							<PrivateRoute exact path="/" component={Dashboard} />
-							<PrivateRoute exact path="/addpage" component={AddPage} />
+							<Route exact path="/pages" component={Pages} />
+							<Route exact path="/addpage" component={AddPage} />
 							<Route exact path="/login" component={Login} />
 						</Switch>
 					</div>

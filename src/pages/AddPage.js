@@ -1,19 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import PageContext from "../context/page/pageContext";
-import PageBuilder from "./PageBuilder.js";
+import AddBlock from "../blocks/AddBlock";
+import Blocks from "../blocks/Blocks";
 
 const AddPage = () => {
 	const pageContext = useContext(PageContext);
 
-	const [pageInfo, setPageInfo] = useState({
-		title: pageContext.title,
-		subtitle: pageContext.subtitle,
-		content: pageContext.content
-	});
+	const { current, updateCurrent } = pageContext;
 
-	const { title, subtitle } = pageInfo;
+	const { title, subtitle, content } = current;
 
-	const onTextChange = e => setPageInfo({ ...pageInfo, [e.target.name]: e.target.value });
+	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
 
 	return (
 		<div>
@@ -30,7 +27,8 @@ const AddPage = () => {
 					<input type="text" name="subtitle" value={subtitle} onChange={onTextChange} />
 				</div>
 				<br />
-				<PageBuilder />
+				<AddBlock position="-1" />
+				<Blocks blocks={content} />
 				<button>Save & Publish</button>
 			</form>
 		</div>

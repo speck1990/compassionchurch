@@ -1,11 +1,23 @@
-import { ADD_ELEMENT } from "../types";
+import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT } from "../types";
 
 const pageReducer = (state, action) => {
 	switch (action.type) {
-		case ADD_ELEMENT:
+		case GET_PAGES:
 			return {
 				...state,
-				content: action.payload.content
+				pages: action.payload
+			};
+
+		case SET_CURRENT:
+			return {
+				...state,
+				current: action.payload
+			};
+
+		case UPDATE_CURRENT:
+			return {
+				...state,
+				current: action.payload
 			};
 
 		default:
