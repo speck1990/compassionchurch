@@ -66,6 +66,12 @@ const PageState = props => {
 		dispatch({ type: UPDATE_CURRENT, payload: updatedCurrent });
 	};
 
+	const deleteBlock = id => {
+		const updatedContent = state.current.content.filter(block => block.id !== id);
+		const updatedCurrent = { ...state.current, content: updatedContent };
+		dispatch({ type: UPDATE_CURRENT, payload: updatedCurrent });
+	};
+
 	return (
 		<PageContext.Provider
 			value={{
@@ -74,7 +80,8 @@ const PageState = props => {
 				getPages,
 				setCurrent,
 				updateCurrent,
-				addBlock
+				addBlock,
+				deleteBlock
 			}}
 		>
 			{props.children}
