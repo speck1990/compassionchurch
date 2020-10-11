@@ -3,19 +3,26 @@ import PageContext from "../context/page/pageContext";
 import AddBlock from "../blocks/AddBlock";
 import Blocks from "../blocks/Blocks";
 
-const AddPage = () => {
+const AddPage = props => {
 	const pageContext = useContext(PageContext);
 
-	const { current, updateCurrent } = pageContext;
+	const { current, updateCurrent, updatePage } = pageContext;
 
 	const { title, subtitle, content } = current;
 
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
 
+	const handleOnClick = e => {
+		e.preventDefault();
+		updatePage(current);
+
+		props.history.push("/pages");
+	};
+
 	return (
 		<div>
 			<h1>Add New Page</h1>
-			<form>
+			<form onSubmit={handleOnClick}>
 				<div>
 					<label htmlFor="title">Title</label>
 					<br />
@@ -29,7 +36,7 @@ const AddPage = () => {
 				<br />
 				<AddBlock position="-1" />
 				<Blocks blocks={content} />
-				<button>Save & Publish</button>
+				<button onClick={handleOnClick}>Save & Publish</button>
 			</form>
 		</div>
 	);

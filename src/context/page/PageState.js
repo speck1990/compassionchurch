@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PageContext from "./pageContext";
 import pageReducer from "./pageReducer";
-import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT } from "../types";
+import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT } from "../types";
 
 const PageState = props => {
 	const pages = [
@@ -49,8 +49,17 @@ const PageState = props => {
 		dispatch({ type: GET_PAGES, payload: pages });
 	};
 
+	const updatePage = page => {
+		dispatch({ type: UPDATE_PAGE, payload: page });
+		clearCurrent();
+	};
+
 	const setCurrent = page => {
 		dispatch({ type: SET_CURRENT, payload: page });
+	};
+
+	const clearCurrent = () => {
+		dispatch({ type: CLEAR_CURRENT });
 	};
 
 	const updateCurrent = current => {
@@ -80,8 +89,10 @@ const PageState = props => {
 				getPages,
 				setCurrent,
 				updateCurrent,
+				clearCurrent,
 				addBlock,
-				deleteBlock
+				deleteBlock,
+				updatePage
 			}}
 		>
 			{props.children}
