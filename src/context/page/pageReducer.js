@@ -1,4 +1,4 @@
-import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT } from "../types";
+import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR } from "../types";
 
 const pageReducer = (state, action) => {
 	switch (action.type) {
@@ -30,6 +30,12 @@ const pageReducer = (state, action) => {
 			return {
 				...state,
 				current: action.payload
+			};
+
+		case PAGE_ERROR:
+			return {
+				...state,
+				error: action.payload
 			};
 
 		default:

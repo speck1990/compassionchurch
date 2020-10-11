@@ -1,41 +1,11 @@
 import React, { useReducer } from "react";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 import PageContext from "./pageContext";
 import pageReducer from "./pageReducer";
-import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT } from "../types";
+import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR } from "../types";
 
 const PageState = props => {
-	const pages = [
-		{
-			id: 1,
-			title: "About Us",
-			subtitle: "Get to know us",
-			content: [
-				{ id: 1, type: "heading", text: "<h1>About Us</h1>" },
-				{
-					id: 2,
-					type: "paragraph",
-					text: "<p>Irure proident aliqua amet voluptate non non pariatur. Non nisi eu nulla consequat. Enim fugiat dolore quis dolor culpa. Ullamco reprehenderit proident nostrud voluptate deserunt ea elit qui reprehenderit enim duis deserunt adipisicing dolor.</p>"
-				},
-				{ id: 3, type: "image" }
-			]
-		},
-		{
-			id: 2,
-			title: "Locations and Services",
-			subtitle: "Get to know us",
-			content: [
-				{ id: 1, type: "heading", text: "<h1>About Us</h1>" },
-				{
-					id: 2,
-					type: "paragraph",
-					text: "<p>Irure proident aliqua amet voluptate non non pariatur. Non nisi eu nulla consequat. Enim fugiat dolore quis dolor culpa. Ullamco reprehenderit proident nostrud voluptate deserunt ea elit qui reprehenderit enim duis deserunt adipisicing dolor.</p>"
-				},
-				{ id: 3, type: "image" }
-			]
-		}
-	];
-
 	const initalState = {
 		pages: null,
 		current: null,
@@ -44,13 +14,35 @@ const PageState = props => {
 
 	const [state, dispatch] = useReducer(pageReducer, initalState);
 
-	const getPages = () => {
-		// const pages = [pages from api]
-		dispatch({ type: GET_PAGES, payload: pages });
+	const getPages = async () => {
+		try {
+			const res = await axios.get("/pages");
+			dispatch({ type: GET_PAGES, payload: res.data });
+		} catch (err) {
+			dispatch({
+				type: PAGE_ERROR,
+				payload: err.response.msg
+			});
+		}
 	};
 
-	const updatePage = page => {
-		dispatch({ type: UPDATE_PAGE, payload: page });
+	const updatePage = async page => {
+		const config = {
+			headers: {
+				"Content-Type": "application/json"
+			}
+		};
+
+		try {
+			const res = await axios.put(`/pages/${page.id}`, page, config);
+			dispatch({ type: UPDATE_PAGE, payload: res.data });
+		} catch (err) {
+			dispatch({
+				type: PAGE_ERROR,
+				payload: err.response.msg
+			});
+		}
+
 		clearCurrent();
 	};
 
