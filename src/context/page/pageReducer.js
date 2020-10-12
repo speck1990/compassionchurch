@@ -1,47 +1,60 @@
-import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, ADD_PAGE } from "../types";
+import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, ADD_PAGE, SET_LOADING } from "../types";
 
 const pageReducer = (state, action) => {
 	switch (action.type) {
 		case GET_PAGES:
 			return {
 				...state,
-				pages: action.payload
+				pages: action.payload,
+				loading: false
 			};
 
 		case ADD_PAGE:
 			return {
 				...state,
-				pages: [action.payload, ...state.pages]
+				pages: [action.payload, ...state.pages],
+				loading: false
 			};
 
 		case UPDATE_PAGE:
 			return {
 				...state,
-				pages: state.pages.map(page => (page.id === action.payload.id ? action.payload : page))
+				pages: state.pages.map(page => (page.id === action.payload.id ? action.payload : page)),
+				loading: false
 			};
 
 		case SET_CURRENT:
 			return {
 				...state,
-				current: action.payload
+				current: action.payload,
+				loading: false
 			};
 
 		case CLEAR_CURRENT:
 			return {
 				...state,
-				current: null
+				current: null,
+				loading: false
 			};
 
 		case UPDATE_CURRENT:
 			return {
 				...state,
-				current: action.payload
+				current: action.payload,
+				loading: false
 			};
 
 		case PAGE_ERROR:
 			return {
 				...state,
-				error: action.payload
+				error: action.payload,
+				loading: false
+			};
+
+		case SET_LOADING:
+			return {
+				...state,
+				loading: true
 			};
 
 		default:

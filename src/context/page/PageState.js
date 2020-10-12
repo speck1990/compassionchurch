@@ -3,18 +3,21 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import PageContext from "./pageContext";
 import pageReducer from "./pageReducer";
-import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, ADD_PAGE } from "../types";
+import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, ADD_PAGE, SET_LOADING } from "../types";
 
 const PageState = props => {
 	const initalState = {
 		pages: null,
 		current: null,
-		error: null
+		error: null,
+		loading: false
 	};
 
 	const [state, dispatch] = useReducer(pageReducer, initalState);
 
 	const getPages = async () => {
+		setLoading();
+
 		try {
 			const res = await axios.get("/pages");
 			dispatch({ type: GET_PAGES, payload: res.data });
@@ -27,6 +30,8 @@ const PageState = props => {
 	};
 
 	const addPage = async page => {
+		setLoading();
+
 		const config = {
 			headers: {
 				"Content-Type": "application/json"
@@ -47,6 +52,8 @@ const PageState = props => {
 	};
 
 	const updatePage = async page => {
+		setLoading();
+
 		const config = {
 			headers: {
 				"Content-Type": "application/json"
@@ -67,6 +74,8 @@ const PageState = props => {
 	};
 
 	const setCurrent = async id => {
+		setLoading();
+
 		if (id) {
 			try {
 				const res = await axios.get(`/pages/${id}`);
@@ -105,6 +114,8 @@ const PageState = props => {
 		dispatch({ type: UPDATE_CURRENT, payload: updatedCurrent });
 	};
 
+	const setLoading = () => dispatch({ type: SET_LOADING });
+
 	return (
 		<PageContext.Provider
 			value={{
@@ -117,7 +128,8 @@ const PageState = props => {
 				clearCurrent,
 				addBlock,
 				deleteBlock,
-				updatePage
+				updatePage,
+				loading: state.loading
 			}}
 		>
 			{props.children}

@@ -8,7 +8,7 @@ const AddPage = props => {
 	const { id } = useParams();
 	const pageContext = useContext(PageContext);
 
-	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage } = pageContext;
+	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, loading } = pageContext;
 
 	useEffect(() => {
 		if (id !== null) {
@@ -39,9 +39,7 @@ const AddPage = props => {
 
 	return (
 		<div>
-			{current === null ? (
-				<p>No page selected</p>
-			) : (
+			{current !== null && !loading ? (
 				<div>
 					<h1>Add New Page</h1>
 					<form onSubmit={handleOnClick}>
@@ -61,6 +59,8 @@ const AddPage = props => {
 						<button onClick={handleOnClick}>Save & Publish</button>
 					</form>
 				</div>
+			) : (
+				<p></p>
 			)}
 		</div>
 	);
