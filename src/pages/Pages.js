@@ -5,7 +5,7 @@ import PageContext from "../context/page/pageContext";
 const Pages = () => {
 	const pageContext = useContext(PageContext);
 
-	const { pages, getPages, setCurrent } = pageContext;
+	const { pages, getPages } = pageContext;
 
 	useEffect(() => {
 		getPages();
@@ -14,14 +14,14 @@ const Pages = () => {
 
 	return (
 		<div>
+			<Link to="/pages/create">Add Page</Link>
+			<br />
 			{pages === null ? (
 				<p>No Pages</p>
 			) : (
 				pages.map((page, key) => (
 					<div key={key}>
-						<Link to="/addpage" onClick={() => setCurrent(page)}>
-							{page.title}
-						</Link>
+						<Link to={`/pages/${page.id}`}>{page.title}</Link>
 					</div>
 				))
 			)}

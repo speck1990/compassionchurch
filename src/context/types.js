@@ -9,3 +9,4 @@ export const UPDATE_CURRENT = "UPDATE_CURRENT";
 export const UPDATE_PAGE = "UPDATE_PAGE";
 export const CLEAR_CURRENT = "CLEAR_CURRENT";
 export const PAGE_ERROR = "PAGE_ERROR";
+export const ADD_PAGE = "ADD_PAGE";

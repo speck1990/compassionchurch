@@ -22,6 +22,8 @@ const App = () => {
 							<PrivateRoute exact path="/" component={Dashboard} />
 							<Route exact path="/pages" component={Pages} />
 							<Route exact path="/addpage" component={AddPage} />
+							<Route exact path="/pages/create" component={AddPage} />
+							<Route exact path="/pages/:id" component={AddPage} />
 							<Route exact path="/login" component={Login} />
 						</Switch>
 					</div>

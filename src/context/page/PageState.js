@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import PageContext from "./pageContext";
 import pageReducer from "./pageReducer";
-import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR } from "../types";
+import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, ADD_PAGE } from "../types";
 
 const PageState = props => {
 	const initalState = {
@@ -26,6 +26,26 @@ const PageState = props => {
 		}
 	};
 
+	const addPage = async page => {
+		const config = {
+			headers: {
+				"Content-Type": "application/json"
+			}
+		};
+
+		try {
+			const res = await axios.post(`/pages`, { id: uuidv4(), ...page }, config);
+			dispatch({ type: ADD_PAGE, payload: res.data });
+		} catch (err) {
+			dispatch({
+				type: PAGE_ERROR,
+				payload: err.response.msg
+			});
+		}
+
+		clearCurrent();
+	};
+
 	const updatePage = async page => {
 		const config = {
 			headers: {
@@ -46,8 +66,20 @@ const PageState = props => {
 		clearCurrent();
 	};
 
-	const setCurrent = page => {
-		dispatch({ type: SET_CURRENT, payload: page });
+	const setCurrent = async id => {
+		if (id) {
+			try {
+				const res = await axios.get(`/pages/${id}`);
+				dispatch({ type: SET_CURRENT, payload: res.data });
+			} catch (err) {
+				dispatch({
+					type: PAGE_ERROR,
+					payload: err.response.msg
+				});
+			}
+		} else {
+			dispatch({ type: SET_CURRENT, payload: { title: "", subtitle: "", content: "" } });
+		}
 	};
 
 	const clearCurrent = () => {
@@ -79,6 +111,7 @@ const PageState = props => {
 				pages: state.pages,
 				current: state.current,
 				getPages,
+				addPage,
 				setCurrent,
 				updateCurrent,
 				clearCurrent,
