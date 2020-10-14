@@ -5,12 +5,17 @@ import PageContext from "../context/page/pageContext";
 const Pages = () => {
 	const pageContext = useContext(PageContext);
 
-	const { pages, getPages, loading } = pageContext;
+	const { pages, getPages, deletePage, loading } = pageContext;
 
 	useEffect(() => {
 		getPages();
 		// eslint-disable-next-line
 	}, []);
+
+	const handleClick = (id, e) => {
+		e.preventDefault();
+		deletePage(id);
+	};
 
 	return (
 		<div>
@@ -20,6 +25,7 @@ const Pages = () => {
 				pages.map((page, key) => (
 					<div key={key}>
 						<Link to={`/pages/${page.id}`}>{page.title}</Link>
+						<button onClick={e => handleClick(page.id, e)}>Delete</button>
 					</div>
 				))
 			) : (

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import PageContext from "./pageContext";
 import pageReducer from "./pageReducer";
-import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, ADD_PAGE, SET_LOADING } from "../types";
+import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, ADD_PAGE, SET_LOADING, DELETE_PAGE } from "../types";
 
 const PageState = props => {
 	const initalState = {
@@ -73,6 +73,21 @@ const PageState = props => {
 		clearCurrent();
 	};
 
+	const deletePage = async id => {
+		setLoading();
+
+		try {
+			await axios.delete(`/pages/${id}`);
+		} catch (err) {
+			dispatch({
+				type: PAGE_ERROR,
+				payload: err
+			});
+		}
+
+		dispatch({ type: DELETE_PAGE, payload: id });
+	};
+
 	const setCurrent = async id => {
 		setLoading();
 
@@ -130,6 +145,7 @@ const PageState = props => {
 				addBlock,
 				deleteBlock,
 				updatePage,
+				deletePage,
 				loading: state.loading
 			}}
 		>

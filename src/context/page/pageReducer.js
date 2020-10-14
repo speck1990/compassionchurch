@@ -1,4 +1,4 @@
-import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, ADD_PAGE, SET_LOADING } from "../types";
+import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, ADD_PAGE, SET_LOADING, DELETE_PAGE } from "../types";
 
 const pageReducer = (state, action) => {
 	switch (action.type) {
@@ -20,6 +20,13 @@ const pageReducer = (state, action) => {
 			return {
 				...state,
 				pages: state.pages.map(page => (page.id === action.payload.id ? action.payload : page)),
+				loading: false
+			};
+
+		case DELETE_PAGE:
+			return {
+				...state,
+				pages: state.pages.filter(page => page.id !== action.payload),
 				loading: false
 			};
 
