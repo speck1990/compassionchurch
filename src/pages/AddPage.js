@@ -38,8 +38,14 @@ const AddPage = props => {
 		props.history.push("/pages");
 	};
 
-	const onDragEnd = result => {
-		console.log(result);
+	const onDragEnd = ({ destination, source }) => {
+		if (!destination) return;
+
+		const updatedContent = Array.from(current.content);
+		const [removed] = updatedContent.splice(source.index, 1);
+		updatedContent.splice(destination.index, 0, removed);
+
+		updateCurrent({ ...current, content: updatedContent });
 	};
 
 	return (
