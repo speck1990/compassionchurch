@@ -7,9 +7,9 @@ const BlockItems = {
 	paragraph: Paragraph
 };
 
-export default block => {
+export default (block, index) => {
 	if (typeof BlockItems[block.type] != "undefined") {
-		return React.createElement(BlockItems[block.type], { block, key: block.id });
+		return React.createElement(BlockItems[block.type], { block, key: block.id, index });
 	}
 
 	return React.createElement(() => <div>The component {block.type} has not been created yet.</div>, { key: block.id });

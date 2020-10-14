@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { DragDropContext } from "react-beautiful-dnd";
 import PageContext from "../context/page/pageContext";
 import AddBlock from "../blocks/AddBlock";
 import Blocks from "../blocks/Blocks";
@@ -37,32 +38,38 @@ const AddPage = props => {
 		props.history.push("/pages");
 	};
 
+	const onDragEnd = result => {
+		console.log(result);
+	};
+
 	return (
-		<div>
-			{current !== null && !loading ? (
-				<div>
-					<h1>Add New Page</h1>
-					<form onSubmit={handleOnClick}>
-						<div>
-							<label htmlFor="title">Title</label>
+		<DragDropContext onDragEnd={onDragEnd}>
+			<div>
+				{current !== null && !loading ? (
+					<div>
+						<h1>Add New Page</h1>
+						<form onSubmit={handleOnClick}>
+							<div>
+								<label htmlFor="title">Title</label>
+								<br />
+								<input type="text" name="title" value={current.title} onChange={onTextChange} />
+							</div>
+							<div>
+								<label htmlFor="subtitle">Subtitle</label>
+								<br />
+								<input type="text" name="subtitle" value={current.subtitle} onChange={onTextChange} />
+							</div>
 							<br />
-							<input type="text" name="title" value={current.title} onChange={onTextChange} />
-						</div>
-						<div>
-							<label htmlFor="subtitle">Subtitle</label>
-							<br />
-							<input type="text" name="subtitle" value={current.subtitle} onChange={onTextChange} />
-						</div>
-						<br />
-						<AddBlock position="-1" />
-						<Blocks blocks={current.content} />
-						<button onClick={handleOnClick}>Save & Publish</button>
-					</form>
-				</div>
-			) : (
-				<p></p>
-			)}
-		</div>
+							<AddBlock position="-1" />
+							<Blocks blocks={current.content} />
+							<button onClick={handleOnClick}>Save & Publish</button>
+						</form>
+					</div>
+				) : (
+					<p></p>
+				)}
+			</div>
+		</DragDropContext>
 	);
 };
 

@@ -1,6 +1,8 @@
 import React, { Fragment, useContext } from "react";
+import { Droppable } from "react-beautiful-dnd";
 import AddBlock from "./AddBlock";
 import BlockItems from "./blocks/BlockItems";
+
 import PageContext from "../context/page/pageContext";
 
 const Blocks = ({ blocks }) => {
@@ -13,13 +15,20 @@ const Blocks = ({ blocks }) => {
 			{blocks.length === 0 ? (
 				<p>No Blocks</p>
 			) : (
-				blocks.map((block, key) => (
-					<div key={block.id}>
-						<button onClick={() => deleteBlock(block.id)}>Delete Below</button>
-						{BlockItems(block)}
-						<AddBlock position={key} />
-					</div>
-				))
+				<Droppable droppableId="blocks">
+					{provided => (
+						<div ref={provided.innerRef} {...provided.droppableProps}>
+							{blocks.map((block, key) => (
+								<div key={block.id}>
+									<button onClick={() => deleteBlock(block.id)}>Delete Below</button>
+									{BlockItems(block, key)}
+									<AddBlock position={key} />
+								</div>
+							))}
+							{provided.placeholder}
+						</div>
+					)}
+				</Droppable>
 			)}
 		</Fragment>
 	);
