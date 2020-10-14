@@ -8,7 +8,7 @@ import PageContext from "../context/page/pageContext";
 const Blocks = ({ blocks }) => {
 	const pageContext = useContext(PageContext);
 
-	const { deleteBlock } = pageContext;
+	const {} = pageContext;
 
 	return (
 		<Fragment>
@@ -20,7 +20,6 @@ const Blocks = ({ blocks }) => {
 						<div ref={provided.innerRef} {...provided.droppableProps}>
 							{blocks.map((block, key) => (
 								<div key={block.id}>
-									<button onClick={() => deleteBlock(block.id)}>Delete Below</button>
 									{BlockItems(block, key)}
 									<AddBlock position={key} />
 								</div>

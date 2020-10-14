@@ -7,7 +7,7 @@ import PageContext from "../../context/page/pageContext";
 const Paragraph = ({ block, index }) => {
 	const pageContext = useContext(PageContext);
 
-	const { current, updateCurrent } = pageContext;
+	const { current, updateCurrent, deleteBlock } = pageContext;
 
 	const modules = {
 		toolbar: [["bold", "italic", "underline"], [{ align: [false, "center", "right"] }], ["link"], [{ indent: "-1" }, { indent: "+1" }], ["clean"]]
@@ -21,6 +21,7 @@ const Paragraph = ({ block, index }) => {
 		<Draggable draggableId={`draggable-${block.id}`} index={index}>
 			{provided => (
 				<div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+					<button onClick={() => deleteBlock(block.id)}>Delete Below</button>
 					<ReactQuill modules={modules} formats={formats} value={block.text || ""} onChange={handleOnChange} />
 				</div>
 			)}
