@@ -60,7 +60,7 @@ const AddPage = props => {
 								<input type="text" name="subtitle" value={current.subtitle} onChange={onTextChange} />
 							</div>
 							<br />
-							<AddBlock position="-1" />
+							<AddBlock location="-1" />
 							<Blocks blocks={current.content} />
 							<button onClick={handleOnClick}>Save & Publish</button>
 						</form>

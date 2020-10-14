@@ -99,10 +99,11 @@ const PageState = props => {
 		dispatch({ type: UPDATE_CURRENT, payload: current });
 	};
 
-	const addBlock = (type, position) => {
+	const addBlock = (block, position) => {
+		block.id = block.id || uuidv4();
+
 		const updatedContent = [...state.current.content];
-		const newKey = position + 1;
-		updatedContent.splice(newKey, 0, { id: uuidv4(), type, text: "" });
+		updatedContent.splice(position, 0, block);
 		const updatedCurrent = { ...state.current, content: updatedContent };
 
 		dispatch({ type: UPDATE_CURRENT, payload: updatedCurrent });

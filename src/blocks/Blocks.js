@@ -21,7 +21,7 @@ const Blocks = ({ blocks }) => {
 							{blocks.map((block, key) => (
 								<div key={block.id}>
 									{BlockItems(block, key)}
-									<AddBlock position={key} />
+									<AddBlock location={key} />
 								</div>
 							))}
 							{provided.placeholder}
