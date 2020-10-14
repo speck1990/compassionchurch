@@ -83,7 +83,7 @@ const PageState = props => {
 			} catch (err) {
 				dispatch({
 					type: PAGE_ERROR,
-					payload: err.response.msg
+					payload: err
 				});
 			}
 		} else {
