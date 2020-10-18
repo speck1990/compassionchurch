@@ -1,15 +1,9 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import AddBlock from "./AddBlock";
 import BlockItems from "./blocks/BlockItems";
 
-import PageContext from "../context/page/pageContext";
-
 const Blocks = ({ blocks }) => {
-	const pageContext = useContext(PageContext);
-
-	const {} = pageContext;
-
 	return (
 		<Fragment>
 			{blocks.length === 0 ? (
