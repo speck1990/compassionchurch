@@ -53,7 +53,7 @@ const PageForm = props => {
 			<div>
 				{current !== null && !loading ? (
 					<div>
-						<h1>Add New Page</h1>
+						<h1>{id ? "Edit Page" : "Add New Page"}</h1>
 						<form onSubmit={handleOnClick}>
 							<div>
 								<label htmlFor="title">Title</label>
