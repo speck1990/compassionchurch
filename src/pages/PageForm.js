@@ -5,7 +5,7 @@ import AddBlock from "../blocks/AddBlock";
 import Blocks from "../blocks/Blocks";
 import { useParams } from "react-router-dom";
 
-const AddPage = props => {
+const PageForm = props => {
 	const { id } = useParams();
 	const pageContext = useContext(PageContext);
 
@@ -79,4 +79,4 @@ const AddPage = props => {
 	);
 };
 
-export default AddPage;
+export default PageForm;
