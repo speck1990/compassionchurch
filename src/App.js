@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import PrivateRoute from "./routing/PrivateRoute";
 
 import NavigationBar from "./layout/NavigationBar";
@@ -21,6 +21,7 @@ const App = () => {
 				<LinkState>
 					<Router>
 						<NavigationBar />
+						<Link to="/">Home</Link> | <Link to="/pages">Pages</Link> | <Link to="/links">Navigation</Link>
 						<Switch>
 							<PrivateRoute exact path="/" component={Dashboard} />
 							<Route exact path="/pages" component={Pages} />
