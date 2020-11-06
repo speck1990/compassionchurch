@@ -78,47 +78,10 @@ const Header = props => {
 									</Dropdown.Menu>
 								</Dropdown>
 							</li>
-							<li className="nav-item">
-								<Dropdown className={isPathActive("/settings") ? "nav-item active" : "nav-item"}>
-									<Dropdown.Toggle as={"a"} className="nav-link with-sub">
-										<i className="typcn typcn-spanner-outline"></i> Settings
-									</Dropdown.Toggle>
-									<Dropdown.Menu className="az-menu-sub">
-										<Link to="/utilities/background" className={isPathActive("/utilities/background") ? "nav-link active" : "nav-link"}>
-											Background
-										</Link>
-										<Link to="/utilities/border" className={isPathActive("/utilities/border") ? "nav-link active" : "nav-link"}>
-											Border
-										</Link>
-										<Link to="/utilities/display" className={isPathActive("/utilities/display") ? "nav-link active" : "nav-link"}>
-											Display
-										</Link>
-										<Link to="/utilities/flex" className={isPathActive("/utilities/flex") ? "nav-link active" : "nav-link"}>
-											Flex
-										</Link>
-										<Link to="/utilities/height" className={isPathActive("/utilities/height") ? "nav-link active" : "nav-link"}>
-											Height
-										</Link>
-										<Link to="/utilities/margin" className={isPathActive("/utilities/margin") ? "nav-link active" : "nav-link"}>
-											Margin
-										</Link>
-										<Link to="/utilities/padding" className={isPathActive("/utilities/padding") ? "nav-link active" : "nav-link"}>
-											Padding
-										</Link>
-										<Link to="/utilities/position" className={isPathActive("/utilities/position") ? "nav-link active" : "nav-link"}>
-											Position
-										</Link>
-										<Link to="/utilities/typography" className={isPathActive("/utilities/typography") ? "nav-link active" : "nav-link"}>
-											Typography
-										</Link>
-										<Link to="/utilities/width" className={isPathActive("/utilities/width") ? "nav-link active" : "nav-link"}>
-											Width
-										</Link>
-										<Link to="/utilities/extras" className={isPathActive("/utilities/extras") ? "nav-link active" : "nav-link"}>
-											Extras
-										</Link>
-									</Dropdown.Menu>
-								</Dropdown>
+							<li className={isPathActive("/settings", true) ? "nav-item active" : "nav-item"}>
+								<Link to="/" className="nav-link">
+									<i className="typcn typcn-spanner-outline"></i> Settings
+								</Link>
 							</li>
 						</ul>
 					</div>
