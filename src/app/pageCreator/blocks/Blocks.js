@@ -3,11 +3,11 @@ import { Droppable } from "react-beautiful-dnd";
 import AddBlock from "./AddBlock";
 import BlockItems from "./blocks/BlockItems";
 
-const Blocks = ({ blocks }) => {
+const Blocks = ({ blocks, isVisible }) => {
 	return (
 		<Fragment>
 			{blocks.length === 0 ? (
-				<p>No Blocks</p>
+				<p></p>
 			) : (
 				<Droppable droppableId="blocks">
 					{provided => (
