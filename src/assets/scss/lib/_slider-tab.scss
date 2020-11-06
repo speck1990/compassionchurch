@@ -1,0 +1,21 @@
+.az-custom-nav-tabs {
+  overflow: scroll;
+  display: table;
+
+  @media screen and (max-width: 992px) {
+    display: block;
+  }
+  .nav-tabs {
+    display: block;
+    width: 100%;
+    background: transparent;
+    padding: 0;
+    flex: 1;
+    overflow: scroll;
+    border: 1px solid red;
+    .nav-link {
+      display: table-cell;
+      min-width: 130px;
+    }
+  }
+}
