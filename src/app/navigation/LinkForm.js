@@ -35,7 +35,7 @@ const LinkForm = props => {
 	const onLinkChange = e => updateCurrent({ ...current, link: "", [e.target.name]: e.target.value });
 	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
 
-	const handleOnClick = () => (id ? updateLink(current) : addLink(current));
+	const handleSave = () => (id ? updateLink(current) : addLink(current));
 
 	return (
 		<div>
@@ -103,7 +103,7 @@ const LinkForm = props => {
 
 									<hr className="mg-y-30" />
 
-									<SaveCancel onSave={handleOnClick} redirect="/links" />
+									<SaveCancel onSave={handleSave} redirect="/links" />
 								</form>
 							</div>
 						) : (

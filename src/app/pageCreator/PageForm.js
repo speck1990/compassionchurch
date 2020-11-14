@@ -31,7 +31,7 @@ const PageForm = props => {
 
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
 
-	const handleOnClick = () => (id ? updatePage(current) : addPage(current));
+	const handleSave = () => (id ? updatePage(current) : addPage(current));
 
 	const onDragStart = () => setIsVisible(false);
 
@@ -113,7 +113,7 @@ const PageForm = props => {
 
 										<hr className="mg-y-30" />
 
-										<SaveCancel onSave={handleOnClick} redirect="/pages" />
+										<SaveCancel onSave={handleSave} redirect="/pages" />
 									</form>
 								</div>
 							) : (
