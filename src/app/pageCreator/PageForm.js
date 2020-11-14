@@ -4,6 +4,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import PageContext from "../context/page/pageContext";
 import AddBlock from "./blocks/AddBlock";
 import Blocks from "./blocks/Blocks";
+import SaveCancel from "../shared/SaveCancel";
 import { useParams } from "react-router-dom";
 
 const PageForm = props => {
@@ -30,20 +31,12 @@ const PageForm = props => {
 
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
 
-	const [showModal, setShowModal] = useState(false);
-	const closeModal = () => {
-		setShowModal(false);
-	};
-
-	const handleOnClick = e => {
-		e.preventDefault();
+	const handleOnClick = () => {
 		if (id) {
 			updatePage(current);
 		} else {
 			addPage(current);
 		}
-
-		props.history.push("/pages");
 	};
 
 	const onDragStart = () => {
@@ -128,7 +121,9 @@ const PageForm = props => {
 
 										<hr className="mg-y-30" />
 
-										<div className="wd-xl-50p">
+										<SaveCancel onSave={handleOnClick} redirect="/pages" />
+
+										{/* <div className="wd-xl-50p">
 											<button className="btn btn-az-primary pd-x-30 mg-r-5" onClick={handleOnClick}>
 												Save & Publish
 											</button>
@@ -146,7 +141,7 @@ const PageForm = props => {
 												</Modal.Body>
 
 												<Modal.Footer>
-													<Button variant="danger" onClick={closeModal}>
+													<Button variant="danger" onClick={cancelChanges}>
 														Yes
 													</Button>
 													<Button variant="outline-light" onClick={closeModal}>
@@ -154,7 +149,7 @@ const PageForm = props => {
 													</Button>
 												</Modal.Footer>
 											</Modal>
-										</div>
+										</div> */}
 									</form>
 								</div>
 							) : (

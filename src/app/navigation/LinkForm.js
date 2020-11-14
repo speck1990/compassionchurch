@@ -4,6 +4,7 @@ import PageContext from "../context/page/pageContext";
 import LinkContext from "../context/link/linkContext";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
+import SaveCancel from "../shared/SaveCancel";
 
 const LinkForm = props => {
 	const { id } = useParams();
@@ -40,14 +41,11 @@ const LinkForm = props => {
 	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
 
 	const handleOnClick = e => {
-		e.preventDefault();
 		if (id) {
 			updateLink(current);
 		} else {
 			addLink(current);
 		}
-
-		props.history.push("/links");
 	};
 
 	return (
@@ -116,12 +114,7 @@ const LinkForm = props => {
 
 									<hr className="mg-y-30" />
 
-									<div className="wd-xl-50p">
-										<button className="btn btn-az-primary pd-x-30 mg-r-5" onClick={handleOnClick}>
-											Save & Publish
-										</button>
-										<button className="btn btn-dark pd-x-30">Cancel</button>
-									</div>
+									<SaveCancel onSave={handleOnClick} redirect="/links" />
 								</form>
 							</div>
 						) : (
