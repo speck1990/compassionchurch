@@ -114,34 +114,6 @@ const PageForm = props => {
 										<hr className="mg-y-30" />
 
 										<SaveCancel onSave={handleOnClick} redirect="/pages" />
-
-										{/* <div className="wd-xl-50p">
-											<button className="btn btn-az-primary pd-x-30 mg-r-5" onClick={handleOnClick}>
-												Save & Publish
-											</button>
-											<Button className="btn btn-dark pd-x-30" onClick={() => setShowModal(true)}>
-												Cancel
-											</Button>
-
-											<Modal show={showModal} size="sm" onHide={() => closeModal("small")}>
-												<Modal.Header closeButton>
-													<Modal.Title>Cancel Changes?</Modal.Title>
-												</Modal.Header>
-
-												<Modal.Body>
-													<p>Are you sure you would like to cancel all changes?</p>
-												</Modal.Body>
-
-												<Modal.Footer>
-													<Button variant="danger" onClick={cancelChanges}>
-														Yes
-													</Button>
-													<Button variant="outline-light" onClick={closeModal}>
-														No
-													</Button>
-												</Modal.Footer>
-											</Modal>
-										</div> */}
 									</form>
 								</div>
 							) : (
