@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Form, Modal, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { DragDropContext } from "react-beautiful-dnd";
 import PageContext from "../context/page/pageContext";
 import AddBlock from "./blocks/AddBlock";
