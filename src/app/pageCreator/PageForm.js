@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Modal, Button } from "react-bootstrap";
 import { DragDropContext } from "react-beautiful-dnd";
 import PageContext from "../context/page/pageContext";
 import AddBlock from "./blocks/AddBlock";
@@ -29,6 +29,11 @@ const PageForm = props => {
 	}, []);
 
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
+
+	const [showModal, setShowModal] = useState(false);
+	const closeModal = () => {
+		setShowModal(false);
+	};
 
 	const handleOnClick = e => {
 		e.preventDefault();
@@ -95,6 +100,20 @@ const PageForm = props => {
 												{/* col */}
 											</div>
 											{/* row */}
+
+											<div className="row row-xs mg-b-20">
+												<div className="col-md-4">
+													<label htmlFor="subtitle" className="form-label mg-b-0">
+														Description
+													</label>
+												</div>
+												{/* col */}
+												<div className="col-md-8 mg-t-5 mg-md-t-0">
+													<Form.Control as="textarea" rows="3" name="description" value={current.description} onChange={onTextChange} />
+												</div>
+												{/* col */}
+											</div>
+											{/* row */}
 										</div>
 
 										<hr className="mg-y-30" />
@@ -113,7 +132,28 @@ const PageForm = props => {
 											<button className="btn btn-az-primary pd-x-30 mg-r-5" onClick={handleOnClick}>
 												Save & Publish
 											</button>
-											<button className="btn btn-dark pd-x-30">Cancel</button>
+											<Button className="btn btn-dark pd-x-30" onClick={() => setShowModal(true)}>
+												Cancel
+											</Button>
+
+											<Modal show={showModal} size="sm" onHide={() => closeModal("small")}>
+												<Modal.Header closeButton>
+													<Modal.Title>Cancel Changes?</Modal.Title>
+												</Modal.Header>
+
+												<Modal.Body>
+													<p>Are you sure you would like to cancel all changes?</p>
+												</Modal.Body>
+
+												<Modal.Footer>
+													<Button variant="danger" onClick={closeModal}>
+														Yes
+													</Button>
+													<Button variant="outline-light" onClick={closeModal}>
+														No
+													</Button>
+												</Modal.Footer>
+											</Modal>
 										</div>
 									</form>
 								</div>
