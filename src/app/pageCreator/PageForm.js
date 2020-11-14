@@ -31,18 +31,10 @@ const PageForm = props => {
 
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
 
-	const handleOnClick = () => {
-		if (id) {
-			updatePage(current);
-		} else {
-			addPage(current);
-		}
-	};
+	const handleOnClick = () => (id ? updatePage(current) : addPage(current));
 
-	const onDragStart = () => {
-		console.log("Drag Started");
-		setIsVisible(false);
-	};
+	const onDragStart = () => setIsVisible(false);
+
 	const onDragEnd = ({ destination, source }) => {
 		if (!destination) return;
 

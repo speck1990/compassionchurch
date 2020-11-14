@@ -31,22 +31,11 @@ const LinkForm = props => {
 	}, []);
 
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
-	const onSelectChange = e => {
-		console.log(e.label);
-		updateCurrent({ ...current, link: e.value });
-	};
-	const onLinkChange = e => {
-		updateCurrent({ ...current, link: "", [e.target.name]: e.target.value });
-	};
+	const onSelectChange = e => updateCurrent({ ...current, link: e.value });
+	const onLinkChange = e => updateCurrent({ ...current, link: "", [e.target.name]: e.target.value });
 	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
 
-	const handleOnClick = e => {
-		if (id) {
-			updateLink(current);
-		} else {
-			addLink(current);
-		}
-	};
+	const handleOnClick = () => (id ? updateLink(current) : addLink(current));
 
 	return (
 		<div>
