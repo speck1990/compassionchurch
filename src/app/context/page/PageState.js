@@ -103,7 +103,7 @@ const PageState = props => {
 				});
 			}
 		} else {
-			dispatch({ type: SET_CURRENT, payload: { title: "", subtitle: "", content: "" } });
+			dispatch({ type: SET_CURRENT, payload: { title: "", subtitle: "", description: "", content: "" } });
 		}
 	};
 
