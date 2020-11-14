@@ -45,7 +45,7 @@ const LinkForm = props => {
 						{current !== null && !loading ? (
 							<div>
 								<h2 className="az-content-title">{id ? "Edit Link" : "Add New Link"}</h2>
-								<form onSubmit={handleOnClick}>
+								<form onSubmit={handleSave}>
 									<div className="wd-xl-50p">
 										{/* Link Label Textbox */}
 										<div className="row row-xs align-items-center mg-b-20">
