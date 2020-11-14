@@ -9,6 +9,8 @@ const LinkForm = lazy(() => import("./navigation/LinkForm"));
 const Navigation = lazy(() => import("./navigation/Navigation"));
 const Login = lazy(() => import("./generalPages/Login"));
 
+const Site = lazy(() => import("../site/Site"));
+
 const AppRoutes = () => {
 	return (
 		<Suspense fallback="">
@@ -21,6 +23,7 @@ const AppRoutes = () => {
 				<Route exact path="/links/create" component={LinkForm} />
 				<Route exact path="/links/:id" component={LinkForm} />
 				<Route exact path="/login" component={Login} />
+				<Route exact path="/site/:slug" component={Site} />
 			</Switch>
 		</Suspense>
 	);
