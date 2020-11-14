@@ -18,7 +18,7 @@ const App = props => {
 		window.scrollTo(0, 0);
 		const fullPageLayoutRoutes = ["/login", "/page-404"];
 		for (let i = 0; i < fullPageLayoutRoutes.length; i++) {
-			if (props.location.pathname === fullPageLayoutRoutes[i]) {
+			if (props.location.pathname === fullPageLayoutRoutes[i] || props.location.pathname.startsWith("/site")) {
 				setIsFullPageLayout(true);
 				document.querySelector(".az-content-wrapper").classList.add("p-0");
 				break;
