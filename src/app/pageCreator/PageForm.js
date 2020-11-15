@@ -56,7 +56,7 @@ const PageForm = props => {
 							{current !== null && !loading ? (
 								<div>
 									<h2 className="az-content-title">{id ? "Edit Page" : "Add New Page"}</h2>
-									<form onSubmit={handleOnClick}>
+									<form onSubmit={handleSave}>
 										<div className="wd-xl-50p">
 											<div className="row row-xs align-items-center mg-b-20">
 												<div className="col-md-4">
