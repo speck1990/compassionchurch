@@ -2,10 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { DragDropContext } from "react-beautiful-dnd";
 import PageContext from "../context/page/pageContext";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import AddBlock from "./blocks/AddBlock";
 import Blocks from "./blocks/Blocks";
 import SaveCancel from "../shared/SaveCancel";
 import { useParams } from "react-router-dom";
+import moment from "moment";
 
 const PageForm = props => {
 	const { id } = useParams();
@@ -30,6 +33,8 @@ const PageForm = props => {
 	}, []);
 
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
+	const setPublishDate = date => updateCurrent({ ...current, publish: date });
+	const setUnpublishDate = date => updateCurrent({ ...current, unpublish: date });
 
 	const handleSave = () => (id ? updatePage(current) : addPage(current));
 
@@ -95,6 +100,66 @@ const PageForm = props => {
 												{/* col */}
 												<div className="col-md-8 mg-t-5 mg-md-t-0">
 													<Form.Control as="textarea" rows="3" name="description" value={current.description} onChange={onTextChange} />
+												</div>
+												{/* col */}
+											</div>
+											{/* row */}
+
+											<div className="row row-xs align-items-center mg-b-20">
+												<div className="col-md-4">
+													<label htmlFor="publish" className="form-label mg-b-0">
+														Publish
+													</label>
+												</div>
+												{/* col */}
+												<div className="col-md-8 mg-t-5 mg-md-t-0">
+													<div className="input-group">
+														<div className="input-group-prepend">
+															<div className="input-group-text">
+																<i className="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+															</div>
+														</div>
+														<DatePicker
+															selected={current.publish ? moment(current.publish).toDate() : null}
+															onChange={date => setPublishDate(date)}
+															className="form-control"
+															style={{ "z-index": 3 }}
+															showTimeSelect
+															isClearable
+															dateFormat="MM/dd/yyyy h:mm aa"
+															placeholderText="Immediately"
+														/>
+													</div>
+												</div>
+												{/* col */}
+											</div>
+											{/* row */}
+
+											<div className="row row-xs align-items-center mg-b-20">
+												<div className="col-md-4">
+													<label htmlFor="unpublish" className="form-label mg-b-0">
+														Unpublish
+													</label>
+												</div>
+												{/* col */}
+												<div className="col-md-8 mg-t-5 mg-md-t-0">
+													<div className="input-group">
+														<div className="input-group-prepend">
+															<div className="input-group-text">
+																<i className="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+															</div>
+														</div>
+														<DatePicker
+															selected={current.unpublish ? moment(current.unpublish).toDate() : null}
+															onChange={date => setUnpublishDate(date)}
+															className="form-control"
+															style={{ "z-index": 3 }}
+															showTimeSelect
+															isClearable
+															dateFormat="MM/dd/yyyy h:mm aa"
+															placeholderText="Never"
+														/>
+													</div>
 												</div>
 												{/* col */}
 											</div>
