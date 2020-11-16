@@ -6,6 +6,7 @@ import LinkContext from "../context/link/linkContext";
 import Select from "../shared/formElements/Select";
 import Input from "../shared/formElements/Input";
 import Checkbox from "../shared/formElements/Checkbox";
+import Radio from "../shared/formElements/Radio";
 import { useParams } from "react-router-dom";
 import SaveCancel from "../shared/formElements/SaveCancel";
 
@@ -40,6 +41,11 @@ const LinkForm = props => {
 
 	const handleSave = () => (id ? updateLink(current) : addLink(current));
 
+	const options = [
+		{ name: "page", value: "page", label: "Link to page" },
+		{ name: "external", value: "external", label: "External link" }
+	];
+
 	return (
 		<div>
 			<div className="container d-flex p-md-0">
@@ -51,21 +57,7 @@ const LinkForm = props => {
 								<form onSubmit={handleSave}>
 									<div className="wd-xl-50p">
 										<Input label="Link Label" name="label" type="text" value={current.label} onChange={onTextChange} />
-
-										{/* Link Type Radio Controls */}
-										<div className="row row-xs align-items-center mg-b-20">
-											<div className="col-md-4">
-												<label htmlFor="type" className="form-label mg-b-0">
-													Link Type
-												</label>
-											</div>
-											<div className="col-md-4 mg-t-5 mg-md-t-0">
-												<Form.Check onChange={onLinkChange} type="radio" name="type" id="page" value="page" label="Link to page" className="rdiobox" checked={current.type === "page"} />
-											</div>
-											<div className="col-md-4 mg-t-5 mg-md-t-0">
-												<Form.Check onChange={onLinkChange} type="radio" name="type" id="external" value="external" label="External link" className="rdiobox" checked={current.type === "external"} />
-											</div>
-										</div>
+										<Radio onChange={onLinkChange} name="type" options={options} checkedValue={current.type} />
 
 										{current.type === "page" ? (
 											<Select defaultValue={pages.filter(page => page.id === current.link).map(page => ({ value: page.id, label: page.title }))} onChange={onSelectChange} name="link" label="Link" options={pages.map(page => ({ value: page.id, label: page.title }))} />
