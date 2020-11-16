@@ -57,7 +57,7 @@ const LinkForm = props => {
 								<form onSubmit={handleSave}>
 									<div className="wd-xl-50p">
 										<Input label="Link Label" name="label" type="text" value={current.label} onChange={onTextChange} />
-										<Radio onChange={onLinkChange} name="type" options={options} checkedValue={current.type} />
+										<Radio onChange={onLinkChange} label="Type" name="type" options={options} checkedValue={current.type} />
 
 										{current.type === "page" ? (
 											<Select defaultValue={pages.filter(page => page.id === current.link).map(page => ({ value: page.id, label: page.title }))} onChange={onSelectChange} name="link" label="Link" options={pages.map(page => ({ value: page.id, label: page.title }))} />
