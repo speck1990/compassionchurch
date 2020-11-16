@@ -4,7 +4,7 @@ import PageContext from "../context/page/pageContext";
 import "react-datepicker/dist/react-datepicker.css";
 import AddBlock from "./blocks/AddBlock";
 import Blocks from "./blocks/Blocks";
-import SaveCancel from "../shared/SaveCancel";
+import SaveCancel from "../shared/formElements/SaveCancel";
 import Input from "../shared/formElements/Input";
 import { useParams } from "react-router-dom";
 
