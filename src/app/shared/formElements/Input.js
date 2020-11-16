@@ -1,17 +1,10 @@
-import React, { useContext } from "react";
-import PageContext from "../../context/page/pageContext";
+import React from "react";
 import { Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 
 const Input = props => {
-	const pageContext = useContext(PageContext);
-	const { current, updateCurrent } = pageContext;
-
-	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
-	const setDate = (date, name) => updateCurrent({ ...current, [name]: date });
-
 	return (
 		<div className={`row row-xs mg-b-20 ${props.as !== "textarea" && "align-items-center"}`}>
 			<div className="col-md-4">
@@ -27,10 +20,10 @@ const Input = props => {
 								<i className="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
 							</div>
 						</div>
-						<DatePicker selected={props.value ? moment(props.value).toDate() : null} onChange={date => setDate(date, props.name)} placeholderText={props.placeholderText} className="form-control" style={{ "z-index": 3 }} showTimeSelect isClearable dateFormat="MM/dd/yyyy h:mm aa" />
+						<DatePicker selected={props.value ? moment(props.value).toDate() : null} onChange={date => props.onChange(date)} placeholderText={props.placeholderText} className="form-control" style={{ "z-index": 3 }} showTimeSelect isClearable dateFormat="MM/dd/yyyy h:mm aa" />
 					</div>
 				) : (
-					<Form.Control {...props} onChange={onTextChange} autoComplete="off" />
+					<Form.Control {...props} autoComplete="off" />
 				)}
 			</div>
 		</div>

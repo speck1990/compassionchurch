@@ -30,6 +30,10 @@ const PageForm = props => {
 		// eslint-disable-next-line
 	}, []);
 
+	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
+	const setPublishDate = date => updateCurrent({ ...current, publish: date });
+	const setUnpublishDate = date => updateCurrent({ ...current, unpublish: date });
+
 	const handleSave = () => (id ? updatePage(current) : addPage(current));
 
 	const onDragStart = () => setIsVisible(false);
@@ -57,11 +61,11 @@ const PageForm = props => {
 									<h2 className="az-content-title">{id ? "Edit Page" : "Add New Page"}</h2>
 									<form onSubmit={handleSave}>
 										<div className="wd-xl-50p">
-											<Input label="Title" name="title" type="text" value={current.title} />
-											<Input label="Subtitle" name="subtitle" type="text" value={current.subtitle} />
-											<Input label="Description" name="description" as="textarea" value={current.description} rows="3" />
-											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} />
-											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} />
+											<Input label="Title" name="title" type="text" value={current.title} onChange={onTextChange} />
+											<Input label="Subtitle" name="subtitle" type="text" value={current.subtitle} onChange={onTextChange} />
+											<Input label="Description" name="description" as="textarea" value={current.description} rows="3" onChange={onTextChange} />
+											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} onChange={setPublishDate} />
+											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} onChange={setUnpublishDate} />
 										</div>
 
 										<hr className="mg-y-30" />
