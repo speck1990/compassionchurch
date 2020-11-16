@@ -2,9 +2,12 @@ import React, { useContext, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import PageContext from "../context/page/pageContext";
 import LinkContext from "../context/link/linkContext";
-import Select from "react-select";
+// import Select from "react-select";
+import Select from "../shared/formElements/Select";
+import Input from "../shared/formElements/Input";
+import Checkbox from "../shared/formElements/Checkbox";
 import { useParams } from "react-router-dom";
-import SaveCancel from "../shared/SaveCancel";
+import SaveCancel from "../shared/formElements/SaveCancel";
 
 const LinkForm = props => {
 	const { id } = useParams();
@@ -47,17 +50,7 @@ const LinkForm = props => {
 								<h2 className="az-content-title">{id ? "Edit Link" : "Add New Link"}</h2>
 								<form onSubmit={handleSave}>
 									<div className="wd-xl-50p">
-										{/* Link Label Textbox */}
-										<div className="row row-xs align-items-center mg-b-20">
-											<div className="col-md-4">
-												<label htmlFor="label" className="form-label mg-b-0">
-													Link Label
-												</label>
-											</div>
-											<div className="col-md-8 mg-t-5 mg-md-t-0">
-												<Form.Control type="text" name="label" autoComplete="off" value={current.label} onChange={onTextChange} />
-											</div>
-										</div>
+										<Input label="Link Label" name="label" type="text" value={current.label} onChange={onTextChange} />
 
 										{/* Link Type Radio Controls */}
 										<div className="row row-xs align-items-center mg-b-20">
@@ -74,31 +67,13 @@ const LinkForm = props => {
 											</div>
 										</div>
 
-										{/* Link Value */}
-										<div className="row row-xs align-items-center mg-b-20">
-											<div className="col-md-4">
-												<label htmlFor="type" className="form-label mg-b-0">
-													Link
-												</label>
-											</div>
-											<div className="col-md-5 mg-t-5 mg-md-t-0">
-												{current.type === "page" ? (
-													<Select defaultValue={pages.filter(page => page.id === current.link).map(page => ({ value: page.id, label: page.title }))} onChange={onSelectChange} name="link" options={pages.map(page => ({ value: page.id, label: page.title }))} />
-												) : (
-													<Form.Control type="text" name="link" autoComplete="off" value={current.link} onChange={onTextChange} placeholder="http://www.example.com" />
-												)}
-											</div>
-										</div>
+										{current.type === "page" ? (
+											<Select defaultValue={pages.filter(page => page.id === current.link).map(page => ({ value: page.id, label: page.title }))} onChange={onSelectChange} name="link" label="Link" options={pages.map(page => ({ value: page.id, label: page.title }))} />
+										) : (
+											<Input label="Link" name="link" type="text" value={current.link} onChange={onTextChange} placeholder="http://www.example.com" />
+										)}
 
-										{/* Open New Tab Checkbox */}
-										<div className="row row-xs align-items-center mg-b-20">
-											<div className="col-md-4">
-												<label htmlFor="newTab" className="form-label mg-b-0"></label>
-											</div>
-											<div className="col-md-5 mg-t-5 mg-md-t-0">
-												<Form.Check type="checkbox" name="newTab" id="newTab" label="Open in new tab" className="ckbox" onChange={e => onCheckboxChange(current.newTab, e)} defaultChecked={current.newTab} />
-											</div>
-										</div>
+										<Checkbox name="newTab" label="Open in new tab" value={current.newTab} onCheckboxChange={onCheckboxChange} />
 									</div>
 
 									<hr className="mg-y-30" />
