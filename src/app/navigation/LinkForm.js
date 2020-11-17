@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { Form } from "react-bootstrap";
 import PageContext from "../context/page/pageContext";
 import LinkContext from "../context/link/linkContext";
-// import Select from "react-select";
 import Select from "../shared/formElements/Select";
 import Input from "../shared/formElements/Input";
 import Checkbox from "../shared/formElements/Checkbox";
