@@ -79,7 +79,7 @@ const Header = props => {
 								</Dropdown>
 							</li>
 							<li className={isPathActive("/settings", true) ? "nav-item active" : "nav-item"}>
-								<Link to="/" className="nav-link">
+								<Link to="/settings" className="nav-link">
 									<i className="typcn typcn-spanner-outline"></i> Settings
 								</Link>
 							</li>
