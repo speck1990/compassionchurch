@@ -17,3 +17,6 @@ export const UPDATE_LINK = "UPDATE_LINK";
 export const LINK_ERROR = "LINK_ERROR";
 export const ADD_LINK = "ADD_LINK";
 export const DELETE_LINK = "DELETE_LINK";
+export const GET_SETTINGS = "GET_SETTINGS";
+export const UPDATE_SETTINGS = "UPDATE_SETTING";
+export const SETTING_ERROR = "SETTING_ERROR";
