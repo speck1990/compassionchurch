@@ -8,6 +8,7 @@ const PageForm = lazy(() => import("./pageCreator/PageForm"));
 const LinkForm = lazy(() => import("./navigation/LinkForm"));
 const Navigation = lazy(() => import("./navigation/Navigation"));
 const Login = lazy(() => import("./generalPages/Login"));
+const Settings = lazy(() => import("./generalPages/Settings"));
 
 const Site = lazy(() => import("../site/Site"));
 
@@ -24,6 +25,7 @@ const AppRoutes = () => {
 				<Route exact path="/links/:id" component={LinkForm} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/site/:slug" component={Site} />
+				<Route exact path="/settings" component={Settings} />
 			</Switch>
 		</Suspense>
 	);
