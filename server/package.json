@@ -7,9 +7,12 @@
     "dev": "env-cmd -f ./config/dev.env nodemon ./src/bin/www"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-validator": "^6.7.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.15",
     "morgan": "~1.9.1",
     "passport": "^0.4.1"
