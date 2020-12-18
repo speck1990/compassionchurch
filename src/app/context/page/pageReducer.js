@@ -19,14 +19,14 @@ const pageReducer = (state, action) => {
 		case UPDATE_PAGE:
 			return {
 				...state,
-				pages: state.pages.map(page => (page.id === action.payload.id ? action.payload : page)),
+				pages: state.pages.map(page => (page._id === action.payload.id ? action.payload : page)),
 				loading: false
 			};
 
 		case DELETE_PAGE:
 			return {
 				...state,
-				pages: state.pages.filter(page => page.id !== action.payload),
+				pages: state.pages.filter(page => page._id !== action.payload),
 				loading: false
 			};
 
