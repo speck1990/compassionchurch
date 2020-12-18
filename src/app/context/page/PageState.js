@@ -21,7 +21,7 @@ const PageState = props => {
 		setLoading();
 
 		try {
-			const res = await axios.get("/pages");
+			const res = await axios.get("/api/pages");
 			dispatch({ type: GET_PAGES, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -41,7 +41,7 @@ const PageState = props => {
 		};
 
 		try {
-			const res = await axios.post(`/pages`, { id: uuidv4(), ...page }, config);
+			const res = await axios.post(`/api/pages`, { id: uuidv4(), ...page }, config);
 			dispatch({ type: ADD_PAGE, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -63,7 +63,7 @@ const PageState = props => {
 		};
 
 		try {
-			const res = await axios.put(`/pages/${page.id}`, page, config);
+			const res = await axios.put(`/api/pages/${page.id}`, page, config);
 			console.log(res.data);
 			dispatch({ type: UPDATE_PAGE, payload: res.data });
 		} catch (err) {
@@ -80,7 +80,7 @@ const PageState = props => {
 		setLoading();
 
 		try {
-			await axios.delete(`/pages/${id}`);
+			await axios.delete(`/api/pages/${id}`);
 		} catch (err) {
 			dispatch({
 				type: PAGE_ERROR,
@@ -96,7 +96,7 @@ const PageState = props => {
 
 		if (id) {
 			try {
-				const res = await axios.get(`/pages/${id}`);
+				const res = await axios.get(`/api/pages/${id}`);
 				dispatch({ type: SET_CURRENT, payload: res.data });
 			} catch (err) {
 				dispatch({
@@ -128,7 +128,7 @@ const PageState = props => {
 	};
 
 	const deleteBlock = id => {
-		const updatedContent = state.current.content.filter(block => block.id !== id);
+		const updatedContent = state.current.content.filter(block => block._id !== id);
 		const updatedCurrent = { ...state.current, content: updatedContent };
 		dispatch({ type: UPDATE_CURRENT, payload: updatedCurrent });
 	};
