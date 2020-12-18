@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../context/auth/authContext";
+import { Alert } from "react-bootstrap";
 
 const Login = props => {
 	const authContext = useContext(AuthContext);
 
-	const { loginUser, isAuthenticated } = authContext;
+	const { loginUser, isAuthenticated, error } = authContext;
 
 	useEffect(() => {
 		if (isAuthenticated) {
@@ -24,11 +25,7 @@ const Login = props => {
 
 	const onSubmit = e => {
 		e.preventDefault();
-		if (email === "" || password === "") {
-			console.log("Please complete the form.");
-		} else {
-			loginUser();
-		}
+		loginUser({ email, password });
 	};
 
 	return (
@@ -52,6 +49,7 @@ const Login = props => {
 								<label>Password</label>
 								<input type="password" name="password" className="form-control" onChange={onChange} placeholder="Enter your password" defaultValue={password} />
 							</div>
+							{error && <Alert variant="danger">{error}</Alert>}
 							{/* form-group */}
 							<button type="submit" className="btn btn-az-primary btn-block">
 								Login
