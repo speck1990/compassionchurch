@@ -12,7 +12,7 @@ const Link = require("../models/link");
 router.get("/", auth, async (req, res) => {
 	try {
 		const links = await Link.find();
-		res.json({ links });
+		res.json(links);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send("Server Error");
@@ -35,7 +35,7 @@ router.get("/:id", auth, async (req, res) => {
 		// 	return res.status(401).json({ msg: "Not authorized" });
 		// }
 
-		res.json({ link });
+		res.json(link);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send("Server Error");
@@ -56,7 +56,7 @@ router.post("/", auth, [check("label", "Label is required").not().isEmpty(), che
 	try {
 		const link = new Link({ label, type, linkValue, newTab });
 		await link.save();
-		res.json({ link });
+		res.json(link);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send("Server error");
