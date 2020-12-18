@@ -12,7 +12,7 @@ const Page = require("../models/page");
 router.get("/", auth, async (req, res) => {
 	try {
 		const pages = await Page.find();
-		res.json({ pages });
+		res.json(pages);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send("Server Error");
@@ -35,7 +35,7 @@ router.get("/:id", auth, async (req, res) => {
 		// 	return res.status(401).json({ msg: "Not authorized" });
 		// }
 
-		res.json({ page });
+		res.json(page);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send("Server Error");
@@ -56,7 +56,7 @@ router.post("/", auth, [check("title", "Title is required").not().isEmpty(), che
 	try {
 		const page = new Page({ title, slug, subtitle, content });
 		await page.save();
-		res.json({ page });
+		res.json(page);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send("Server error");
