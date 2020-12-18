@@ -19,7 +19,7 @@ const LinkState = props => {
 		setLoading();
 
 		try {
-			const res = await axios.get("/links");
+			const res = await axios.get("/api/links");
 			dispatch({ type: GET_LINKS, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -39,7 +39,7 @@ const LinkState = props => {
 		};
 
 		try {
-			const res = await axios.post(`/links`, { id: uuidv4(), ...link }, config);
+			const res = await axios.post(`/api/links`, { id: uuidv4(), ...link }, config);
 			dispatch({ type: ADD_LINK, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -61,7 +61,7 @@ const LinkState = props => {
 		};
 
 		try {
-			const res = await axios.put(`/links/${link.id}`, link, config);
+			const res = await axios.put(`/api/links/${link.id}`, link, config);
 			dispatch({ type: UPDATE_LINK, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -77,7 +77,7 @@ const LinkState = props => {
 		setLoading();
 
 		try {
-			await axios.delete(`/links/${id}`);
+			await axios.delete(`/api/links/${id}`);
 		} catch (err) {
 			dispatch({
 				type: LINK_ERROR,
@@ -93,7 +93,7 @@ const LinkState = props => {
 
 		if (id) {
 			try {
-				const res = await axios.get(`/links/${id}`);
+				const res = await axios.get(`/api/links/${id}`);
 				dispatch({ type: SET_CURRENT, payload: res.data });
 			} catch (err) {
 				dispatch({
