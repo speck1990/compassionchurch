@@ -17,15 +17,15 @@ const AppRoutes = () => {
 		<Suspense fallback="">
 			<Switch>
 				<PrivateRoute exact path="/" component={Dashboard} />
-				<Route exact path="/pages" component={Pages} />
-				<Route exact path="/pages/create" component={PageForm} />
-				<Route exact path="/pages/:id" component={PageForm} />
-				<Route exact path="/links" component={Navigation} />
-				<Route exact path="/links/create" component={LinkForm} />
-				<Route exact path="/links/:id" component={LinkForm} />
-				<Route exact path="/login" component={Login} />
-				<Route exact path="/site/:slug" component={Site} />
-				<Route exact path="/settings" component={Settings} />
+				<PrivateRoute exact path="/pages" component={Pages} />
+				<PrivateRoute exact path="/pages/create" component={PageForm} />
+				<PrivateRoute exact path="/pages/:id" component={PageForm} />
+				<PrivateRoute exact path="/links" component={Navigation} />
+				<PrivateRoute exact path="/links/create" component={LinkForm} />
+				<PrivateRoute exact path="/links/:id" component={LinkForm} />
+				<PrivateRoute exact path="/login" component={Login} />
+				<PrivateRoute exact path="/site/:slug" component={Site} />
+				<PrivateRoute exact path="/settings" component={Settings} />
 			</Switch>
 		</Suspense>
 	);
