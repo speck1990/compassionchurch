@@ -98,7 +98,7 @@ router.put("/:id", auth, [check("title", "Title is required").not().isEmpty(), c
 // @route       DELETE api/page/:id
 // @desc        Delete a page
 // @access      Private
-router.post("/:id", auth, async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
 	const id = req.params.id;
 
 	try {
