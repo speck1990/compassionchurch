@@ -1,47 +1,64 @@
 import React, { useReducer } from "react";
+import axios from "axios";
+import setAuthToken from "../../utils/setAuthToken";
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
-import { USER_LOADED, LOGIN_SUCCESS, LOGOUT_USER } from "../types";
+import { USER_LOADED, LOGIN_SUCCESS, LOGOUT_USER, AUTH_ERROR, LOGIN_FAIL, CLEAR_ERRORS } from "../types";
 
 const AuthState = props => {
-	const users = [
-		{
-			id: "1",
-			firstName: "Stephen",
-			lastName: "Peck",
-			email: "speck1990@gmail.com",
-			password: "password123"
-		}
-	];
-
 	const initalState = {
+		token: localStorage.getItem("token"),
 		isAuthenticated: null,
-		user: null
+		loading: true,
+		user: null,
+		error: null
 	};
 
 	const [state, dispatch] = useReducer(authReducer, initalState);
 
 	// Load User
 	const loadUser = async () => {
-		dispatch({
-			type: USER_LOADED,
-			payload: users[0]
-		});
+		if (localStorage.token) {
+			setAuthToken(localStorage.token);
+		}
+
+		try {
+			const res = await axios.get("http://localhost:5000/api/users");
+
+			dispatch({
+				type: USER_LOADED,
+				payload: res.data
+			});
+		} catch (error) {
+			dispatch({
+				type: AUTH_ERROR
+			});
+		}
 	};
 
 	// Login User
 	const loginUser = async formData => {
-		const res = {
-			data: {
-				user: users[0],
-				token: "faketoken"
+		const config = {
+			headers: {
+				"Content-Type": "application/json"
 			}
 		};
 
-		dispatch({
-			type: LOGIN_SUCCESS,
-			payload: res.data
-		});
+		try {
+			const res = await axios.post("http://localhost:5000/api/users/login", formData, config);
+
+			dispatch({
+				type: LOGIN_SUCCESS,
+				payload: res.data
+			});
+
+			loadUser();
+		} catch (error) {
+			dispatch({
+				type: LOGIN_FAIL,
+				payload: error.response.data.msg
+			});
+		}
 	};
 
 	// Logout User
@@ -51,14 +68,20 @@ const AuthState = props => {
 		});
 	};
 
+	// Clear errors
+	const clearErrors = async () => dispatch({ type: CLEAR_ERRORS });
+
 	return (
 		<AuthContext.Provider
 			value={{
 				isAuthenticated: state.isAuthenticated,
 				user: state.user,
+				error: state.error,
+				loading: state.loading,
 				loadUser,
 				loginUser,
-				logoutUser
+				logoutUser,
+				clearErrors
 			}}
 		>
 			{props.children}
