@@ -98,7 +98,7 @@ router.put("/:id", auth, [check("label", "Label is required").not().isEmpty(), c
 // @route       DELETE api/link/:id
 // @desc        Delete a link
 // @access      Private
-router.post("/:id", auth, async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
 	const id = req.params.id;
 
 	try {
