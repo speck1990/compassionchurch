@@ -3,11 +3,12 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
-const { check, validationResult } = require("express-validator");
+const { loginValidationRules, validationResult } = require("../middleware/validation");
+const { check } = require("express-validator");
 
 const User = require("../models/user");
 
-// @route       GET api/user
+// @route       GET api/users
 // @desc        Get logged in user
 // @access      Private
 router.get("/", auth, async (req, res) => {
@@ -20,7 +21,7 @@ router.get("/", auth, async (req, res) => {
 	}
 });
 
-// @route       POST api/user/register
+// @route       POST api/users/register
 // @desc        Register a user
 // @access      Public
 router.post(
@@ -73,13 +74,14 @@ router.post(
 	}
 );
 
-// @route       POST api/user/login
+// @route       POST api/users/login
 // @desc        Auth user & get token
 // @access      Public
-router.post("/login", [check("email", "Please include a valid email").isEmail(), check("password", "Password is required").exists()], async (req, res) => {
+router.post("/login", loginValidationRules(), async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(400).json({ errors: errors.array() });
+		const error = errors.array({ onlyFirstError: true });
+		return res.status(401).json({ msg: error[0].msg });
 	}
 
 	const { email, password } = req.body;
@@ -88,13 +90,13 @@ router.post("/login", [check("email", "Please include a valid email").isEmail(),
 		let user = await User.findOne({ email });
 
 		if (!user) {
-			return res.status(400).json({ msg: "Invalid Credentials" });
+			return res.status(401).json({ msg: "Sorry, we can't find an account with this email address. Please try again." });
 		}
 
 		const isMatch = await bcrypt.compare(password, user.password);
 
 		if (!isMatch) {
-			return res.status(400).json({ msg: "Invalid Credentials" });
+			return res.status(401).json({ msg: "Incorrect password. Please try again." });
 		}
 
 		const payload = {
