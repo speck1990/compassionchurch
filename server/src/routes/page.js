@@ -31,9 +31,9 @@ router.get("/:id", auth, async (req, res) => {
 		if (!page) return res.status(404).json({ msg: "Page not found" });
 
 		// Make sure user owns contact
-		// if (page.user.toString() !== req.user.id) {
-		// 	return res.status(401).json({ msg: "Not authorized" });
-		// }
+		if (page.user.toString() !== req.user.id) {
+			return res.status(401).json({ msg: "Not authorized" });
+		}
 
 		res.json(page);
 	} catch (err) {
@@ -54,7 +54,7 @@ router.post("/", auth, [check("title", "Title is required").not().isEmpty(), che
 	const { title, slug, subtitle, content } = req.body;
 
 	try {
-		const page = new Page({ title, slug, subtitle, content });
+		const page = new Page({ title, slug, subtitle, content, user: req.user.id });
 		await page.save();
 		res.json(page);
 	} catch (err) {
@@ -82,9 +82,9 @@ router.put("/:id", auth, [check("title", "Title is required").not().isEmpty(), c
 		if (!page) return res.status(404).json({ msg: "Page not found" });
 
 		// Make sure user owns contact
-		// if (page.user.toString() !== req.user.id) {
-		// 	return res.status(401).json({ msg: "Not authorized" });
-		// }
+		if (page.user.toString() !== req.user.id) {
+			return res.status(401).json({ msg: "Not authorized" });
+		}
 
 		page = await Page.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
 
@@ -107,9 +107,9 @@ router.delete("/:id", auth, async (req, res) => {
 		if (!page) return res.status(404).json({ msg: "Page not found" });
 
 		// Make sure user owns contact
-		// if (page.user.toString() !== req.user.id) {
-		// 	return res.status(401).json({ msg: "Not authorized" });
-		// }
+		if (page.user.toString() !== req.user.id) {
+			return res.status(401).json({ msg: "Not authorized" });
+		}
 
 		await Page.findByIdAndRemove(id);
 
