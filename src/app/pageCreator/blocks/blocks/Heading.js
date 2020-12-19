@@ -4,6 +4,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import PageContext from "../../../context/page/pageContext";
 
+// TODO: HAVE HEADING BE H1 BY DEFAULT WHEN CREATED
+
 const Heading = ({ block, index }) => {
 	const pageContext = useContext(PageContext);
 
