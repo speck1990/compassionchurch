@@ -21,7 +21,7 @@ const PageState = props => {
 		setLoading();
 
 		try {
-			const res = await axios.get("/api/pages");
+			const res = await axios.get("http://localhost:5000/api/pages");
 			dispatch({ type: GET_PAGES, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -41,7 +41,7 @@ const PageState = props => {
 		};
 
 		try {
-			const res = await axios.post(`/api/pages`, page, config);
+			const res = await axios.post("http://localhost:5000/api/pages", page, config);
 			dispatch({ type: ADD_PAGE, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -63,7 +63,7 @@ const PageState = props => {
 		};
 
 		try {
-			const res = await axios.put(`/api/pages/${page.id}`, page, config);
+			const res = await axios.put(`http://localhost:5000/api/pages/${page.id}`, page, config);
 			console.log(res.data);
 			dispatch({ type: UPDATE_PAGE, payload: res.data });
 		} catch (err) {
@@ -80,7 +80,7 @@ const PageState = props => {
 		setLoading();
 
 		try {
-			await axios.delete(`/api/pages/${id}`);
+			await axios.delete(`http://localhost:5000/api/pages/${id}`);
 		} catch (err) {
 			dispatch({
 				type: PAGE_ERROR,
@@ -96,7 +96,7 @@ const PageState = props => {
 
 		if (id) {
 			try {
-				const res = await axios.get(`/api/pages/${id}`);
+				const res = await axios.get(`http://localhost:5000/api/pages/${id}`);
 				dispatch({ type: SET_CURRENT, payload: res.data });
 			} catch (err) {
 				dispatch({
