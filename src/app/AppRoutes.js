@@ -23,7 +23,7 @@ const AppRoutes = () => {
 				<PrivateRoute exact path="/links" component={Navigation} />
 				<PrivateRoute exact path="/links/create" component={LinkForm} />
 				<PrivateRoute exact path="/links/:id" component={LinkForm} />
-				<PrivateRoute exact path="/login" component={Login} />
+				<Route exact path="/login" component={Login} />
 				<PrivateRoute exact path="/site/:slug" component={Site} />
 				<PrivateRoute exact path="/settings" component={Settings} />
 			</Switch>
