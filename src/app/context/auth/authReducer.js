@@ -1,4 +1,4 @@
-import { USER_LOADED, LOGIN_SUCCESS, LOGOUT_USER, AUTH_ERROR, LOGIN_FAIL } from "../types";
+import { USER_LOADED, LOGIN_SUCCESS, LOGOUT_USER, AUTH_ERROR, LOGIN_FAIL, SET_LOADING } from "../types";
 
 const authReducer = (state, action) => {
 	switch (action.type) {
@@ -33,6 +33,12 @@ const authReducer = (state, action) => {
 				...state,
 				isAuthenticated: false,
 				error: action.payload
+			};
+
+		case SET_LOADING:
+			return {
+				...state,
+				loading: true
 			};
 
 		default:
