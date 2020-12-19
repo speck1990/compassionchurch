@@ -34,6 +34,7 @@ const PageForm = props => {
 	const setPublishDate = date => updateCurrent({ ...current, publish: date });
 	const setUnpublishDate = date => updateCurrent({ ...current, unpublish: date });
 
+	// FIXME: MAKE SURE IF THERE IS AN ERROR PAGE DOES NOT GO BACK TO PAGES PAGE
 	const handleSave = () => (id ? updatePage(current) : addPage(current));
 
 	const onDragStart = () => setIsVisible(false);
