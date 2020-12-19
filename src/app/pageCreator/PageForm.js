@@ -62,7 +62,7 @@ const PageForm = props => {
 									<form onSubmit={handleSave}>
 										<div className="wd-xl-50p">
 											<Input label="Title" name="title" type="text" value={current.title} onChange={onTextChange} />
-											<Input label="Subtitle" name="subtitle" type="text" value={current.subtitle} onChange={onTextChange} />
+											<Input label="Slug" name="slug" type="text" value={current.slug} onChange={onTextChange} />
 											<Input label="Description" name="description" as="textarea" value={current.description} rows="3" onChange={onTextChange} />
 											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} onChange={setPublishDate} />
 											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} onChange={setUnpublishDate} />

@@ -5,7 +5,7 @@ import PageContext from "./pageContext";
 import pageReducer from "./pageReducer";
 import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, ADD_PAGE, SET_LOADING, DELETE_PAGE } from "../types";
 
-const pageSchema = { title: "", subtitle: "", description: "", publish: "", unpublish: "", content: "" };
+const pageSchema = { title: "", slug: "", description: "", publish: "", unpublish: "", content: "" };
 
 const PageState = props => {
 	const initalState = {
