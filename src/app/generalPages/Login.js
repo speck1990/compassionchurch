@@ -8,6 +8,7 @@ const Login = props => {
 	const { loginUser, isAuthenticated, error } = authContext;
 
 	useEffect(() => {
+		// TODO: MAKE LOGIN FORM NOT APPEAR IF ALREADY LOGGED IN
 		if (isAuthenticated) {
 			props.history.push("/");
 		}
