@@ -41,7 +41,7 @@ const PageState = props => {
 		};
 
 		try {
-			const res = await axios.post(`/api/pages`, { id: uuidv4(), ...page }, config);
+			const res = await axios.post(`/api/pages`, page, config);
 			dispatch({ type: ADD_PAGE, payload: res.data });
 		} catch (err) {
 			dispatch({
