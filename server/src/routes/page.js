@@ -6,7 +6,7 @@ const { check, validationResult } = require("express-validator");
 const User = require("../models/user");
 const Page = require("../models/page");
 
-// @route       GET api/page
+// @route       GET api/pages
 // @desc        Get all pages
 // @access      Private
 router.get("/", auth, async (req, res) => {
@@ -19,7 +19,7 @@ router.get("/", auth, async (req, res) => {
 	}
 });
 
-// @route       GET api/page/:id
+// @route       GET api/pages/:id
 // @desc        Get page by id
 // @access      Private
 router.get("/:id", auth, async (req, res) => {
@@ -42,7 +42,7 @@ router.get("/:id", auth, async (req, res) => {
 	}
 });
 
-// @route       POST api/page
+// @route       POST api/pages
 // @desc        Create a page
 // @access      Private
 router.post("/", auth, [check("title", "Title is required").not().isEmpty(), check("slug", "Slug is required").not().isEmpty()], async (req, res) => {
@@ -63,7 +63,7 @@ router.post("/", auth, [check("title", "Title is required").not().isEmpty(), che
 	}
 });
 
-// @route       PUT api/page/:id
+// @route       PUT api/pages/:id
 // @desc        Update a page
 // @access      Private
 router.put("/:id", auth, [check("title", "Title is required").not().isEmpty(), check("slug", "Slug is required").not().isEmpty()], async (req, res) => {
@@ -95,7 +95,7 @@ router.put("/:id", auth, [check("title", "Title is required").not().isEmpty(), c
 	}
 });
 
-// @route       DELETE api/page/:id
+// @route       DELETE api/pages/:id
 // @desc        Delete a page
 // @access      Private
 router.delete("/:id", auth, async (req, res) => {
