@@ -32,7 +32,8 @@ const authReducer = (state, action) => {
 			return {
 				...state,
 				isAuthenticated: false,
-				error: action.payload
+				error: action.payload,
+				loading: false
 			};
 
 		case SET_LOADING:
