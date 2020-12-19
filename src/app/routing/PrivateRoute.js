@@ -12,6 +12,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 		//eslint-disable-next-line
 	}, []);
 
+	// TODO: MAKE SURE PRIVATE PAGE DOES NOT SHOW BEFORE LOGIN
 	return <Route {...rest} render={props => (!isAuthenticated && !loading ? <Redirect to="/login" /> : <Component {...props} />)} />;
 };
 
