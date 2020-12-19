@@ -3,7 +3,7 @@ import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
-import { USER_LOADED, LOGIN_SUCCESS, LOGOUT_USER, AUTH_ERROR, LOGIN_FAIL, CLEAR_ERRORS } from "../types";
+import { USER_LOADED, LOGIN_SUCCESS, LOGOUT_USER, AUTH_ERROR, LOGIN_FAIL, CLEAR_ERRORS, SET_LOADING } from "../types";
 
 const AuthState = props => {
 	const initalState = {
@@ -18,6 +18,8 @@ const AuthState = props => {
 
 	// Load User
 	const loadUser = async () => {
+		setLoading();
+
 		if (localStorage.token) {
 			setAuthToken(localStorage.token);
 		}
@@ -70,6 +72,8 @@ const AuthState = props => {
 
 	// Clear errors
 	const clearErrors = async () => dispatch({ type: CLEAR_ERRORS });
+
+	const setLoading = () => dispatch({ type: SET_LOADING });
 
 	return (
 		<AuthContext.Provider
