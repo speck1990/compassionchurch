@@ -77,7 +77,7 @@ const PageForm = props => {
 										<p className="mg-b-20">Click the button to add new content blocks to page.</p>
 
 										<div>
-											{isVisible ? <AddBlock location="-1" /> : ""}
+											<AddBlock location="-1" isVisible={isVisible} />
 											<Blocks blocks={current.content} isVisible={isVisible} />
 										</div>
 
