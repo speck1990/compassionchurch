@@ -140,6 +140,7 @@ const PageState = props => {
 			value={{
 				pages: state.pages,
 				current: state.current,
+				error: state.error,
 				getPages,
 				addPage,
 				setCurrent,
