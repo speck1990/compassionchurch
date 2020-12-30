@@ -17,13 +17,13 @@ const Heading = ({ block, index }) => {
 
 	const formats = ["header", "align"];
 
-	const handleOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el.id === block.id ? { id: block.id, type: "heading", text: value } : el)) });
+	const handleOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { _id: block._id, type: "heading", text: value } : el)) });
 
 	return (
-		<Draggable draggableId={`draggable-${block.id}`} index={index}>
+		<Draggable draggableId={`draggable-${block._id}`} index={index}>
 			{provided => (
 				<div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} className="bg-white">
-					<button onClick={() => deleteBlock(block.id)}>Delete Below</button>
+					<button onClick={() => deleteBlock(block._id)}>Delete Below</button>
 					<ReactQuill modules={modules} formats={formats} value={block.text || ""} onChange={handleOnChange} />
 				</div>
 			)}
