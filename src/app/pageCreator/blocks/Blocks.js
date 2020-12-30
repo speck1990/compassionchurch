@@ -13,7 +13,7 @@ const Blocks = ({ blocks, isVisible }) => {
 					{provided => (
 						<div ref={provided.innerRef} {...provided.droppableProps}>
 							{blocks.map((block, key) => (
-								<div key={block.id}>
+								<div key={block._id}>
 									{BlockItems(block, key)}
 									<AddBlock location={key} />
 								</div>
