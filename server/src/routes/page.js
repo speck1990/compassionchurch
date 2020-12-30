@@ -8,11 +8,11 @@ const User = require("../models/user");
 const Page = require("../models/page");
 
 // @route       GET api/pages
-// @desc        Get all pages
+// @desc        Get all pages for user
 // @access      Private
 router.get("/", auth, async (req, res) => {
 	try {
-		const pages = await Page.find();
+		const pages = await Page.find({ user: req.user.id });
 		res.json(pages);
 	} catch (err) {
 		console.error(err.message);
