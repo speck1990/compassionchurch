@@ -15,7 +15,7 @@ const Blocks = ({ blocks, isVisible }) => {
 							{blocks.map((block, key) => (
 								<div key={block._id}>
 									{BlockItems(block, key)}
-									<AddBlock location={key} />
+									<AddBlock location={key} isVisible={isVisible} />
 								</div>
 							))}
 							{provided.placeholder}
