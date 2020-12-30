@@ -16,7 +16,7 @@ router.get("/", auth, async (req, res) => {
 		res.json(pages);
 	} catch (err) {
 		console.error(err.message);
-		res.status(500).send("Server Error");
+		res.status(500).send({ msg: "Server Error" });
 	}
 });
 
@@ -39,7 +39,7 @@ router.get("/:id", auth, async (req, res) => {
 		res.json(page);
 	} catch (err) {
 		console.error(err.message);
-		res.status(500).send("Server Error");
+		res.status(500).send({ msg: "Server Error" });
 	}
 });
 
