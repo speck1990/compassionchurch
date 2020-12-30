@@ -52,10 +52,10 @@ router.post("/", auth, pageValidationRules, async (req, res) => {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { title, slug, subtitle, content } = req.body;
+	const { title, slug, content } = req.body;
 
 	try {
-		const page = new Page({ title, slug, subtitle, content, user: req.user.id });
+		const page = new Page({ title, slug, content, user: req.user.id });
 		await page.save();
 		res.json(page);
 	} catch (err) {
