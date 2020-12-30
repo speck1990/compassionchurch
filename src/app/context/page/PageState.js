@@ -63,7 +63,7 @@ const PageState = props => {
 		};
 
 		try {
-			const res = await axios.put(`http://localhost:5000/api/pages/${page.id}`, page, config);
+			const res = await axios.put(`http://localhost:5000/api/pages/${page._id}`, page, config);
 			console.log(res.data);
 			dispatch({ type: UPDATE_PAGE, payload: res.data });
 		} catch (err) {
