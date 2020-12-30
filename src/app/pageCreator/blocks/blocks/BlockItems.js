@@ -12,5 +12,5 @@ export default (block, index) => {
 		return React.createElement(BlockItems[block.type], { block, index });
 	}
 
-	return React.createElement(() => <div>The component {block.type} has not been created yet.</div>, { key: block.id });
+	return React.createElement(() => <div>The component {block.type} has not been created yet.</div>, { key: index });
 };
