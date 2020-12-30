@@ -26,7 +26,7 @@ const PageState = props => {
 		} catch (err) {
 			dispatch({
 				type: PAGE_ERROR,
-				payload: err
+				payload: err.response.data.msg
 			});
 		}
 	};
