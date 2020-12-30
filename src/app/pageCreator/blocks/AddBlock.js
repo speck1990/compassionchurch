@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Button, Popover, OverlayTrigger } from "react-bootstrap";
 import PageContext from "../../context/page/pageContext";
 
-const AddBlock = ({ location }) => {
+const AddBlock = ({ location, isVisible }) => {
 	const pageContext = useContext(PageContext);
 
 	const { addBlock } = pageContext;
