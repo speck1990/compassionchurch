@@ -14,8 +14,8 @@ router.get("/", auth, async (req, res) => {
 	try {
 		const pages = await Page.find({ user: req.user.id });
 		res.json(pages);
-	} catch (err) {
-		console.error(err.message);
+	} catch (error) {
+		console.error(error.message);
 		res.status(500).send({ msg: "Server Error" });
 	}
 });
@@ -37,8 +37,8 @@ router.get("/:id", auth, async (req, res) => {
 		}
 
 		res.json(page);
-	} catch (err) {
-		console.error(err.message);
+	} catch (error) {
+		console.error(error.message);
 		res.status(500).send({ msg: "Server Error" });
 	}
 });
