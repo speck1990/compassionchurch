@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import PageContext from "../context/page/pageContext";
 import "react-datepicker/dist/react-datepicker.css";
+import { Alert } from "react-bootstrap";
 import AddBlock from "./blocks/AddBlock";
 import Blocks from "./blocks/Blocks";
 import SaveCancel from "../shared/formElements/SaveCancel";
@@ -12,7 +13,7 @@ const PageForm = props => {
 	const { id } = useParams();
 	const pageContext = useContext(PageContext);
 
-	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, loading } = pageContext;
+	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, loading, error } = pageContext;
 
 	const [isVisible, setIsVisible] = useState(true);
 
@@ -60,6 +61,7 @@ const PageForm = props => {
 							{current !== null && !loading ? (
 								<div>
 									<h2 className="az-content-title">{id ? "Edit Page" : "Add New Page"}</h2>
+									{error && <Alert variant="danger">{error}</Alert>}
 									<form onSubmit={handleSave}>
 										<div className="wd-xl-50p">
 											<Input label="Title" name="title" type="text" value={current.title} onChange={onTextChange} />
