@@ -65,8 +65,22 @@ const PageForm = props => {
 						<div>
 							{current !== null ? (
 								<div>
-									<h2 className="az-content-title">{id ? "Edit Page" : "Add New Page"}</h2>
-									{error && <Alert variant="danger">{error}</Alert>}
+									<h2 className="az-content-title">
+										{id ? "Edit Page " : "Add New Page "}
+										{loading && (
+											<div className="spinner-border text-primary" role="status">
+												<span className="sr-only">Loading...</span>
+											</div>
+										)}
+									</h2>
+									{error && (
+										<Alert variant="danger">
+											{error.map((err, key) => (
+												<div key={key}>{err.msg}</div>
+											))}
+										</Alert>
+									)}
+									{isSaved && <Alert variant="success">Page Saved!</Alert>}
 									<form onSubmit={handleSave}>
 										<div className="wd-xl-50p">
 											<Input label="Title" name="title" type="text" value={current.title} onChange={onTextChange} />
