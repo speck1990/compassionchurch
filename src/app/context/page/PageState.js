@@ -115,7 +115,7 @@ const PageState = props => {
 	};
 
 	const addBlock = (block, position) => {
-		block.id = block.id || uuidv4();
+		block._id = uuidv4();
 
 		const updatedContent = [...state.current.content];
 		updatedContent.splice(position, 0, block);
