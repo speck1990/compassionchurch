@@ -7,9 +7,10 @@ import AddBlock from "./blocks/AddBlock";
 import Blocks from "./blocks/Blocks";
 import SaveCancel from "../shared/formElements/SaveCancel";
 import Input from "../shared/formElements/Input";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const PageForm = props => {
+	const history = useHistory();
 	const { id } = useParams();
 	const pageContext = useContext(PageContext);
 
