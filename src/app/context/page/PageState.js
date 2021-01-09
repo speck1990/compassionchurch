@@ -50,8 +50,6 @@ const PageState = props => {
 				payload: err
 			});
 		}
-
-		clearCurrent();
 	};
 
 	const updatePage = async page => {
@@ -73,8 +71,6 @@ const PageState = props => {
 				payload: err
 			});
 		}
-
-		clearCurrent();
 	};
 
 	const deletePage = async id => {
