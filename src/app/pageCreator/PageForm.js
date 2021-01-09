@@ -62,7 +62,7 @@ const PageForm = props => {
 				<div className="az-content-body pd-lg-l-40 d-flex flex-column">
 					<DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
 						<div>
-							{current !== null && !loading ? (
+							{current !== null ? (
 								<div>
 									<h2 className="az-content-title">{id ? "Edit Page" : "Add New Page"}</h2>
 									{error && <Alert variant="danger">{error}</Alert>}
