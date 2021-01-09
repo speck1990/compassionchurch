@@ -60,7 +60,7 @@ router.post("/", auth, pageValidationRules, async (req, res) => {
 		res.json(page);
 	} catch (err) {
 		console.error(err.message);
-		res.status(500).send("Server error");
+		res.status(500).send({ msg: err.message });
 	}
 });
 
@@ -92,7 +92,7 @@ router.put("/:id", auth, [check("title", "Title is required").not().isEmpty(), c
 		res.json(page);
 	} catch (err) {
 		console.error(err.message);
-		res.status(500).send("Server Error");
+		res.status(500).json({ msg: err.message });
 	}
 });
 
