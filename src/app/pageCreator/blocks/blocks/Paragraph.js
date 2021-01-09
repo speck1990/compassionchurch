@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Draggable } from "react-beautiful-dnd";
+import { Fragment } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import PageContext from "../../../context/page/pageContext";
@@ -15,17 +15,15 @@ const Paragraph = ({ block, index }) => {
 
 	const formats = ["bold", "italic", "underline", "indent", "link", "align"];
 
-	const handleOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { id: block._id, type: "paragraph", text: value } : el)) });
+	const handleOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { _id: block._id, type: "paragraph", text: value } : el)) });
 
 	return (
-		<Draggable draggableId={`draggable-${block._id}`} index={index}>
-			{provided => (
-				<div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} className="bg-white">
-					<button onClick={() => deleteBlock(block._id)}>Delete Below</button>
-					<ReactQuill modules={modules} formats={formats} value={block.text || ""} onChange={handleOnChange} />
-				</div>
-			)}
-		</Draggable>
+		<Fragment>
+			<button onClick={() => deleteBlock(block._id)} type="button">
+				Delete Below
+			</button>
+			<ReactQuill modules={modules} formats={formats} value={block.text || ""} onChange={handleOnChange} />
+		</Fragment>
 	);
 };
 
