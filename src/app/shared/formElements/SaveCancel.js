@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 
-const SaveCancel = ({ onSave, redirect }) => {
-	const history = useHistory();
-
+const SaveCancel = ({ onSave, onCancel }) => {
 	const [showModal, setShowModal] = useState(false);
 
 	const closeModal = () => {
@@ -14,11 +11,6 @@ const SaveCancel = ({ onSave, redirect }) => {
 	const handleSave = (onSave, e) => {
 		e.preventDefault();
 		onSave();
-		history.push(redirect);
-	};
-
-	const handleCancel = () => {
-		history.push(redirect);
 	};
 
 	return (
@@ -40,7 +32,7 @@ const SaveCancel = ({ onSave, redirect }) => {
 				</Modal.Body>
 
 				<Modal.Footer>
-					<Button variant="danger" onClick={handleCancel}>
+					<Button variant="danger" onClick={onCancel}>
 						Yes
 					</Button>
 					<Button variant="outline-light" onClick={closeModal}>
