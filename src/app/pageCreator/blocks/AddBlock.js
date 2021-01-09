@@ -16,7 +16,7 @@ const AddBlock = ({ location, isVisible }) => {
 	};
 
 	return (
-		<div className="row justify-content-md-center mg-t-10 mg-b-10">
+		<div className="row justify-content-md-center mg-t-10">
 			<OverlayTrigger
 				trigger="focus"
 				placement="top"
