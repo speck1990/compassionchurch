@@ -87,7 +87,7 @@ const PageForm = props => {
 
 										<hr className="mg-y-30" />
 
-										<SaveCancel onSave={handleSave} redirect="/pages" />
+										<SaveCancel onSave={handleSave} onCancel={handleCancel} />
 									</form>
 								</div>
 							) : (
