@@ -13,7 +13,7 @@ const PageForm = props => {
 	const { id } = useParams();
 	const pageContext = useContext(PageContext);
 
-	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, loading, error, isSaved, getPages } = pageContext;
+	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, loading, error, isSaved } = pageContext;
 
 	const [isVisible, setIsVisible] = useState(true);
 
