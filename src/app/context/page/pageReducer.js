@@ -19,7 +19,8 @@ const pageReducer = (state, action) => {
 		case UPDATE_PAGE:
 			return {
 				...state,
-				pages: state.pages.map(page => (page._id === action.payload.id ? action.payload : page)),
+				pages: state.pages.map(page => (page._id === action.payload._id ? action.payload : page)),
+				isSaved: true,
 				loading: false
 			};
 
@@ -34,6 +35,7 @@ const pageReducer = (state, action) => {
 			return {
 				...state,
 				current: action.payload,
+				isSaved: false,
 				loading: false
 			};
 
@@ -48,6 +50,7 @@ const pageReducer = (state, action) => {
 			return {
 				...state,
 				current: action.payload,
+				isSaved: false,
 				loading: false
 			};
 
