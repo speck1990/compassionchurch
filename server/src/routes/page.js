@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
-const { pageValidationRules, validationResult } = require("../middleware/validation");
-const { check } = require("express-validator");
+const { pageValidationRules, validate } = require("../middleware/validation");
 
 const User = require("../models/user");
 const Page = require("../models/page");
@@ -46,16 +45,9 @@ router.get("/:id", auth, async (req, res) => {
 // @route       POST api/pages
 // @desc        Create a page
 // @access      Private
-router.post("/", auth, pageValidationRules, async (req, res) => {
-	const errors = validationResult(req);
-	if (!errors.isEmpty()) {
-		return res.status(400).json({ errors: errors.array() });
-	}
-
-	const { title, slug, content } = req.body;
-
+router.post("/", auth, pageValidationRules(), validate, async (req, res) => {
 	try {
-		const page = new Page({ title, slug, content, user: req.user.id });
+		const page = new Page({ ...req.body, user: req.user.id });
 		await page.save();
 		res.json(page);
 	} catch (err) {
@@ -67,15 +59,8 @@ router.post("/", auth, pageValidationRules, async (req, res) => {
 // @route       PUT api/pages/:id
 // @desc        Update a page
 // @access      Private
-router.put("/:id", auth, [check("title", "Title is required").not().isEmpty(), check("slug", "Slug is required").not().isEmpty()], async (req, res) => {
+router.put("/:id", auth, pageValidationRules(), validate, async (req, res) => {
 	const id = req.params.id;
-
-	const errors = validationResult(req);
-	if (!errors.isEmpty()) {
-		return res.status(400).json({ errors: errors.array() });
-	}
-
-	// const { title, slug, subtitle, content } = req.body;
 
 	try {
 		let page = await Page.findById(id);
