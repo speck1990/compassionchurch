@@ -39,6 +39,7 @@
 		"react-scripts": "3.4.3",
 		"react-select": "^3.0.8",
 		"react-simplemde-editor": "^4.1.0",
+		"slugify": "^1.4.6",
 		"styled-components": "^5.2.0",
 		"typicons.font": "^2.0.9",
 		"uuid": "^8.3.1"
