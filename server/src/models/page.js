@@ -3,16 +3,13 @@ const mongoose = require("mongoose");
 const PageSchema = new mongoose.Schema({
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
-		required: true,
 		ref: "User"
 	},
 	slug: {
-		type: String,
-		required: true
+		type: String
 	},
 	title: {
 		type: String,
-		required: true,
 		trim: true
 	},
 	subtitle: {
