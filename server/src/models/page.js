@@ -1,15 +1,5 @@
 const mongoose = require("mongoose");
 
-const ContentSchema = new mongoose.Schema({
-	type: {
-		type: String,
-		required: true
-	},
-	text: {
-		type: String
-	}
-});
-
 const PageSchema = new mongoose.Schema({
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -29,7 +19,7 @@ const PageSchema = new mongoose.Schema({
 		type: String,
 		trim: true
 	},
-	content: [ContentSchema]
+	content: Array
 });
 
 module.exports = mongoose.model("Page", PageSchema);
