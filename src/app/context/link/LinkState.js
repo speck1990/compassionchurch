@@ -124,6 +124,7 @@ const LinkState = props => {
 			value={{
 				links: state.links,
 				current: state.current,
+				error: state.error,
 				isSaved: state.isSaved,
 				getLinks,
 				addLink,
