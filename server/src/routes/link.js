@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
-const { check, validationResult } = require("express-validator");
+const { linkValidationRules, validate } = require("../middleware/validation");
 
 const Link = require("../models/link");
 
@@ -44,12 +44,7 @@ router.get("/:id", auth, async (req, res) => {
 // @route       POST api/link
 // @desc        Create a link
 // @access      Private
-router.post("/", auth, [check("label", "Label is required").not().isEmpty(), check("type", "Type is required").not().isEmpty(), check("linkValue", "Link is required").not().isEmpty()], async (req, res) => {
-	const errors = validationResult(req);
-	if (!errors.isEmpty()) {
-		return res.status(400).json({ errors: errors.array() });
-	}
-
+router.post("/", auth, linkValidationRules(), validate, async (req, res) => {
 	const { label, type, linkValue, newTab } = req.body;
 
 	try {
@@ -65,7 +60,7 @@ router.post("/", auth, [check("label", "Label is required").not().isEmpty(), che
 // @route       PUT api/link/:id
 // @desc        Update a link
 // @access      Private
-router.put("/:id", auth, [check("label", "Label is required").not().isEmpty(), check("type", "Type is required").not().isEmpty(), check("linkValue", "Link is required").not().isEmpty()], async (req, res) => {
+router.put("/:id", auth, linkValidationRules(), validate, async (req, res) => {
 	const id = req.params.id;
 
 	try {
