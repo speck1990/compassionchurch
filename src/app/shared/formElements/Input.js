@@ -20,7 +20,17 @@ const Input = props => {
 								<i className="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
 							</div>
 						</div>
-						<DatePicker selected={props.value ? moment(props.value).toDate() : null} onChange={date => props.onChange(date)} placeholderText={props.placeholderText} className="form-control" style={{ "z-index": 3 }} showTimeSelect isClearable dateFormat="MM/dd/yyyy h:mm aa" />
+						<DatePicker
+							minDate={moment().toDate() - 1}
+							selected={props.value ? moment(props.value).toDate() : null}
+							onChange={date => props.onChange(date)}
+							placeholderText={props.placeholderText}
+							className="form-control"
+							style={{ "z-index": 3 }}
+							showTimeSelect
+							isClearable
+							dateFormat="MM/dd/yyyy h:mm aa"
+						/>
 					</div>
 				) : (
 					<Form.Control {...props} autoComplete="off" />
