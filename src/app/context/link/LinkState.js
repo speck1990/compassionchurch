@@ -25,7 +25,7 @@ const LinkState = props => {
 		} catch (err) {
 			dispatch({
 				type: LINK_ERROR,
-				payload: err
+				payload: err.response.data.msg
 			});
 		}
 	};
@@ -45,7 +45,7 @@ const LinkState = props => {
 		} catch (err) {
 			dispatch({
 				type: LINK_ERROR,
-				payload: err
+				payload: err.response.data.errors
 			});
 		}
 
@@ -67,7 +67,7 @@ const LinkState = props => {
 		} catch (err) {
 			dispatch({
 				type: LINK_ERROR,
-				payload: err
+				payload: err.response.data.errors
 			});
 		}
 
@@ -99,7 +99,7 @@ const LinkState = props => {
 			} catch (err) {
 				dispatch({
 					type: LINK_ERROR,
-					payload: err
+					payload: err.response.data
 				});
 			}
 		} else {
