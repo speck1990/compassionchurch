@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import LinkContext from "./linkContext";
 import linkReducer from "./linkReducer";
-import { GET_LINKS, SET_CURRENT, UPDATE_CURRENT, UPDATE_LINK, CLEAR_CURRENT, LINK_ERROR, ADD_LINK, SET_LOADING, DELETE_LINK } from "../types";
+import { GET_LINKS, SET_CURRENT, UPDATE_CURRENT, UPDATE_LINK, CLEAR_CURRENT, LINK_ERROR, ADD_LINK, SET_LOADING, DELETE_LINK, CLEAR_ERRORS } from "../types";
 
 const LinkState = props => {
 	const initalState = {
@@ -19,7 +19,7 @@ const LinkState = props => {
 		setLoading();
 
 		try {
-			const res = await axios.get("/api/links");
+			const res = await axios.get("http://localhost:5000/api/links");
 			dispatch({ type: GET_LINKS, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -39,7 +39,7 @@ const LinkState = props => {
 		};
 
 		try {
-			const res = await axios.post(`/api/links`, { id: uuidv4(), ...link }, config);
+			const res = await axios.post(`http://localhost:5000/api/links`, link, config);
 			dispatch({ type: ADD_LINK, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -61,7 +61,7 @@ const LinkState = props => {
 		};
 
 		try {
-			const res = await axios.put(`/api/links/${link.id}`, link, config);
+			const res = await axios.put(`http://localhost:5000/api/links/${link._id}`, link, config);
 			dispatch({ type: UPDATE_LINK, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -77,7 +77,7 @@ const LinkState = props => {
 		setLoading();
 
 		try {
-			await axios.delete(`/api/links/${id}`);
+			await axios.delete(`http://localhost:5000/api/links/${id}`);
 		} catch (err) {
 			dispatch({
 				type: LINK_ERROR,
@@ -93,7 +93,7 @@ const LinkState = props => {
 
 		if (id) {
 			try {
-				const res = await axios.get(`/api/links/${id}`);
+				const res = await axios.get(`http://localhost:5000/api/links/${id}`);
 				dispatch({ type: SET_CURRENT, payload: res.data });
 			} catch (err) {
 				dispatch({
@@ -114,6 +114,8 @@ const LinkState = props => {
 		dispatch({ type: UPDATE_CURRENT, payload: current });
 	};
 
+	const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
+
 	const setLoading = () => dispatch({ type: SET_LOADING });
 
 	return (
@@ -128,6 +130,7 @@ const LinkState = props => {
 				clearCurrent,
 				updateLink,
 				deleteLink,
+				clearErrors,
 				loading: state.loading
 			}}
 		>
