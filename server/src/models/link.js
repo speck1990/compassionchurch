@@ -7,23 +7,18 @@ const LinkSchema = new mongoose.Schema({
 		ref: "User"
 	},
 	label: {
-		type: String,
-		required: true,
-		unique: true
+		type: String
 	},
 	type: {
 		type: String,
-		required: true,
 		trim: true
 	},
 	linkValue: {
 		type: String,
-		required: true,
 		trim: true
 	},
 	newTab: {
 		type: Boolean,
-		required: true,
 		default: false
 	}
 });
