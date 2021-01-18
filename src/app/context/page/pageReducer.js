@@ -64,7 +64,7 @@ const pageReducer = (state, action) => {
 		case CLEAR_ERRORS:
 			return {
 				...state,
-				error: null
+				error: []
 			};
 
 		case SET_LOADING:
