@@ -12,10 +12,13 @@ const PageSchema = new mongoose.Schema({
 		type: String,
 		trim: true
 	},
-	subtitle: {
+	description: {
 		type: String,
 		trim: true
 	},
+	publish: Date,
+	unpublish: Date,
+	visible: Boolean,
 	content: Array
 });
 
