@@ -9,9 +9,9 @@ const pageSchema = { title: "", slug: "", description: "", publish: "", unpublis
 
 const PageState = props => {
 	const initalState = {
-		pages: null,
+		pages: [],
 		current: null,
-		error: null,
+		error: [],
 		isSaved: true,
 		loading: false
 	};
