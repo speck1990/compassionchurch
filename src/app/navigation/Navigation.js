@@ -48,18 +48,24 @@ const Navigation = () => {
 								</thead>
 
 								<tbody>
-									{links.map((link, key) => (
-										<tr key={key}>
-											<th scope="row" className="col-sm-10">
-												<Link to={`/links/${link.id}`}>{link.label}</Link>
-											</th>
-											<td className="col-sm-2">
-												<Button onClick={e => handleClick(link.id, e)} variant="btn-icon">
-													<i className="far fa-trash-alt"></i>
-												</Button>
-											</td>
+									{links.length > 0 ? (
+										links.map((link, key) => (
+											<tr key={key}>
+												<th scope="row" className="col-sm-10">
+													<Link to={`/links/${link._id}`}>{link.label}</Link>
+												</th>
+												<td className="col-sm-2">
+													<Button onClick={e => handleClick(link._id, e)} variant="btn-icon">
+														<i className="far fa-trash-alt"></i>
+													</Button>
+												</td>
+											</tr>
+										))
+									) : (
+										<tr>
+											<td col="2">No Links Available</td>
 										</tr>
-									))}
+									)}
 								</tbody>
 							</Table>
 						</div>
