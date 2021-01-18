@@ -31,9 +31,9 @@ router.get("/:id", auth, async (req, res) => {
 		if (!link) return res.status(404).json({ msg: "Link not found" });
 
 		// Make sure user owns contact
-		// if (link.user.toString() !== req.user.id) {
-		// 	return res.status(401).json({ msg: "Not authorized" });
-		// }
+		if (link.user.toString() !== req.user.id) {
+			return res.status(401).json({ msg: "Not authorized" });
+		}
 
 		res.json(link);
 	} catch (error) {
@@ -82,9 +82,9 @@ router.put("/:id", auth, [check("label", "Label is required").not().isEmpty(), c
 		if (!link) return res.status(404).json({ msg: "Link not found" });
 
 		// Make sure user owns contact
-		// if (link.user.toString() !== req.user.id) {
-		// 	return res.status(401).json({ msg: "Not authorized" });
-		// }
+		if (link.user.toString() !== req.user.id) {
+			return res.status(401).json({ msg: "Not authorized" });
+		}
 
 		link = await Link.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
 
@@ -107,9 +107,9 @@ router.delete("/:id", auth, async (req, res) => {
 		if (!link) return res.status(404).json({ msg: "Link not found" });
 
 		// Make sure user owns contact
-		// if (link.user.toString() !== req.user.id) {
-		// 	return res.status(401).json({ msg: "Not authorized" });
-		// }
+		if (link.user.toString() !== req.user.id) {
+			return res.status(401).json({ msg: "Not authorized" });
+		}
 
 		await Link.findByIdAndRemove(id);
 
