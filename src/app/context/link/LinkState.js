@@ -10,6 +10,7 @@ const LinkState = props => {
 		links: [],
 		current: null,
 		error: [],
+		isSaved: true,
 		loading: false
 	};
 
@@ -123,6 +124,7 @@ const LinkState = props => {
 			value={{
 				links: state.links,
 				current: state.current,
+				isSaved: state.isSaved,
 				getLinks,
 				addLink,
 				setCurrent,
