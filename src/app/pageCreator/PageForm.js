@@ -71,7 +71,7 @@ const PageForm = props => {
 											</div>
 										)}
 									</h2>
-									{error && (
+									{error.length > 0 && (
 										<Alert variant="danger">
 											{error.map((err, key) => (
 												<div key={key}>{err.msg}</div>
