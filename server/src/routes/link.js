@@ -3,15 +3,14 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const { check, validationResult } = require("express-validator");
 
-const User = require("../models/user");
 const Link = require("../models/link");
 
 // @route       GET api/link
-// @desc        Get all links
+// @desc        Get all links for user
 // @access      Private
 router.get("/", auth, async (req, res) => {
 	try {
-		const links = await Link.find();
+		const links = await Link.find({ user: req.user.id });
 		res.json(links);
 	} catch (error) {
 		console.error(error.message);
@@ -54,7 +53,7 @@ router.post("/", auth, [check("label", "Label is required").not().isEmpty(), che
 	const { label, type, linkValue, newTab } = req.body;
 
 	try {
-		const link = new Link({ label, type, linkValue, newTab });
+		const link = new Link({ label, type, linkValue, newTab, user: req.user.id });
 		await link.save();
 		res.json(link);
 	} catch (error) {
@@ -68,13 +67,6 @@ router.post("/", auth, [check("label", "Label is required").not().isEmpty(), che
 // @access      Private
 router.put("/:id", auth, [check("label", "Label is required").not().isEmpty(), check("type", "Type is required").not().isEmpty(), check("linkValue", "Link is required").not().isEmpty()], async (req, res) => {
 	const id = req.params.id;
-
-	const errors = validationResult(req);
-	if (!errors.isEmpty()) {
-		return res.status(400).json({ errors: errors.array() });
-	}
-
-	// const { title, slug, subtitle, content } = req.body;
 
 	try {
 		let link = await Link.findById(id);
