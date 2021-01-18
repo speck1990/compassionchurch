@@ -48,8 +48,6 @@ const LinkState = props => {
 				payload: err.response.data.errors
 			});
 		}
-
-		clearCurrent();
 	};
 
 	const updateLink = async link => {
@@ -70,8 +68,6 @@ const LinkState = props => {
 				payload: err.response.data.errors
 			});
 		}
-
-		clearCurrent();
 	};
 
 	const deleteLink = async id => {
