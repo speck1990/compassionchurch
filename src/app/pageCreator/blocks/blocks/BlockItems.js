@@ -1,10 +1,14 @@
 import React from "react";
 import Heading from "./Heading";
 import Paragraph from "./Paragraph";
+import Image from "./Image";
+import Button from "./Button";
 
 const BlockItems = {
 	heading: Heading,
-	paragraph: Paragraph
+	paragraph: Paragraph,
+	image: Image,
+	button: Button
 };
 
 export default (block, index) => {
