@@ -7,7 +7,7 @@ const AddBlock = ({ location, isVisible }) => {
 
 	const { addBlock } = pageContext;
 
-	const blockTypes = ["heading", "paragraph", "image"];
+	const blockTypes = ["heading", "paragraph", "image", "button"];
 
 	const handleClick = (type, location, e) => {
 		e.preventDefault();
