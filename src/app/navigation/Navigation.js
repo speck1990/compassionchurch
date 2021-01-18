@@ -37,7 +37,7 @@ const Navigation = () => {
 					<div className="az-content-label mg-b-5">Create and manage navigation</div>
 					<p className="mg-b-20">Here's where you create and manage links that will be accessed on your website navigation.</p>
 
-					{links !== null && !loading ? (
+					{!loading ? (
 						<div className="table-responsive">
 							<Table hover className="mg-b-0">
 								<thead>
