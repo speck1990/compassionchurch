@@ -33,6 +33,11 @@ const PageForm = props => {
 	}, []);
 
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
+	const onTitleChange = e => {
+		const slug = slugify(e.target.value, { lower: true });
+		updateCurrent({ ...current, title: e.target.value, slug });
+	};
+
 	const setPublishDate = date => updateCurrent({ ...current, publish: date });
 	const setUnpublishDate = date => updateCurrent({ ...current, unpublish: date });
 
@@ -81,8 +86,7 @@ const PageForm = props => {
 									{isSaved && <Alert variant="success">Page Saved!</Alert>}
 									<form onSubmit={handleSave}>
 										<div className="wd-xl-50p">
-											<Input label="Title" name="title" type="text" value={current.title} onChange={onTextChange} />
-											<Input label="Slug" name="slug" type="text" value={current.slug} onChange={onTextChange} />
+											<Input label="Title" name="title" type="text" value={current.title} onChange={onTitleChange} />
 											<Input label="Description" name="description" as="textarea" value={current.description} rows="3" onChange={onTextChange} />
 											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} onChange={setPublishDate} />
 											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} onChange={setUnpublishDate} />
