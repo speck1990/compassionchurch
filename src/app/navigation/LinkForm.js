@@ -50,7 +50,7 @@ const LinkForm = props => {
 			<div className="container d-flex p-md-0">
 				<div className="az-content-body pd-lg-l-40 d-flex flex-column">
 					<div>
-						{current !== null && !loading ? (
+						{current !== null && pages !== null ? (
 							<div>
 								{error && (
 									<Alert variant="danger">
