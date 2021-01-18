@@ -7,9 +7,9 @@ import { GET_LINKS, SET_CURRENT, UPDATE_CURRENT, UPDATE_LINK, CLEAR_CURRENT, LIN
 
 const LinkState = props => {
 	const initalState = {
-		links: null,
+		links: [],
 		current: null,
-		error: null,
+		error: [],
 		loading: false
 	};
 
