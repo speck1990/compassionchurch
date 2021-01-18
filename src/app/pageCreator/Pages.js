@@ -35,8 +35,7 @@ const Pages = () => {
 					</div>
 					<div className="az-content-label mg-b-5">Create and manage pages</div>
 					<p className="mg-b-20">Here's where you create and manage pages that will be accessed on your website.</p>
-
-					{pages !== null && !loading ? (
+					{!loading ? (
 						<div className="table-responsive">
 							<Table hover className="mg-b-0">
 								<thead>
