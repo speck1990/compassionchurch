@@ -52,6 +52,7 @@ const LinkState = props => {
 
 	const updateLink = async link => {
 		setLoading();
+		clearErrors();
 
 		const config = {
 			headers: {
@@ -87,6 +88,7 @@ const LinkState = props => {
 
 	const setCurrent = async id => {
 		setLoading();
+		clearErrors();
 
 		if (id) {
 			try {
