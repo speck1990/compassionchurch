@@ -19,14 +19,14 @@ const linkReducer = (state, action) => {
 		case UPDATE_LINK:
 			return {
 				...state,
-				links: state.links.map(link => (link.id === action.payload.id ? action.payload : link)),
+				links: state.links.map(link => (link._id === action.payload._id ? action.payload : link)),
 				loading: false
 			};
 
 		case DELETE_LINK:
 			return {
 				...state,
-				links: state.links.filter(link => link.id !== action.payload),
+				links: state.links.filter(link => link._id !== action.payload),
 				loading: false
 			};
 
