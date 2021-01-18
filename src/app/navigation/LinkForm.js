@@ -7,13 +7,14 @@ import Checkbox from "../shared/formElements/Checkbox";
 import Radio from "../shared/formElements/Radio";
 import { useParams } from "react-router-dom";
 import SaveCancel from "../shared/formElements/SaveCancel";
+import { Alert } from "react-bootstrap";
 
 const LinkForm = props => {
 	const { id } = useParams();
 	const linkContext = useContext(LinkContext);
 	const pageContext = useContext(PageContext);
 
-	const { current, setCurrent, clearCurrent, updateCurrent, updateLink, addLink, loading } = linkContext;
+	const { current, setCurrent, clearCurrent, updateCurrent, updateLink, addLink, loading, error, isSaved } = linkContext;
 	const { getPages, pages } = pageContext;
 
 	useEffect(() => {
@@ -51,7 +52,14 @@ const LinkForm = props => {
 					<div>
 						{current !== null && !loading ? (
 							<div>
-								<h2 className="az-content-title">{id ? "Edit Link" : "Add New Link"}</h2>
+								{error && (
+									<Alert variant="danger">
+										{error.map((err, key) => (
+											<div key={key}>{err.msg}</div>
+										))}
+									</Alert>
+								)}
+								{isSaved && <Alert variant="success">Link Saved!</Alert>}
 								<form onSubmit={handleSave}>
 									<div className="wd-xl-50p">
 										<Input label="Link Label" name="label" type="text" value={current.label} onChange={onTextChange} />
