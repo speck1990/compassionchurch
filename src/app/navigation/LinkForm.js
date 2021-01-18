@@ -33,8 +33,8 @@ const LinkForm = props => {
 	}, []);
 
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
-	const onSelectChange = e => updateCurrent({ ...current, link: e.value });
-	const onLinkChange = e => updateCurrent({ ...current, link: "", [e.target.name]: e.target.value });
+	const onSelectChange = e => updateCurrent({ ...current, linkValue: e.value });
+	const onLinkChange = e => updateCurrent({ ...current, linkValue: "", [e.target.name]: e.target.value });
 	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
 
 	const handleSave = () => (id ? updateLink(current) : addLink(current));
@@ -58,9 +58,15 @@ const LinkForm = props => {
 										<Radio onChange={onLinkChange} label="Type" name="type" options={options} checkedValue={current.type} />
 
 										{current.type === "page" ? (
-											<Select defaultValue={pages.filter(page => page.id === current.link).map(page => ({ value: page.id, label: page.title }))} onChange={onSelectChange} name="link" label="Link" options={pages.map(page => ({ value: page.id, label: page.title }))} />
+											<Select
+												defaultValue={pages.filter(page => page._id === current.linkValue).map(page => ({ value: page._id, label: page.title }))}
+												onChange={onSelectChange}
+												name="linkValue"
+												label="Link"
+												options={pages.map(page => ({ value: page._id, label: page.title }))}
+											/>
 										) : (
-											<Input label="Link" name="link" type="text" value={current.link} onChange={onTextChange} placeholder="http://www.example.com" />
+											<Input label="Link" name="linkValue" type="text" value={current.linkValue} onChange={onTextChange} placeholder="http://www.example.com" />
 										)}
 
 										<Checkbox name="newTab" label="Open in new tab" value={current.newTab} onCheckboxChange={onCheckboxChange} />
