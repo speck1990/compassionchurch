@@ -8,6 +8,7 @@ import Blocks from "./blocks/Blocks";
 import SaveCancel from "../shared/formElements/SaveCancel";
 import Input from "../shared/formElements/Input";
 import { useParams, useHistory } from "react-router-dom";
+import Checkbox from "../shared/formElements/Checkbox";
 
 const PageForm = props => {
 	const history = useHistory();
@@ -40,6 +41,8 @@ const PageForm = props => {
 
 	const setPublishDate = date => updateCurrent({ ...current, publish: date });
 	const setUnpublishDate = date => updateCurrent({ ...current, unpublish: date });
+
+	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
 
 	// FIXME: MAKE SURE IF THERE IS AN ERROR PAGE DOES NOT GO BACK TO PAGES PAGE
 	const handleSave = () => (id ? updatePage(current) : addPage(current));
@@ -91,6 +94,7 @@ const PageForm = props => {
 											<Input label="Description" name="description" as="textarea" value={current.description} rows="3" onChange={onTextChange} />
 											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} onChange={setPublishDate} />
 											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} onChange={setUnpublishDate} />
+											<Checkbox name="visible" label="Visible" value={current.visible} onCheckboxChange={onCheckboxChange} />
 										</div>
 
 										<hr className="mg-y-30" />
