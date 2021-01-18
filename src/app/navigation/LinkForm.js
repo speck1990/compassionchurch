@@ -52,6 +52,14 @@ const LinkForm = props => {
 					<div>
 						{current !== null && pages !== null ? (
 							<div>
+								<h2 className="az-content-title">
+									{id ? "Edit Link " : "Add New Link "}
+									{loading && (
+										<div className="spinner-border text-primary" role="status">
+											<span className="sr-only">Loading...</span>
+										</div>
+									)}
+								</h2>
 								{error && (
 									<Alert variant="danger">
 										{error.map((err, key) => (
