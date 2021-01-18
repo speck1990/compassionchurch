@@ -54,6 +54,7 @@ const PageState = props => {
 
 	const updatePage = async page => {
 		setLoading();
+		clearErrors();
 
 		const config = {
 			headers: {
@@ -150,6 +151,7 @@ const PageState = props => {
 				deleteBlock,
 				updatePage,
 				deletePage,
+				clearErrors,
 				loading: state.loading
 			}}
 		>
