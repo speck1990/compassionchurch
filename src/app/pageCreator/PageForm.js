@@ -39,9 +39,7 @@ const PageForm = props => {
 	// FIXME: MAKE SURE IF THERE IS AN ERROR PAGE DOES NOT GO BACK TO PAGES PAGE
 	const handleSave = () => (id ? updatePage(current) : addPage(current));
 
-	const handleCancel = () => {
-		history.push("/pages");
-	};
+	const handleCancel = () => history.push("/pages");
 
 	const onDragStart = () => setIsVisible(false);
 
