@@ -1,9 +1,14 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Button } from "react-bootstrap";
 import AddBlock from "./AddBlock";
 import BlockItems from "./blocks/BlockItems";
+import PageContext from "../../context/page/pageContext";
 
 const Blocks = ({ blocks, isVisible }) => {
+	const pageContext = useContext(PageContext);
+	const { deleteBlock } = pageContext;
+
 	return (
 		<Fragment>
 			{blocks.length === 0 ? (
@@ -16,7 +21,15 @@ const Blocks = ({ blocks, isVisible }) => {
 								<div key={block._id}>
 									<Draggable draggableId={`draggable-${block._id}`} index={key}>
 										{provided => (
-											<div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} className="bg-white mg-b-10">
+											<div {...provided.draggableProps} ref={provided.innerRef} className="bg-white mg-b-10">
+												<div className="btn-icon-list">
+													<div {...provided.dragHandleProps}>
+														<i className="fas fa-arrows-alt"></i>
+													</div>
+													<Button variant="btn-icon" onClick={() => deleteBlock(block._id)}>
+														<i className="fas fa-times"></i>
+													</Button>
+												</div>
 												{BlockItems(block, key)}
 												<AddBlock location={key} isVisible={isVisible} />
 											</div>
