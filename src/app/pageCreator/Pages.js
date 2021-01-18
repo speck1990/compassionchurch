@@ -46,18 +46,24 @@ const Pages = () => {
 								</thead>
 
 								<tbody>
-									{pages.map((page, key) => (
-										<tr key={key}>
-											<th scope="row" className="col-sm-10">
-												<Link to={`/pages/${page._id}`}>{page.title}</Link>
-											</th>
-											<td className="col-sm-2">
-												<Button onClick={e => handleClick(page._id, e)} variant="btn-icon">
-													<i className="far fa-trash-alt"></i>
-												</Button>
-											</td>
+									{pages.length > 0 ? (
+										pages.map((page, key) => (
+											<tr key={page._id}>
+												<td className="col-sm-10">
+													<Link to={`/pages/${page._id}`}>{page.title}</Link>
+												</td>
+												<td className="col-sm-2">
+													<Button onClick={e => handleClick(page._id, e)} variant="btn-icon">
+														<i className="far fa-trash-alt"></i>
+													</Button>
+												</td>
+											</tr>
+										))
+									) : (
+										<tr>
+											<td col="2">No Pages Available</td>
 										</tr>
-									))}
+									)}
 								</tbody>
 							</Table>
 						</div>
