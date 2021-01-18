@@ -13,9 +13,9 @@ router.get("/", auth, async (req, res) => {
 	try {
 		const links = await Link.find();
 		res.json(links);
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).send("Server Error");
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).send({ msg: "Server Error" });
 	}
 });
 
@@ -36,9 +36,9 @@ router.get("/:id", auth, async (req, res) => {
 		// }
 
 		res.json(link);
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).send("Server Error");
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).send({ msg: "Server Error" });
 	}
 });
 
@@ -57,9 +57,9 @@ router.post("/", auth, [check("label", "Label is required").not().isEmpty(), che
 		const link = new Link({ label, type, linkValue, newTab });
 		await link.save();
 		res.json(link);
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).send("Server error");
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).send({ msg: "Server error" });
 	}
 });
 
@@ -89,9 +89,9 @@ router.put("/:id", auth, [check("label", "Label is required").not().isEmpty(), c
 		link = await Link.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
 
 		res.json(link);
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).send("Server Error");
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).send({ msg: "Server Error" });
 	}
 });
 
@@ -114,9 +114,9 @@ router.delete("/:id", auth, async (req, res) => {
 		await Link.findByIdAndRemove(id);
 
 		res.json({ msg: "Link deleted" });
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).send("Server Error");
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).send({ msg: "Server Error" });
 	}
 });
 
