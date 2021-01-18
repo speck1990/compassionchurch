@@ -9,6 +9,7 @@ import SaveCancel from "../shared/formElements/SaveCancel";
 import Input from "../shared/formElements/Input";
 import { useParams, useHistory } from "react-router-dom";
 import Checkbox from "../shared/formElements/Checkbox";
+import slugify from "slugify";
 
 const PageForm = props => {
 	const history = useHistory();
