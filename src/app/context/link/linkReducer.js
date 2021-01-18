@@ -13,6 +13,7 @@ const linkReducer = (state, action) => {
 			return {
 				...state,
 				links: [action.payload, ...state.links],
+				isSaved: true,
 				loading: false
 			};
 
@@ -20,6 +21,7 @@ const linkReducer = (state, action) => {
 			return {
 				...state,
 				links: state.links.map(link => (link._id === action.payload._id ? action.payload : link)),
+				isSaved: true,
 				loading: false
 			};
 
@@ -34,6 +36,7 @@ const linkReducer = (state, action) => {
 			return {
 				...state,
 				current: action.payload,
+				isSaved: false,
 				loading: false
 			};
 
@@ -48,6 +51,7 @@ const linkReducer = (state, action) => {
 			return {
 				...state,
 				current: action.payload,
+				isSaved: false,
 				loading: false
 			};
 
