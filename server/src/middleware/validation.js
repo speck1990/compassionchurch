@@ -20,20 +20,19 @@ VALIDATION FOR PAGE FORM
 
 const validPage = () => {
 	return check("slug").custom((value, { req }) => {
-		// new page check if page title exists
-		// edit page, check if title has changed, if so check if title exists
-
-		if (req.params.id) {
-			return Page.findById(req.params.id).then(page => {
-				if (page.slug !== req.body.slug) {
-					return Page.findOne({ slug: value, user: req.user.id }).then(page => {
-						if (page) {
-							return Promise.reject("Slug already in use.");
-						}
-					});
+		return Page.findOne({ slug: value, user: req.user.id }).then(page => {
+			if (page) {
+				if (!req.params.id) {
+					return Promise.reject("Slug already in use.");
 				}
-			});
-		}
+
+				return Page.findById(req.params.id).then(page => {
+					if (page.slug !== value) {
+						return Promise.reject("Slug already in use.");
+					}
+				});
+			}
+		});
 	});
 };
 
