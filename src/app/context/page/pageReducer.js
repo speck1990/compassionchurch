@@ -13,6 +13,7 @@ const pageReducer = (state, action) => {
 			return {
 				...state,
 				pages: [action.payload, ...state.pages],
+				isSaved: true,
 				loading: false
 			};
 
