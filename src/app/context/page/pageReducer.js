@@ -44,6 +44,7 @@ const pageReducer = (state, action) => {
 			return {
 				...state,
 				current: null,
+				isSaved: false,
 				loading: false
 			};
 

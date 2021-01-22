@@ -34,6 +34,10 @@ const PageForm = props => {
 		// eslint-disable-next-line
 	}, []);
 
+	useEffect(() => {
+		isSaved && history.push("/pages");
+	}, [isSaved, history]);
+
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
 	const onTitleChange = e => {
 		const slug = slugify(e.target.value, { lower: true });
@@ -44,7 +48,6 @@ const PageForm = props => {
 
 	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
 
-	// FIXME: MAKE SURE IF THERE IS AN ERROR PAGE DOES NOT GO BACK TO PAGES PAGE
 	const handleSave = () => (id ? updatePage(current) : addPage(current));
 
 	const handleCancel = () => history.push("/pages");
@@ -86,7 +89,6 @@ const PageForm = props => {
 											))}
 										</Alert>
 									)}
-									{isSaved && <Alert variant="success">Page Saved!</Alert>}
 									<form onSubmit={handleSave}>
 										<div className="wd-xl-50p">
 											<Input label="Title" name="title" type="text" value={current.title} onChange={onTitleChange} />
