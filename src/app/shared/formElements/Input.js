@@ -23,7 +23,7 @@ const Input = props => {
 						<DatePicker
 							minDate={moment().toDate() - 1}
 							selected={props.value ? moment(props.value).toDate() : null}
-							onChange={date => props.onChange(date)}
+							onChange={date => props.onChange(date, props)}
 							placeholderText={props.placeholderText}
 							className="form-control"
 							style={{ "z-index": 3 }}

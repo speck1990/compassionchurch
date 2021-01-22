@@ -40,8 +40,7 @@ const PageForm = props => {
 		updateCurrent({ ...current, title: e.target.value, slug });
 	};
 
-	const setPublishDate = date => updateCurrent({ ...current, publish: date });
-	const setUnpublishDate = date => updateCurrent({ ...current, unpublish: date });
+	const setDate = (date, { name }) => updateCurrent({ ...current, [name]: date });
 
 	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
 
@@ -93,8 +92,8 @@ const PageForm = props => {
 											<Input label="Title" name="title" type="text" value={current.title} onChange={onTitleChange} />
 											<Input label="Slug" name="slug" type="text" value={current.slug} onChange={onTextChange} disabled />
 											<Input label="Description" name="description" as="textarea" value={current.description} rows="3" onChange={onTextChange} />
-											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} onChange={setPublishDate} />
-											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} onChange={setUnpublishDate} />
+											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} onChange={setDate} />
+											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} onChange={setDate} />
 											<Checkbox name="visible" label="Visible" value={current.visible} onCheckboxChange={onCheckboxChange} />
 										</div>
 
