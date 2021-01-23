@@ -44,6 +44,7 @@ const linkReducer = (state, action) => {
 			return {
 				...state,
 				current: null,
+				isSaved: false,
 				loading: false
 			};
 
