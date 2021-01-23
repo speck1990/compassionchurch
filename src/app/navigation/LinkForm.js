@@ -5,11 +5,12 @@ import Select from "../shared/formElements/Select";
 import Input from "../shared/formElements/Input";
 import Checkbox from "../shared/formElements/Checkbox";
 import Radio from "../shared/formElements/Radio";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import SaveCancel from "../shared/formElements/SaveCancel";
 import { Alert } from "react-bootstrap";
 
 const LinkForm = props => {
+	const history = useHistory();
 	const { id } = useParams();
 	const linkContext = useContext(LinkContext);
 	const pageContext = useContext(PageContext);
@@ -33,12 +34,17 @@ const LinkForm = props => {
 		// eslint-disable-next-line
 	}, []);
 
+	useEffect(() => {
+		isSaved && history.push("/links");
+	}, [isSaved, history]);
+
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
 	const onSelectChange = e => updateCurrent({ ...current, linkValue: e.value });
 	const onLinkChange = e => updateCurrent({ ...current, linkValue: "", [e.target.name]: e.target.value });
 	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
 
 	const handleSave = () => (id ? updateLink(current) : addLink(current));
+	const handleCancel = () => history.push("/links");
 
 	const options = [
 		{ name: "page", value: "page", label: "Link to page" },
@@ -90,7 +96,7 @@ const LinkForm = props => {
 
 									<hr className="mg-y-30" />
 
-									<SaveCancel onSave={handleSave} redirect="/links" />
+									<SaveCancel onSave={handleSave} onCancel={handleCancel} />
 								</form>
 							</div>
 						) : (
