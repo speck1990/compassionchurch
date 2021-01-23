@@ -56,7 +56,15 @@ const validLink = () => {
 	return check("label").custom((value, { req }) => {
 		return Link.findOne({ label: value, user: req.user.id }).then(link => {
 			if (link) {
-				return Promise.reject("Link already in use.");
+				if (!req.params.id) {
+					return Promise.reject("Label already in use.");
+				}
+
+				return Link.findById(req.params.id).then(link => {
+					if (link.label !== value) {
+						return Promise.reject("Label already in use.");
+					}
+				});
 			}
 		});
 	});
