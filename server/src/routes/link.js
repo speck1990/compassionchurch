@@ -29,7 +29,7 @@ router.get("/:id", auth, async (req, res) => {
 
 		if (!link) return res.status(404).json({ msg: "Link not found" });
 
-		// Make sure user owns contact
+		// Make sure user owns link
 		if (link.user.toString() !== req.user.id) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
@@ -68,7 +68,7 @@ router.put("/:id", auth, linkValidationRules(), validate, async (req, res) => {
 
 		if (!link) return res.status(404).json({ msg: "Link not found" });
 
-		// Make sure user owns contact
+		// Make sure user owns link
 		if (link.user.toString() !== req.user.id) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
@@ -93,7 +93,7 @@ router.delete("/:id", auth, async (req, res) => {
 
 		if (!link) return res.status(404).json({ msg: "Link not found" });
 
-		// Make sure user owns contact
+		// Make sure user owns link
 		if (link.user.toString() !== req.user.id) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}

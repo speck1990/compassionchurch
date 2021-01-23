@@ -30,7 +30,7 @@ router.get("/:id", auth, async (req, res) => {
 
 		if (!page) return res.status(404).json({ msg: "Page not found" });
 
-		// Make sure user owns contact
+		// Make sure user owns page
 		if (page.user.toString() !== req.user.id) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
@@ -67,7 +67,7 @@ router.put("/:id", auth, pageValidationRules(), validate, async (req, res) => {
 
 		if (!page) return res.status(404).json({ msg: "Page not found" });
 
-		// Make sure user owns contact
+		// Make sure user owns page
 		if (page.user.toString() !== req.user.id) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
@@ -92,7 +92,7 @@ router.delete("/:id", auth, async (req, res) => {
 
 		if (!page) return res.status(404).json({ msg: "Page not found" });
 
-		// Make sure user owns contact
+		// Make sure user owns page
 		if (page.user.toString() !== req.user.id) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
