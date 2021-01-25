@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PageSchema = new mongoose.Schema({
+const SettingSchema = new mongoose.Schema({
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User"
@@ -11,4 +11,4 @@ const PageSchema = new mongoose.Schema({
 	youtube: String
 });
 
-module.exports = mongoose.model("Setting", PageSchema);
+module.exports = mongoose.model("Setting", SettingSchema);
