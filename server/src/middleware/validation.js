@@ -81,6 +81,16 @@ const linkValidationRules = req => {
 	];
 };
 
+/*
+
+VALIDATION FOR SETTINGS FORM
+
+*/
+
+const settingValidationRules = req => {
+	return [check("facebook", "Facebook address is required").notEmpty()];
+};
+
 const validate = (req, res, next) => {
 	const errors = validationResult(req);
 	if (errors.isEmpty()) {
@@ -94,6 +104,7 @@ module.exports = {
 	loginValidationRules,
 	pageValidationRules,
 	linkValidationRules,
+	settingValidationRules,
 	validationResult,
 	validate
 };
