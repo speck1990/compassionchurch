@@ -1,4 +1,4 @@
-import { GET_SETTINGS, SET_CURRENT, UPDATE_CURRENT, UPDATE_SETTINGS, CLEAR_CURRENT, SETTING_ERROR, SET_LOADING } from "../types";
+import { GET_SETTINGS, UPDATE_CURRENT, UPDATE_SETTINGS, SETTING_ERROR, SET_LOADING } from "../types";
 
 const linkReducer = (state, action) => {
 	switch (action.type) {
@@ -6,6 +6,7 @@ const linkReducer = (state, action) => {
 			return {
 				...state,
 				settings: action.payload,
+				isSaved: false,
 				loading: false
 			};
 
@@ -13,27 +14,15 @@ const linkReducer = (state, action) => {
 			return {
 				...state,
 				settings: action.payload,
-				loading: false
-			};
-
-		case SET_CURRENT:
-			return {
-				...state,
-				current: action.payload,
-				loading: false
-			};
-
-		case CLEAR_CURRENT:
-			return {
-				...state,
-				current: null,
+				isSaved: true,
 				loading: false
 			};
 
 		case UPDATE_CURRENT:
 			return {
 				...state,
-				current: action.payload,
+				settings: action.payload,
+				isSaved: false,
 				loading: false
 			};
 

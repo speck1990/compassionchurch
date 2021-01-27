@@ -1,12 +1,15 @@
 import React, { useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 import SettingContext from "../context/setting/settingContext";
 import Input from "../shared/formElements/Input";
 import SaveCancel from "../shared/formElements/SaveCancel";
 
 const Settings = () => {
 	const settingContext = useContext(SettingContext);
+	const history = useHistory();
 
-	const { current, updateCurrent, getSettings, updateSettings, loading } = settingContext;
+	const { current, settings, updateCurrent, getSettings, updateSettings, isSaved, loading, error } = settingContext;
 
 	useEffect(() => {
 		getSettings();
@@ -14,29 +17,44 @@ const Settings = () => {
 		// eslint-disable-next-line
 	}, []);
 
-	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
+	const onTextChange = e => updateCurrent({ ...settings, [e.target.name]: e.target.value });
 
-	const handleSave = () => updateSettings(current);
+	const handleSave = () => updateSettings(settings);
 
 	return (
 		<div>
 			<div className="container d-flex p-md-0">
 				<div className="az-content-body pd-lg-l-40 d-flex flex-column">
 					<div>
-						{current !== null && !loading ? (
+						{settings !== null && !loading ? (
 							<div>
-								<h2 className="az-content-title">Settings</h2>
+								<h2 className="az-content-title">
+									Settings{" "}
+									{loading && (
+										<div className="spinner-border text-primary" role="status">
+											<span className="sr-only">Loading...</span>
+										</div>
+									)}
+								</h2>
+								{error.length > 0 && (
+									<Alert variant="danger">
+										{error.map((err, key) => (
+											<div key={key}>{err.msg}</div>
+										))}
+									</Alert>
+								)}
+								{isSaved && <Alert variant="success">Settings Saved!</Alert>}
 								<form onSubmit={handleSave}>
 									<div className="wd-xl-50p">
-										<Input label="Facebook" name="facebook" type="text" value={current.facebook} onChange={onTextChange} />
-										<Input label="Instagram" name="instagram" type="text" value={current.instagram} onChange={onTextChange} />
-										<Input label="Twitter" name="twitter" type="text" value={current.twitter} onChange={onTextChange} />
-										<Input label="Youtube" name="youtube" type="text" value={current.youtube} onChange={onTextChange} />
+										<Input label="Facebook" name="facebook" type="text" value={settings.facebook} onChange={onTextChange} />
+										<Input label="Instagram" name="instagram" type="text" value={settings.instagram} onChange={onTextChange} />
+										<Input label="Twitter" name="twitter" type="text" value={settings.twitter} onChange={onTextChange} />
+										<Input label="Youtube" name="youtube" type="text" value={settings.youtube} onChange={onTextChange} />
 									</div>
 
 									<hr className="mg-y-30" />
 
-									<SaveCancel onSave={handleSave} redirect="/settings" />
+									<SaveCancel onSave={handleSave} showCancel={false} />
 								</form>
 							</div>
 						) : (
