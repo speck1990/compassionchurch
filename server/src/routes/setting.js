@@ -11,6 +11,12 @@ const Setting = require("../models/setting");
 router.get("/", auth, async (req, res) => {
 	try {
 		let settings = await Setting.findOne({ user: req.user.id });
+
+		if (!settings) {
+			settings = new Setting({ user: req.user.id });
+			await settings.save();
+		}
+
 		res.json(settings);
 	} catch (error) {
 		console.error(error.message);
