@@ -10,7 +10,7 @@ const Setting = require("../models/setting");
 // @access      Private
 router.get("/", auth, async (req, res) => {
 	try {
-		const settings = await Setting.find({ user: req.user.id });
+		let settings = await Setting.findOne({ user: req.user.id });
 		res.json(settings);
 	} catch (error) {
 		console.error(error.message);
