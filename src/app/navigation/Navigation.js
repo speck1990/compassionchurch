@@ -55,7 +55,7 @@ const Navigation = () => {
 													<Link to={`/links/${link._id}`}>{link.label}</Link>
 												</th>
 												<td className="col-sm-2">
-													<Button onClick={e => handleClick(link._id, e)} variant="btn-icon">
+													<Button onClick={e => handleClick(link._id, e)} variant="btn-icon" className="list-action-button">
 														<i className="far fa-trash-alt"></i>
 													</Button>
 												</td>

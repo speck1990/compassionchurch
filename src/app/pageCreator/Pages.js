@@ -53,7 +53,7 @@ const Pages = () => {
 													<Link to={`/pages/${page._id}`}>{page.title}</Link>
 												</td>
 												<td className="col-sm-2">
-													<Button onClick={e => handleClick(page._id, e)} variant="btn-icon">
+													<Button onClick={e => handleClick(page._id, e)} variant="btn-icon" className="list-action-button">
 														<i className="far fa-trash-alt"></i>
 													</Button>
 												</td>
