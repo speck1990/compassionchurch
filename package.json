@@ -51,7 +51,8 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"server": "npm run dev --prefix server",
-		"dev": "concurrently \"npm run server\" \"npm start\""
+		"website": "npm run dev --prefix website",
+		"dev": "concurrently \"npm run server\" \"npm run website\" \"npm start\""
 	},
 	"eslintConfig": {
 		"extends": "react-app"
