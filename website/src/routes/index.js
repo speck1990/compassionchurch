@@ -1,12 +1,12 @@
 var express = require("express");
 var router = express.Router();
-const getCampus = require("../helpers/getCampus");
+const getLocation = require("../helpers/getLocation");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-	const campus = getCampus(req.headers.host);
+router.get("/", async (req, res, next) => {
+	const location = await getLocation(req.headers.host);
 
-	res.render("index", { campus });
+	res.render("index", { location });
 });
 
 module.exports = router;
