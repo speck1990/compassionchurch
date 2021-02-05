@@ -7,6 +7,7 @@ const { loginValidationRules, validationResult } = require("../middleware/valida
 const { check } = require("express-validator");
 
 const User = require("../models/user");
+const Location = require("../models/location");
 
 // @route       GET api/users
 // @desc        Get logged in user
@@ -47,6 +48,9 @@ router.post(
 			const salt = await bcrypt.genSalt(10);
 
 			user.password = await bcrypt.hash(password, salt);
+
+			const location = await Location.findOne();
+			user.location = location._id;
 
 			await user.save();
 
