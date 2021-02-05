@@ -30,4 +30,18 @@ router.get("/:location", async (req, res) => {
 	}
 });
 
+// @route       POST api/location
+// @desc        Create a location
+// @access      Private
+router.get("/", async (req, res) => {
+	try {
+		const location = new Location({ name: "Compassion Church OKC", subdomain: "okc", domain: "compassionokc.church", address: "123 S Road", city: "Oklahoma City", state: "Oklahoma", zip: "12345" });
+		await location.save();
+		res.json(location);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send({ msg: err.message });
+	}
+});
+
 module.exports = router;
