@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const SettingSchema = new mongoose.Schema({
-	user: {
+	location: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "User"
+		ref: "Location"
 	},
 	facebook: String,
 	instagram: String,

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const LinkSchema = new mongoose.Schema({
-	user: {
+	location: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true,
-		ref: "User"
+		ref: "Location"
 	},
 	label: {
 		type: String

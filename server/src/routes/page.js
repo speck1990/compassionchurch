@@ -7,11 +7,11 @@ const User = require("../models/user");
 const Page = require("../models/page");
 
 // @route       GET api/pages
-// @desc        Get all pages for user
+// @desc        Get all pages for location
 // @access      Private
 router.get("/", auth, async (req, res) => {
 	try {
-		const pages = await Page.find({ user: req.user.id });
+		const pages = await Page.find({ location: req.user.location });
 		res.json(pages);
 	} catch (error) {
 		console.error(error.message);
@@ -30,8 +30,8 @@ router.get("/:id", auth, async (req, res) => {
 
 		if (!page) return res.status(404).json({ msg: "Page not found" });
 
-		// Make sure user owns page
-		if (page.user.toString() !== req.user.id) {
+		// Make sure location owns page
+		if (page.location.toString() !== req.user.location) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
 
@@ -47,7 +47,7 @@ router.get("/:id", auth, async (req, res) => {
 // @access      Private
 router.post("/", auth, pageValidationRules(), validate, async (req, res) => {
 	try {
-		const page = new Page({ ...req.body, user: req.user.id });
+		const page = new Page({ ...req.body, location: req.user.location });
 		await page.save();
 		res.json(page);
 	} catch (err) {
@@ -67,8 +67,8 @@ router.put("/:id", auth, pageValidationRules(), validate, async (req, res) => {
 
 		if (!page) return res.status(404).json({ msg: "Page not found" });
 
-		// Make sure user owns page
-		if (page.user.toString() !== req.user.id) {
+		// Make sure location owns page
+		if (page.location.toString() !== req.user.location) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
 
@@ -92,8 +92,8 @@ router.delete("/:id", auth, async (req, res) => {
 
 		if (!page) return res.status(404).json({ msg: "Page not found" });
 
-		// Make sure user owns page
-		if (page.user.toString() !== req.user.id) {
+		// Make sure location owns page
+		if (page.location.toString() !== req.user.location) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
 

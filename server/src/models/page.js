@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const PageSchema = new mongoose.Schema({
-	user: {
+	location: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "User"
+		ref: "Location"
 	},
 	slug: {
 		type: String
