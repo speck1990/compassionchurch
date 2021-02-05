@@ -1,4 +1,7 @@
-<h1>{{location.name}}</h1>
-<p>{{location.subdomain}}</p>
-<p>{{location.domain}}</p>
-<p>We are located in {{location.city}}, {{location.state}}</p>
+<h1>{{page.title}}</h1>
+
+{{#each page.content}}
+
+{{{text}}}
+
+{{/each}}
