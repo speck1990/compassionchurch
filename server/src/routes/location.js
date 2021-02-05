@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Location = require("../models/location");
+const Page = require("../models/page");
 
 // @route       GET api/locations/all
 // @desc        Get all locations
@@ -23,7 +24,11 @@ router.get("/:location", async (req, res) => {
 	const loc = req.params.location;
 	try {
 		const location = await Location.findOne({ $or: [{ subdomain: loc }, { domain: loc }] });
-		res.json(location);
+		const pages = await Page.find({ location: location._id });
+
+		const site = { location, pages };
+
+		res.json(site);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send("Server Error");
