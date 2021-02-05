@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
 	location: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "location"
+		ref: "Location"
 	},
 	email: {
 		type: String,
