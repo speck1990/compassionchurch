@@ -3,10 +3,13 @@ var router = express.Router();
 const getLocation = require("../helpers/getLocation");
 
 /* GET home page. */
-router.get("/", async (req, res, next) => {
-	const location = await getLocation(req.headers.host);
+router.get("/:slug?", async (req, res, next) => {
+	const slug = req.params.slug;
 
-	res.render("index", { location });
+	const { pages } = await getLocation(req.headers.host);
+	const page = pages.find(page => page.slug === slug);
+
+	res.render("index", { page });
 });
 
 module.exports = router;
