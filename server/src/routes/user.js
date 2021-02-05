@@ -56,7 +56,8 @@ router.post(
 
 			const payload = {
 				user: {
-					id: user._id
+					id: user._id,
+					location: user.location
 				}
 			};
 
@@ -105,7 +106,8 @@ router.post("/login", loginValidationRules(), async (req, res) => {
 
 		const payload = {
 			user: {
-				id: user._id
+				id: user._id,
+				location: user.location
 			}
 		};
 
