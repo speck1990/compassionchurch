@@ -7,6 +7,8 @@ import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAG
 
 const pageSchema = { title: "", slug: "", description: "", publish: "", unpublish: "", visible: true, content: "" };
 
+const blockTypes = ["heading", "paragraph", "image", "button"];
+
 const PageState = props => {
 	const initalState = {
 		pages: [],
@@ -142,6 +144,7 @@ const PageState = props => {
 				current: state.current,
 				error: state.error,
 				isSaved: state.isSaved,
+				blockTypes,
 				getPages,
 				addPage,
 				setCurrent,
