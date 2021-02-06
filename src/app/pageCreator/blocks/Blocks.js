@@ -1,11 +1,10 @@
 import React, { Fragment, useContext } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { Button } from "react-bootstrap";
-import AddBlock from "./AddBlock";
 import BlockItems from "./blocks/BlockItems";
 import PageContext from "../../context/page/pageContext";
 
-const Blocks = ({ blocks, isVisible }) => {
+const Blocks = ({ blocks }) => {
 	const pageContext = useContext(PageContext);
 	const { deleteBlock } = pageContext;
 
@@ -31,7 +30,6 @@ const Blocks = ({ blocks, isVisible }) => {
 													</Button>
 												</div>
 												{BlockItems(block, key)}
-												<AddBlock location={key} isVisible={isVisible} />
 											</div>
 										)}
 									</Draggable>

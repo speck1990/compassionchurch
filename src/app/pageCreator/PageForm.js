@@ -1,24 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import PageContext from "../context/page/pageContext";
 import "react-datepicker/dist/react-datepicker.css";
 import { Alert } from "react-bootstrap";
-import AddBlock from "./blocks/AddBlock";
 import Blocks from "./blocks/Blocks";
 import SaveCancel from "../shared/formElements/SaveCancel";
 import Input from "../shared/formElements/Input";
 import { useParams, useHistory } from "react-router-dom";
 import Checkbox from "../shared/formElements/Checkbox";
 import slugify from "slugify";
+import BlockOptions from "./blocks/BlockOptions";
 
 const PageForm = props => {
 	const history = useHistory();
 	const { id } = useParams();
 	const pageContext = useContext(PageContext);
 
-	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, loading, error, isSaved } = pageContext;
-
-	const [isVisible, setIsVisible] = useState(true);
+	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, addBlock, loading, error, isSaved, blockTypes } = pageContext;
 
 	useEffect(() => {
 		if (id !== null) {
@@ -52,25 +50,32 @@ const PageForm = props => {
 
 	const handleCancel = () => history.push("/pages");
 
-	const onDragStart = () => setIsVisible(false);
-
 	const onDragEnd = ({ destination, source }) => {
 		if (!destination) return;
 
-		const updatedContent = Array.from(current.content);
-		const [removed] = updatedContent.splice(source.index, 1);
-		updatedContent.splice(destination.index, 0, removed);
+		switch (source.droppableId) {
+			case destination.droppableId:
+				const updatedContent = Array.from(current.content);
+				const [removed] = updatedContent.splice(source.index, 1);
+				updatedContent.splice(destination.index, 0, removed);
 
-		updateCurrent({ ...current, content: updatedContent });
+				updateCurrent({ ...current, content: updatedContent });
+				break;
 
-		setIsVisible(true);
+			case "options":
+				addBlock({ type: blockTypes[source.index], text: "" }, destination.index);
+				break;
+
+			default:
+				break;
+		}
 	};
 
 	return (
 		<div>
 			<div className="container d-flex p-md-0">
 				<div className="az-content-body pd-lg-l-40 d-flex flex-column">
-					<DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+					<DragDropContext onDragEnd={onDragEnd}>
 						<div>
 							{current !== null ? (
 								<div>
@@ -104,9 +109,10 @@ const PageForm = props => {
 										<div className="az-content-label mg-b-5">Page Content</div>
 										<p className="mg-b-20">Click the button to add new content blocks to page.</p>
 
+										<BlockOptions />
+
 										<div>
-											<AddBlock location="-1" isVisible={isVisible} />
-											<Blocks blocks={current.content} isVisible={isVisible} />
+											<Blocks blocks={current.content} />
 										</div>
 
 										<hr className="mg-y-30" />

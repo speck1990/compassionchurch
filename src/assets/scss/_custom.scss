@@ -3,3 +3,11 @@
     min-height: auto !important;
     padding-bottom: 0 !important;
 }
+
+.dragging-static-copy ~ div {
+  transform: none !important;
+}
+
+.dragging-static-copy ~ [data-rbd-placeholder-context-id] {
+  display: none !important;
+}
