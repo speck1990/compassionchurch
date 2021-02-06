@@ -7,7 +7,12 @@ import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAG
 
 const pageSchema = { title: "", slug: "", description: "", publish: "", unpublish: "", visible: true, content: "" };
 
-const blockTypes = ["heading", "paragraph", "image", "button"];
+const blockTypes = [
+	{ type: "heading", icon: "fas fa-heading" },
+	{ type: "paragraph", icon: "fas fa-paragraph" },
+	{ type: "button", icon: "typcn typcn-minus-outline" },
+	{ type: "image", icon: "far fa-image" }
+];
 
 const PageState = props => {
 	const initalState = {
