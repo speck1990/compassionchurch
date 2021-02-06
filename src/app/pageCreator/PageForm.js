@@ -107,11 +107,10 @@ const PageForm = props => {
 										<hr className="mg-y-30" />
 
 										<div className="az-content-label mg-b-5">Page Content</div>
-										<p className="mg-b-20">Click the button to add new content blocks to page.</p>
+										<p className="mg-b-20">Drag and drop content blocks onto the page.</p>
 
-										<BlockOptions />
-
-										<div>
+										<div className="block-container">
+											<BlockOptions />
 											<Blocks blocks={current.content} />
 										</div>
 
