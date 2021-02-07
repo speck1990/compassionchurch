@@ -11,7 +11,8 @@ const blockTypes = [
 	{ type: "heading", icon: "fas fa-heading" },
 	{ type: "paragraph", icon: "fas fa-paragraph" },
 	{ type: "button", icon: "typcn typcn-minus-outline" },
-	{ type: "image", icon: "far fa-image" }
+	{ type: "image", icon: "far fa-image" },
+	{ type: "form", icon: "far fa-comments" }
 ];
 
 const PageState = props => {
