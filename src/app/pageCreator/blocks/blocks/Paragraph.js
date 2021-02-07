@@ -9,10 +9,10 @@ const Paragraph = ({ block, index }) => {
 	const { current, updateCurrent } = pageContext;
 
 	const modules = {
-		toolbar: [["bold", "italic", "underline"], [{ align: [false, "center", "right"] }], ["link"], [{ indent: "-1" }, { indent: "+1" }], ["clean"]]
+		toolbar: [["bold", "italic", "underline"], [{ align: [false, "center", "right"] }], ["link"], [{ indent: "-1" }, { indent: "+1" }], ["clean"], [{ list: "ordered" }, { list: "bullet" }]]
 	};
 
-	const formats = ["bold", "italic", "underline", "indent", "link", "align"];
+	const formats = ["bold", "italic", "underline", "indent", "link", "align", "list"];
 
 	const handleOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { _id: block._id, type: "paragraph", text: value } : el)) });
 
