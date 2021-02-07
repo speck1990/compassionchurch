@@ -10,8 +10,6 @@ const Navigation = lazy(() => import("./navigation/Navigation"));
 const Login = lazy(() => import("./generalPages/Login"));
 const Settings = lazy(() => import("./generalPages/Settings"));
 
-const Site = lazy(() => import("../site/Site"));
-
 const AppRoutes = () => {
 	return (
 		<Suspense fallback="">
@@ -24,7 +22,6 @@ const AppRoutes = () => {
 				<PrivateRoute exact path="/links/create" component={LinkForm} />
 				<PrivateRoute exact path="/links/:id" component={LinkForm} />
 				<Route exact path="/login" component={Login} />
-				<PrivateRoute exact path="/site/:slug" component={Site} />
 				<PrivateRoute exact path="/settings" component={Settings} />
 			</Switch>
 		</Suspense>
