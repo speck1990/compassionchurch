@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import BlockItems from "./blocks/BlockItems";
