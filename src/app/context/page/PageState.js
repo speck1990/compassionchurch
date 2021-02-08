@@ -8,9 +8,30 @@ import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAG
 const pageSchema = { title: "", slug: "", description: "", publish: "", unpublish: "", visible: true, content: "" };
 
 const blockTypes = [
-	{ type: "heading", icon: "fas fa-heading" },
-	{ type: "paragraph", icon: "fas fa-paragraph" },
-	{ type: "button", icon: "typcn typcn-minus-outline" },
+	{
+		type: "heading",
+		icon: "fas fa-heading",
+		template: {
+			text: ""
+		}
+	},
+	{
+		type: "paragraph",
+		icon: "fas fa-paragraph",
+		template: {
+			text: ""
+		}
+	},
+	{
+		type: "button",
+		icon: "typcn typcn-minus-outline",
+		template: {
+			buttonType: "page",
+			buttonValue: "",
+			label: "",
+			newTab: false
+		}
+	},
 	{ type: "image", icon: "far fa-image" },
 	{ type: "form", icon: "far fa-comments" }
 ];
