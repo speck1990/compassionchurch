@@ -19,12 +19,12 @@ const BlockOptions = () => {
 										{(provided, snapshot) => (
 											<Fragment>
 												<div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={provided.draggableProps.style} className="toolbox-item bg-gray-300">
-													<i class={block.icon}></i>
+													<i className={block.icon}></i>
 													<div>{block.type.charAt(0).toUpperCase() + block.type.slice(1)}</div>
 												</div>
 												{snapshot.isDragging && (
 													<div className="dragging-static-copy toolbox-item bg-gray-300">
-														<i class={block.icon}></i>
+														<i className={block.icon}></i>
 														<div>{block.type.charAt(0).toUpperCase() + block.type.slice(1)}</div>
 													</div>
 												)}
