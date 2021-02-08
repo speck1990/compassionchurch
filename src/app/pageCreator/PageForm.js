@@ -63,7 +63,7 @@ const PageForm = props => {
 				break;
 
 			case "options":
-				addBlock({ type: blockTypes[source.index].type, text: "" }, destination.index);
+				addBlock({ type: blockTypes[source.index].type, ...blockTypes[source.index].template }, destination.index);
 				break;
 
 			default:
