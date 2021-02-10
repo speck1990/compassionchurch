@@ -33,7 +33,7 @@ const Button = ({ block, index }) => {
 					<Radio onChange={onLinkChange} label="Type" name={`buttonType-${index}`} options={options} checkedValue={block.buttonType} />
 
 					{block.buttonType === "page" ? (
-						<Select defaultValue={pages.filter(page => page._id === block.buttonValue).map(page => ({ value: page._id, label: page.title }))} onChange={onSelectChange} name="buttonLabel" label="Button" options={pages.map(page => ({ value: page._id, label: page.title }))} />
+						<Select defaultValue={pages.filter(page => page.slug === block.buttonValue).map(page => ({ value: page.slug, label: page.title }))} onChange={onSelectChange} name="buttonLabel" label="Button" options={pages.map(page => ({ value: page.slug, label: page.title }))} />
 					) : (
 						<Input label="Button" name="buttonValue" type="text" value={block.buttonValue} onChange={onTextChange} placeholder="http://www.example.com" />
 					)}
