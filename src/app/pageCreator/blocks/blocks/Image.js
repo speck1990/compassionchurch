@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { Fragment, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 const baseStyle = {
@@ -27,7 +27,12 @@ const rejectStyle = {
 };
 
 const Image = props => {
-	const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({ accept: "image/*" });
+	const [file, setFile] = useState([]);
+	const onDrop = (files, rejectedFiles) => {
+		setFile(URL.createObjectURL(files[0]));
+	};
+
+	const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({ onDrop, accept: "image/*", multiple: false });
 
 	const style = useMemo(
 		() => ({
@@ -40,12 +45,18 @@ const Image = props => {
 	);
 
 	return (
-		<div className="container">
-			<div {...getRootProps({ style })}>
-				<input {...getInputProps()} />
-				<p>Drag 'n' drop some files here, or click to select files</p>
-			</div>
-		</div>
+		<Fragment>
+			{file.length === 0 ? (
+				<div {...getRootProps({ style })}>
+					<input {...getInputProps()} />
+					<p>Drag 'n' drop an image here, or click to select an image</p>
+				</div>
+			) : (
+				<div>
+					<img alt="test" style={{ width: "100px", height: "auto" }} src={file} />
+				</div>
+			)}
+		</Fragment>
 	);
 };
 
