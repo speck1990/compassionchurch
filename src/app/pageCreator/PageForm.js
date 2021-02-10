@@ -9,7 +9,7 @@ import Input from "../shared/formElements/Input";
 import { useParams, useHistory } from "react-router-dom";
 import Checkbox from "../shared/formElements/Checkbox";
 import slugify from "slugify";
-import BlockOptions from "./blocks/BlockOptions";
+import Toolbox from "./blocks/Toolbox";
 
 const PageForm = props => {
 	const history = useHistory();
@@ -110,7 +110,7 @@ const PageForm = props => {
 										<p className="mg-b-20">Drag and drop content blocks onto the page.</p>
 
 										<div className="block-container">
-											<BlockOptions />
+											<Toolbox />
 											<Blocks blocks={current.content} />
 										</div>
 

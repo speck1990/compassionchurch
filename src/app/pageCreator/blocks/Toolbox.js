@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from "react";
 import PageContext from "../../context/page/pageContext";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-const BlockOptions = () => {
+const Toolbox = () => {
 	const pageContext = useContext(PageContext);
 
 	const { blockTypes } = pageContext;
@@ -42,4 +42,4 @@ const BlockOptions = () => {
 	);
 };
 
-export default BlockOptions;
+export default Toolbox;
