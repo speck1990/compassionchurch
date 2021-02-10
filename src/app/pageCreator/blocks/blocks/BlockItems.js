@@ -3,12 +3,14 @@ import Heading from "./Heading";
 import Paragraph from "./Paragraph";
 import Image from "./Image";
 import Button from "./Button";
+import Columns from "./Columns";
 
 const BlockItems = {
 	heading: Heading,
 	paragraph: Paragraph,
 	image: Image,
-	button: Button
+	button: Button,
+	columns: Columns
 };
 
 export default (block, index) => {

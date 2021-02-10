@@ -33,7 +33,29 @@ const blockTypes = [
 		}
 	},
 	{ type: "image", icon: "far fa-image" },
-	{ type: "form", icon: "far fa-comments" }
+	{ type: "form", icon: "far fa-comments" },
+	{
+		type: "columns",
+		icon: "fas fa-columns",
+		template: {
+			columns: [
+				{
+					id: 1,
+					blocks: [
+						{ id: 1, type: "paragraph", text: "<p>column 1, row 1</p>" },
+						{ id: 1, type: "paragraph", text: "<p>column 1, row 2</p>" }
+					]
+				},
+				{
+					id: 2,
+					blocks: [
+						{ id: 1, type: "paragraph", text: "<p>column 2, row 1</p>" },
+						{ id: 1, type: "paragraph", text: "<p>column 2, row 2</p>" }
+					]
+				}
+			]
+		}
+	}
 ];
 
 const PageState = props => {
