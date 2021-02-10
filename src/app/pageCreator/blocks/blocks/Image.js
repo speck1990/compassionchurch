@@ -2,10 +2,7 @@ import React, { useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 
 const baseStyle = {
-	flex: 1,
-	display: "flex",
-	flexDirection: "column",
-	alignItems: "center",
+	textAlign: "center",
 	padding: "20px",
 	borderWidth: 2,
 	borderRadius: 2,
