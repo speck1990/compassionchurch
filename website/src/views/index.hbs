@@ -1,7 +1,26 @@
-<h1>{{page.title}}</h1>
+<h1 class="display-1">{{page.title}}</h1>
 
 {{#each page.content}}
 
-{{{text}}}
+<div class="row">
+    <div class="col">
+
+        {{#switch type}}
+
+        {{#case 'heading'}} {{{text}}} {{/case}}
+
+        {{#case 'paragraph'}} {{{text}}} {{/case}}
+
+        {{#case 'button'}}
+        <div class="mt-2 mb-5"><a class="btn btn-primary" {{#if newTab}}target="_blank" {{/if}} href="/{{buttonValue}}"
+                role="button">{{label}}</a></div>
+        {{/case}}
+
+        {{/switch}}
+
+
+    </div>
+</div>
+
 
 {{/each}}
