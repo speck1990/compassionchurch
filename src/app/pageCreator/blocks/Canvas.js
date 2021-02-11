@@ -1,6 +1,6 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
-import BlockItems from "./blocks/BlockItems";
+import Blocks from "./blocks/Blocks";
 import { Fragment } from "react";
 
 const Canvas = ({ blocks }) => {
@@ -19,7 +19,7 @@ const Canvas = ({ blocks }) => {
 								<p>Drag and drop content block here.</p>
 							</div>
 						) : (
-							<BlockItems blocks={blocks} />
+							<Blocks blocks={blocks} />
 						)}
 
 						{provided.placeholder}

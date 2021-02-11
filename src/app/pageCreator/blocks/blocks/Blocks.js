@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import PageContext from "../../../context/page/pageContext";
 import blockTypes from "../blockTypes";
 
-const BlockItems = ({ blocks }) => {
+const Blocks = ({ blocks }) => {
 	const pageContext = useContext(PageContext);
 	const { deleteBlock } = pageContext;
 
@@ -49,4 +49,4 @@ const BlockItems = ({ blocks }) => {
 		</Fragment>
 	);
 };
-export default BlockItems;
+export default Blocks;
