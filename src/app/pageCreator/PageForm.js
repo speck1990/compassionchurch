@@ -10,13 +10,14 @@ import { useParams, useHistory } from "react-router-dom";
 import Checkbox from "../shared/formElements/Checkbox";
 import slugify from "slugify";
 import Toolbox from "./blocks/Toolbox";
+import blockTypes from "./blocks/blockTypes";
 
 const PageForm = props => {
 	const history = useHistory();
 	const { id } = useParams();
 	const pageContext = useContext(PageContext);
 
-	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, addBlock, loading, error, isSaved, blockTypes } = pageContext;
+	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, addBlock, loading, error, isSaved } = pageContext;
 
 	useEffect(() => {
 		if (id !== null) {
