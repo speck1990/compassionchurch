@@ -63,7 +63,7 @@ const PageForm = props => {
 				updateCurrent({ ...current, content: updatedContent });
 				break;
 
-			case "options":
+			case "toolbox":
 				addBlock({ type: blockTypes[source.index].type, ...blockTypes[source.index].template }, destination.index);
 				break;
 

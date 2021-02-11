@@ -1,22 +1,44 @@
-import React from "react";
-import Heading from "./Heading";
-import Paragraph from "./Paragraph";
-import Image from "./Image";
-import Button from "./Button";
-import Columns from "./Columns";
+import React, { Fragment, useContext } from "react";
+import { Draggable } from "react-beautiful-dnd";
+import { Button } from "react-bootstrap";
+import PageContext from "../../../context/page/pageContext";
+import blockTypes from "../blockTypes";
 
-const BlockItems = {
-	heading: Heading,
-	paragraph: Paragraph,
-	image: Image,
-	button: Button,
-	columns: Columns
-};
+const BlockItems = ({ block, index }) => {
+	const pageContext = useContext(PageContext);
+	const { deleteBlock } = pageContext;
 
-export default (block, index) => {
-	if (typeof BlockItems[block.type] != "undefined") {
-		return React.createElement(BlockItems[block.type], { block, index });
+	const { component } = blockTypes.find(blockType => blockType.type === block.type && blockType);
+
+	if (typeof component == "undefined") {
+		return (
+			<Fragment>
+				{React.createElement(() => (
+					<div>This option is not available.</div>
+				))}
+			</Fragment>
+		);
 	}
 
-	return React.createElement(() => <div>The component {block.type} has not been created yet.</div>, { key: index });
+	return (
+		<div key={block._id}>
+			<Draggable draggableId={`draggable-${block._id}`} index={index}>
+				{provided => (
+					<div {...provided.draggableProps} ref={provided.innerRef} className="bg-white mg-b-30">
+						<div className="btn-icon-list block-options">
+							<div {...provided.dragHandleProps}>
+								<i className="fas fa-arrows-alt"></i>
+							</div>
+
+							<Button variant="btn-icon" onClick={() => deleteBlock(block._id)}>
+								<i className="fas fa-times"></i>
+							</Button>
+						</div>
+						{React.createElement(component, { block, index })}
+					</div>
+				)}
+			</Draggable>
+		</div>
+	);
 };
+export default BlockItems;

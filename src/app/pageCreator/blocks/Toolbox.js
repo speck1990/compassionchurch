@@ -1,39 +1,34 @@
-import React, { Fragment, useContext } from "react";
-import PageContext from "../../context/page/pageContext";
+import React, { Fragment } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import blockTypes from "./blockTypes";
+import { uppercase } from "../../utils/helpers";
 
 const Toolbox = () => {
-	const pageContext = useContext(PageContext);
-
-	const { blockTypes } = pageContext;
-
 	return (
-		<div className="toolbox">
-			<div className="toolbox-options">
-				<Droppable droppableId="options" isDropDisabled={true}>
-					{(provided, snapshot) => (
-						<div ref={provided.innerRef}>
-							<div className="az-icon-group bg-gray-200 mg-b-40">
-								{blockTypes.map((block, key) => (
-									<Draggable key={key} draggableId={`draggable-${block.type}`} index={key}>
-										{(provided, snapshot) => (
-											<Fragment>
-												<div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={provided.draggableProps.style} className="toolbox-item bg-gray-300">
-													<i className={block.icon}></i>
-													<div>{block.type.charAt(0).toUpperCase() + block.type.slice(1)}</div>
+		<div className="toolbox-container">
+			<div className="toolbox">
+				<Droppable droppableId="toolbox" isDropDisabled={true}>
+					{provided => (
+						<div className="az-icon-group bg-gray-200 mg-b-40" ref={provided.innerRef}>
+							{blockTypes.map(({ type, icon }, key) => (
+								<Draggable key={type} draggableId={`draggable-${type}`} index={key}>
+									{(provided, snapshot) => (
+										<Fragment>
+											<div className="toolbox-item bg-gray-300" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={provided.draggableProps.style}>
+												<i className={icon}></i>
+												<div>{uppercase(type)}</div>
+											</div>
+											{snapshot.isDragging && (
+												<div className="dragging-static-copy toolbox-item bg-gray-300">
+													<i className={icon}></i>
+													<div>{uppercase(type)}</div>
 												</div>
-												{snapshot.isDragging && (
-													<div className="dragging-static-copy toolbox-item bg-gray-300">
-														<i className={block.icon}></i>
-														<div>{block.type.charAt(0).toUpperCase() + block.type.slice(1)}</div>
-													</div>
-												)}
-											</Fragment>
-										)}
-									</Draggable>
-								))}
-								{provided.placeholder}
-							</div>
+											)}
+										</Fragment>
+									)}
+								</Draggable>
+							))}
+							{provided.placeholder}
 						</div>
 					)}
 				</Droppable>
