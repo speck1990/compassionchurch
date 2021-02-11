@@ -1,8 +1,8 @@
 import React, { Fragment, useContext } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { Button } from "react-bootstrap";
-import PageContext from "../../../context/page/pageContext";
-import blockTypes from "../blockTypes";
+import PageContext from "../../context/page/pageContext";
+import blockTypes from "./blockTypes";
 
 const Blocks = ({ blocks }) => {
 	const pageContext = useContext(PageContext);

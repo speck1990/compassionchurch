@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import Blocks from "../blocks/Blocks";
+import Blocks from "../Blocks";
 import PageContext from "../../../context/page/pageContext";
 
 const temp = {
