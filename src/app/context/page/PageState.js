@@ -7,57 +7,6 @@ import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAG
 
 const pageSchema = { title: "", slug: "", description: "", publish: "", unpublish: "", visible: true, content: "" };
 
-const blockTypes = [
-	{
-		type: "heading",
-		icon: "fas fa-heading",
-		template: {
-			text: ""
-		}
-	},
-	{
-		type: "paragraph",
-		icon: "fas fa-paragraph",
-		template: {
-			text: ""
-		}
-	},
-	{
-		type: "button",
-		icon: "typcn typcn-minus-outline",
-		template: {
-			buttonType: "page",
-			buttonValue: "",
-			label: "",
-			newTab: false
-		}
-	},
-	{ type: "image", icon: "far fa-image" },
-	{ type: "form", icon: "far fa-comments" },
-	{
-		type: "columns",
-		icon: "fas fa-columns",
-		template: {
-			columns: [
-				{
-					id: 1,
-					blocks: [
-						{ id: 1, type: "paragraph", text: "<p>column 1, row 1</p>" },
-						{ id: 1, type: "paragraph", text: "<p>column 1, row 2</p>" }
-					]
-				},
-				{
-					id: 2,
-					blocks: [
-						{ id: 1, type: "paragraph", text: "<p>column 2, row 1</p>" },
-						{ id: 1, type: "paragraph", text: "<p>column 2, row 2</p>" }
-					]
-				}
-			]
-		}
-	}
-];
-
 const PageState = props => {
 	const initalState = {
 		pages: [],
@@ -193,7 +142,6 @@ const PageState = props => {
 				current: state.current,
 				error: state.error,
 				isSaved: state.isSaved,
-				blockTypes,
 				getPages,
 				addPage,
 				setCurrent,
