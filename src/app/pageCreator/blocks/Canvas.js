@@ -19,11 +19,7 @@ const Canvas = ({ blocks }) => {
 								<p>Drag and drop content block here.</p>
 							</div>
 						) : (
-							<Fragment>
-								{blocks.map((block, key) => (
-									<BlockItems key={key} block={block} index={key} />
-								))}
-							</Fragment>
+							<BlockItems blocks={blocks} />
 						)}
 
 						{provided.placeholder}
