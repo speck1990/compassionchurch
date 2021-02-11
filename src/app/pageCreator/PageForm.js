@@ -3,7 +3,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import PageContext from "../context/page/pageContext";
 import "react-datepicker/dist/react-datepicker.css";
 import { Alert } from "react-bootstrap";
-import Blocks from "./blocks/Blocks";
+import Canvas from "./blocks/Canvas";
 import SaveCancel from "../shared/formElements/SaveCancel";
 import Input from "../shared/formElements/Input";
 import { useParams, useHistory } from "react-router-dom";
@@ -112,7 +112,7 @@ const PageForm = props => {
 
 										<div className="block-container">
 											<Toolbox />
-											<Blocks blocks={current.content} />
+											<Canvas blocks={current.content} />
 										</div>
 
 										<hr className="mg-y-30" />

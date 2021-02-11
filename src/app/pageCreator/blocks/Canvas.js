@@ -3,7 +3,7 @@ import { Droppable } from "react-beautiful-dnd";
 import BlockItems from "./blocks/BlockItems";
 import { Fragment } from "react";
 
-const Blocks = ({ blocks }) => {
+const Canvas = ({ blocks }) => {
 	return (
 		<div className="block-item-container">
 			<Droppable droppableId="blocks">
@@ -34,4 +34,4 @@ const Blocks = ({ blocks }) => {
 	);
 };
 
-export default Blocks;
+export default Canvas;
