@@ -12,7 +12,7 @@ const PageState = props => {
 		pages: [],
 		current: null,
 		error: [],
-		isSaved: true,
+		isSaved: false,
 		loading: false
 	};
 
