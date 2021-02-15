@@ -12,6 +12,9 @@ const PageSchema = new mongoose.Schema({
 		type: String,
 		trim: true
 	},
+	hero: {
+		type: String
+	},
 	description: {
 		type: String,
 		trim: true
