@@ -21,7 +21,7 @@ const Blocks = ({ blocks }) => {
 			);
 		}
 
-		return React.createElement(component, { block, key });
+		return React.createElement(component, { block, index: key });
 	};
 
 	return (
