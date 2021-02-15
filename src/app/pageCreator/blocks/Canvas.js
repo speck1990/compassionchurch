@@ -1,7 +1,6 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import Blocks from "./Blocks";
-import { Fragment } from "react";
 
 const Canvas = ({ blocks }) => {
 	return (
