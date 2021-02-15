@@ -48,6 +48,7 @@ const PageForm = props => {
 
 	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
 
+	const onImageDelete = () => updateCurrent({ ...current, hero: null });
 	const onImageDrop = url => updateCurrent({ ...current, hero: url });
 
 	const handleSave = () => (id ? updatePage(current) : addPage(current));
@@ -103,7 +104,7 @@ const PageForm = props => {
 											<Input label="Title" name="title" type="text" value={current.title} onChange={onTitleChange} />
 											<Input label="Slug" name="slug" type="text" value={current.slug} onChange={onTextChange} disabled />
 											<Input label="Description" name="description" as="textarea" value={current.description} rows="3" onChange={onTextChange} />
-											<Image label="Main Image" onDrop={onImageDrop} image={current.hero} />
+											<Image label="Main Image" onDrop={onImageDrop} onDelete={onImageDelete} image={current.hero} />
 											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} onChange={onDateChange} />
 											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} onChange={onDateChange} />
 											<Checkbox name="visible" label="Visible" value={current.visible} onCheckboxChange={onCheckboxChange} />
