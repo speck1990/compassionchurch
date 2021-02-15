@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { Fragment } from "react";
 import { useDropzone } from "react-dropzone";
+import { Button } from "react-bootstrap";
 import axios from "axios";
 
 const baseStyle = {
@@ -28,7 +29,7 @@ const rejectStyle = {
 	borderColor: "#ff1744"
 };
 
-const Dropzone = ({ onDrop, image = null }) => {
+const Dropzone = ({ onDrop, onDelete = null, image = null }) => {
 	const uploadImage = async file => {
 		let formData = new FormData();
 
@@ -43,10 +44,10 @@ const Dropzone = ({ onDrop, image = null }) => {
 		onDrop(`http://localhost:5000/${url}`);
 	};
 
-	// const handleOnImageDelete = async file => {
-	// 	const deleted = await axios.delete("http://localhost:5000/api/pages/delete", { url: file });
-	// 	console.log(deleted);
-	// };
+	const handleOnImageDelete = async (e, image) => {
+		e.preventDefault();
+		onDelete(image);
+	};
 
 	const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({ onDrop: handleOnDrop, accept: "image/*", multiple: false });
 
@@ -72,9 +73,14 @@ const Dropzone = ({ onDrop, image = null }) => {
 					</p>
 				</div>
 			) : (
-				<div>
-					<img alt="trying again" style={{ width: "250px", height: "auto" }} src={image} />
-					{/* <button onClick={handleOnImageDelete}>Delete</button> */}
+				<div style={{ ...baseStyle, padding: "10px", position: "relative" }}>
+					<img alt="" style={{ maxWidth: "250px", maxHeight: "175px" }} src={image} />
+
+					{onDelete && (
+						<Button variant="btn-icon" style={{ paddingRight: 0 }} onClick={e => handleOnImageDelete(e, image)}>
+							<i className="fas fa-times"></i>
+						</Button>
+					)}
 				</div>
 			)}
 		</Fragment>
