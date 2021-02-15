@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+const { v4: uuidv4 } = require("uuid");
 const auth = require("../middleware/auth");
 const { pageValidationRules, validate } = require("../middleware/validation");
 
@@ -79,6 +81,25 @@ router.put("/:id", auth, pageValidationRules(), validate, async (req, res) => {
 		console.error(err.message);
 		res.status(500).json({ msg: err.message });
 	}
+});
+
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, "./public/uploads");
+	},
+	filename: (req, file, cb) => {
+		const fileName = file.originalname.toLowerCase().split(" ").join("-");
+		cb(null, uuidv4() + "-" + fileName);
+	}
+});
+
+const upload = multer({ storage });
+
+// @route       POST api/pages/upload
+// @desc        Upload an image
+// @access      Private
+router.post("/upload", auth, upload.single("image"), async (req, res) => {
+	res.json(req.file);
 });
 
 // @route       DELETE api/pages/:id
