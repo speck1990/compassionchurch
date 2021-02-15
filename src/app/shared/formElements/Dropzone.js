@@ -1,0 +1,84 @@
+import React, { useMemo } from "react";
+import { Fragment } from "react";
+import { useDropzone } from "react-dropzone";
+import axios from "axios";
+
+const baseStyle = {
+	textAlign: "center",
+	padding: "20px",
+	borderWidth: 2,
+	borderRadius: 2,
+	borderColor: "#eeeeee",
+	borderStyle: "dashed",
+	backgroundColor: "#fafafa",
+	color: "#bdbdbd",
+	outline: "none",
+	transition: "border .24s ease-in-out"
+};
+
+const activeStyle = {
+	borderColor: "#2196f3"
+};
+
+const acceptStyle = {
+	borderColor: "#00e676"
+};
+
+const rejectStyle = {
+	borderColor: "#ff1744"
+};
+
+const Dropzone = ({ onDrop, image = null }) => {
+	const uploadImage = async file => {
+		let formData = new FormData();
+
+		formData.append("image", file);
+
+		const upload = await axios.post(`http://localhost:5000/api/pages/upload`, formData);
+		return upload.data.path;
+	};
+
+	const handleOnDrop = async (files, rejectedFiles) => {
+		const url = await uploadImage(files[0]);
+		onDrop(`http://localhost:5000/${url}`);
+	};
+
+	// const handleOnImageDelete = async file => {
+	// 	const deleted = await axios.delete("http://localhost:5000/api/pages/delete", { url: file });
+	// 	console.log(deleted);
+	// };
+
+	const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({ onDrop: handleOnDrop, accept: "image/*", multiple: false });
+
+	const style = useMemo(
+		() => ({
+			...baseStyle,
+			...(isDragActive ? activeStyle : {}),
+			...(isDragAccept ? acceptStyle : {}),
+			...(isDragReject ? rejectStyle : {})
+		}),
+		[isDragActive, isDragReject, isDragAccept]
+	);
+
+	return (
+		<Fragment>
+			{image === null ? (
+				<div {...getRootProps({ style })}>
+					<input {...getInputProps()} />
+					<p>
+						Drag 'n' drop an image here,
+						<br />
+						or click to select an image
+					</p>
+				</div>
+			) : (
+				<div>
+					<img alt="trying again" style={{ width: "250px", height: "auto" }} src={image} />
+					{/* <button onClick={handleOnImageDelete}>Delete</button> */}
+				</div>
+			)}
+		</Fragment>
+	);
+};
+
+export default Dropzone;
