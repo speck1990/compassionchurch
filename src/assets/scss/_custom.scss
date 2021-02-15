@@ -47,10 +47,16 @@
     font-size: 18px;
     padding: 125px 25px 125px 25px;
   }
+
+  .block-item {
+    position: relative;
+  }
   
   .block-options {
-    float: right;
-    padding-top: 8px
+    position: absolute;
+    right: 0;
+    top: 6px;
+    z-index: 999;
   }
   
   .block-options > button {

@@ -31,16 +31,18 @@ const Blocks = ({ blocks }) => {
 					<Draggable draggableId={`draggable-${block._id}`} index={key}>
 						{provided => (
 							<div {...provided.draggableProps} ref={provided.innerRef} className="bg-white mg-b-30">
-								<div className="btn-icon-list block-options">
-									<div {...provided.dragHandleProps}>
-										<i className="fas fa-arrows-alt"></i>
-									</div>
+								<div className="block-item">
+									<div className="btn-icon-list block-options">
+										<div {...provided.dragHandleProps}>
+											<i className="fas fa-arrows-alt"></i>
+										</div>
 
-									<Button variant="btn-icon" onClick={() => deleteBlock(block._id)}>
-										<i className="fas fa-times"></i>
-									</Button>
+										<Button variant="btn-icon" onClick={() => deleteBlock(block._id)}>
+											<i className="fas fa-times"></i>
+										</Button>
+									</div>
+									{createBlock(block, key)}
 								</div>
-								{createBlock(block, key)}
 							</div>
 						)}
 					</Draggable>
