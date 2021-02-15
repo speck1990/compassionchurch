@@ -6,6 +6,7 @@ import { Alert } from "react-bootstrap";
 import Canvas from "./blocks/Canvas";
 import SaveCancel from "../shared/formElements/SaveCancel";
 import Input from "../shared/formElements/Input";
+import Image from "../shared/formElements/Image";
 import { useParams, useHistory } from "react-router-dom";
 import Checkbox from "../shared/formElements/Checkbox";
 import slugify from "slugify";
@@ -46,6 +47,8 @@ const PageForm = props => {
 	const onDateChange = (date, { name }) => updateCurrent({ ...current, [name]: date });
 
 	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
+
+	const onImageDrop = url => updateCurrent({ ...current, hero: url });
 
 	const handleSave = () => (id ? updatePage(current) : addPage(current));
 
@@ -100,6 +103,7 @@ const PageForm = props => {
 											<Input label="Title" name="title" type="text" value={current.title} onChange={onTitleChange} />
 											<Input label="Slug" name="slug" type="text" value={current.slug} onChange={onTextChange} disabled />
 											<Input label="Description" name="description" as="textarea" value={current.description} rows="3" onChange={onTextChange} />
+											<Image label="Main Image" onDrop={onImageDrop} image={current.hero} />
 											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} onChange={onDateChange} />
 											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} onChange={onDateChange} />
 											<Checkbox name="visible" label="Visible" value={current.visible} onCheckboxChange={onCheckboxChange} />
