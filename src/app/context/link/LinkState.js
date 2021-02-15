@@ -9,7 +9,7 @@ const LinkState = props => {
 		links: [],
 		current: null,
 		error: [],
-		isSaved: true,
+		isSaved: false,
 		loading: false
 	};
 
