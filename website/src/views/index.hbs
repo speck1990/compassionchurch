@@ -1,4 +1,18 @@
-<h1 class="display-1">{{page.title}}</h1>
+<style>
+    .tinted-image {
+        background:
+        /* top, transparent red, faked with gradient */
+        linear-gradient(rgba(255, 103, 0, 0.3),
+            rgba(255, 103, 0, 0.45)),
+        /* bottom, image */
+        url({{page.hero}}) center center / cover no-repeat;
+    }
+</style>
+
+<div class="text-light rounded mb-5 p-5 tinted-image">
+    <h1 class="display-1">{{page.title}}</h1>
+    <p class="lead">{{page.description}}</p>
+</div>
 
 {{#each page.content}}
 
