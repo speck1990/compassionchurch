@@ -32,7 +32,14 @@ const blockTypes = [
 			newTab: false
 		}
 	},
-	{ type: "image", component: Image, icon: "far fa-image" },
+	{
+		type: "image",
+		component: Image,
+		icon: "far fa-image",
+		template: {
+			url: null
+		}
+	},
 	{ type: "form", icon: "far fa-comments" },
 	{
 		type: "columns",
