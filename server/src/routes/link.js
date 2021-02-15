@@ -6,11 +6,11 @@ const { linkValidationRules, validate } = require("../middleware/validation");
 const Link = require("../models/link");
 
 // @route       GET api/link
-// @desc        Get all links for user
+// @desc        Get all links for location
 // @access      Private
 router.get("/", auth, async (req, res) => {
 	try {
-		const links = await Link.find({ user: req.user.id });
+		const links = await Link.find({ location: req.user.location });
 		res.json(links);
 	} catch (error) {
 		console.error(error.message);
@@ -30,7 +30,7 @@ router.get("/:id", auth, async (req, res) => {
 		if (!link) return res.status(404).json({ msg: "Link not found" });
 
 		// Make sure user owns link
-		if (link.user.toString() !== req.user.id) {
+		if (link.location.toString() !== req.user.location) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
 
@@ -48,7 +48,7 @@ router.post("/", auth, linkValidationRules(), validate, async (req, res) => {
 	const { label, type, linkValue, newTab } = req.body;
 
 	try {
-		const link = new Link({ label, type, linkValue, newTab, user: req.user.id });
+		const link = new Link({ label, type, linkValue, newTab, location: req.user.location });
 		await link.save();
 		res.json(link);
 	} catch (error) {
@@ -69,7 +69,7 @@ router.put("/:id", auth, linkValidationRules(), validate, async (req, res) => {
 		if (!link) return res.status(404).json({ msg: "Link not found" });
 
 		// Make sure user owns link
-		if (link.user.toString() !== req.user.id) {
+		if (link.location.toString() !== req.user.location) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
 
@@ -94,7 +94,7 @@ router.delete("/:id", auth, async (req, res) => {
 		if (!link) return res.status(404).json({ msg: "Link not found" });
 
 		// Make sure user owns link
-		if (link.user.toString() !== req.user.id) {
+		if (link.location.toString() !== req.user.location) {
 			return res.status(401).json({ msg: "Not authorized" });
 		}
 
