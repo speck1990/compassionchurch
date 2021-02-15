@@ -80,11 +80,11 @@ const LinkForm = props => {
 
 										{current.type === "page" ? (
 											<Select
-												defaultValue={pages.filter(page => page._id === current.linkValue).map(page => ({ value: page._id, label: page.title }))}
+												defaultValue={pages.filter(page => page.slug === current.linkValue).map(page => ({ value: page.slug, label: page.title }))}
 												onChange={onSelectChange}
 												name="linkValue"
 												label="Link"
-												options={pages.map(page => ({ value: page._id, label: page.title }))}
+												options={pages.map(page => ({ value: page.slug, label: page.title }))}
 											/>
 										) : (
 											<Input label="Link" name="linkValue" type="text" value={current.linkValue} onChange={onTextChange} placeholder="http://www.example.com" />
