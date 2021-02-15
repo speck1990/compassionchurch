@@ -10,7 +10,7 @@ const Image = props => {
 				</label>
 			</div>
 			<div className="col-md-8 mg-t-5 mg-md-t-0">
-				<Dropzone onDrop={props.onDrop} image={props.image} />
+				<Dropzone onDrop={props.onDrop} onDelete={props.onDelete} image={props.image} />
 			</div>
 		</div>
 	);
