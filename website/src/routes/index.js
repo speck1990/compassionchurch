@@ -6,10 +6,10 @@ const getLocation = require("../helpers/getLocation");
 router.get("/:slug?", async (req, res, next) => {
 	const slug = req.params.slug;
 
-	const { pages } = await getLocation(req.headers.host);
+	const { pages, links } = await getLocation(req.headers.host);
 	const page = pages.find(page => page.slug === slug);
 
-	res.render("index", { page });
+	res.render("index", { page, links });
 });
 
 module.exports = router;
