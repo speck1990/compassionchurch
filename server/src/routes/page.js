@@ -5,7 +5,6 @@ const { v4: uuidv4 } = require("uuid");
 const auth = require("../middleware/auth");
 const { pageValidationRules, validate } = require("../middleware/validation");
 
-const User = require("../models/user");
 const Page = require("../models/page");
 
 // @route       GET api/pages
