@@ -48,8 +48,8 @@ const SettingState = props => {
 		}
 	};
 
-	const updateCurrent = settings => {
-		dispatch({ type: UPDATE_CURRENT, payload: settings });
+	const updateCurrent = current => {
+		dispatch({ type: UPDATE_CURRENT, payload: current });
 	};
 
 	const setLoading = () => dispatch({ type: SET_LOADING });
