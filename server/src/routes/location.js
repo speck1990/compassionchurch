@@ -4,6 +4,7 @@ const router = express.Router();
 const Location = require("../models/location");
 const Page = require("../models/page");
 const Link = require("../models/link");
+const Setting = require("../models/setting");
 
 // @route       GET api/locations/all
 // @desc        Get all locations
@@ -27,8 +28,9 @@ router.get("/:location", async (req, res) => {
 		const location = await Location.findOne({ $or: [{ subdomain: loc }, { domain: loc }] });
 		const pages = await Page.find({ location: location._id });
 		const links = await Link.find({ location: location._id });
+		const settings = await Setting.findOne({ location: location._id });
 
-		const site = { location, pages, links };
+		const site = { location, pages, links, settings };
 
 		res.json(site);
 	} catch (err) {
