@@ -6,14 +6,14 @@ const { settingValidationRules, validate } = require("../middleware/validation")
 const Setting = require("../models/setting");
 
 // @route       GET api/settings
-// @desc        Get all settings for user
+// @desc        Get all settings for location
 // @access      Private
 router.get("/", auth, async (req, res) => {
 	try {
-		let settings = await Setting.findOne({ user: req.user.id });
+		let settings = await Setting.findOne({ location: req.user.location });
 
 		if (!settings) {
-			settings = new Setting({ user: req.user.id });
+			settings = new Setting({ location: req.user.location });
 			await settings.save();
 		}
 
@@ -29,12 +29,7 @@ router.get("/", auth, async (req, res) => {
 // @access      Private
 router.put("/", auth, settingValidationRules(), validate, async (req, res) => {
 	try {
-		let settings = await Setting.findOne({ user: req.user.id });
-
-		if (!settings) {
-			settings = new Setting({ user: req.user.id });
-			await settings.save();
-		}
+		let settings = await Setting.findOne({ location: req.user.location });
 
 		settings = await Setting.findByIdAndUpdate(settings._id, { $set: req.body }, { new: true });
 
