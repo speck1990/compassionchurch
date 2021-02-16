@@ -7,7 +7,7 @@ import { GET_SETTINGS, UPDATE_CURRENT, UPDATE_SETTINGS, SETTING_ERROR, SET_LOADI
 const SettingState = props => {
 	const initalState = {
 		settings: null,
-		isSaved: true,
+		isSaved: false,
 		error: [],
 		loading: false
 	};
