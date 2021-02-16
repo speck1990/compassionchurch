@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import SettingContext from "../context/setting/settingContext";
 import Input from "../shared/formElements/Input";
@@ -7,13 +6,11 @@ import SaveCancel from "../shared/formElements/SaveCancel";
 
 const Settings = () => {
 	const settingContext = useContext(SettingContext);
-	const history = useHistory();
 
-	const { current, settings, updateCurrent, getSettings, updateSettings, isSaved, loading, error } = settingContext;
+	const { settings, updateCurrent, getSettings, updateSettings, isSaved, loading, error } = settingContext;
 
 	useEffect(() => {
 		getSettings();
-
 		// eslint-disable-next-line
 	}, []);
 
