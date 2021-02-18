@@ -77,6 +77,10 @@ const Dashboard = () => {
 				{/* row */}
 
 				<hr className="mg-y-30" />
+
+				<button className="btn btn-az-primary pd-x-30 mg-r-5" onClick={logoutUser}>
+					Logout
+				</button>
 			</div>
 		</div>
 	);
