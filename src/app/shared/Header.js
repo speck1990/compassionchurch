@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
+import logo from "../../assets/images/logo.png";
 
 const Header = props => {
 	const closeMenu = e => {
@@ -27,7 +28,7 @@ const Header = props => {
 				<div className="container">
 					<div className="az-header-left">
 						<a href="/" className="az-logo">
-							<span></span> azia
+							<img alt="logo" src={logo} style={{ width: "200px" }} />
 						</a>
 						<a id="azMenuShow" onClick={event => toggleHeaderMenu(event)} className="az-header-menu-icon d-lg-none" href="/">
 							<span></span>
@@ -36,7 +37,7 @@ const Header = props => {
 					<div className="az-header-menu">
 						<div className="az-header-menu-header">
 							<Link to="/" className="az-logo">
-								<span></span> azia
+								<img alt="logo" src={logo} style={{ width: "150px" }} />
 							</Link>
 							<a href="#/" onClick={event => toggleHeaderMenu(event)} className="close">
 								&times;

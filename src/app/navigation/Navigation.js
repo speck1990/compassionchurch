@@ -28,7 +28,7 @@ const Navigation = () => {
 						</div>
 
 						<div className="col-sm-2 col-md-2 mg-t-10 mg-sm-t-0">
-							<Button as={Link} to="/links/create" variant="primary btn-rounded btn-block">
+							<Button as={Link} to="/links/create" variant="btn btn-az-primary btn-rounded btn-block">
 								Add Link
 							</Button>
 						</div>

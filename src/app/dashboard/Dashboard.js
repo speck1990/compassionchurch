@@ -37,7 +37,7 @@ const Dashboard = () => {
 					</div>
 					{/* col */}
 					<div className="col-md mg-t-20 mg-md-t-0">
-						<div className="card bg-indigo tx-white bd-0">
+						<div className="card bg-orange tx-white bd-0">
 							<div className="card-body">
 								<p className="tx-80">
 									<i className="typcn typcn-location-arrow-outline"></i>

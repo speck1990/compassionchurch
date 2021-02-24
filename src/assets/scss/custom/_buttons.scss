@@ -1,7 +1,7 @@
 /* ###### 4.2 Buttons  ###### */
 
-.btn-az-primary { @include button-variant($indigo, darken($indigo, 5%)); }
-.btn-az-secondary { @include button-variant($blue, darken($blue, 5%)); }
+.btn-az-primary { @include button-variant($az-color-primary, darken($az-color-primary, 5%)); }
+.btn-az-secondary { @include button-variant($az-color-secondary, darken($az-color-secondary, 5%)); }
 
 .btn-rounded {
   @include border-radius(50px);
