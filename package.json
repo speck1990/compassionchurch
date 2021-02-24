@@ -43,7 +43,8 @@
 		"slugify": "^1.4.6",
 		"styled-components": "^5.2.0",
 		"typicons.font": "^2.0.9",
-		"uuid": "^8.3.1"
+		"uuid": "^8.3.1",
+		"yup": "^0.32.9"
 	},
 	"scripts": {
 		"start": "react-scripts start",
