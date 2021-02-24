@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../context/auth/authContext";
 import { Alert } from "react-bootstrap";
+import logoIcon from "../../assets/images/logo-icon.png";
 
 const Login = props => {
 	const authContext = useContext(AuthContext);
@@ -34,7 +35,7 @@ const Login = props => {
 			<div className="az-signin-wrapper">
 				<div className="az-card-signin">
 					<h1 className="az-logo">
-						az<span>i</span>a
+						<img alt="logo" src={logoIcon} className="center-logo" style={{ width: "100px" }} />
 					</h1>
 					<div className="az-signin-header">
 						<h2>Welcome back!</h2>
