@@ -43,10 +43,10 @@ const Settings = () => {
 								{isSaved && <Alert variant="success">Settings Saved!</Alert>}
 								<form onSubmit={handleSave}>
 									<div className="wd-xl-50p">
-										<Input label="Facebook" name="facebook" type="text" value={settings.facebook} error={error.facebook} onChange={onTextChange} />
-										<Input label="Instagram" name="instagram" type="text" value={settings.instagram} error={error.instagram} onChange={onTextChange} />
-										<Input label="Twitter" name="twitter" type="text" value={settings.twitter} error={error.twitter} onChange={onTextChange} />
-										<Input label="Youtube" name="youtube" type="text" value={settings.youtube} error={error.youtube} onChange={onTextChange} />
+										<Input label="Facebook" name="facebook" type="text" text="(ex. http://www.facebook.com/church)" value={settings.facebook} error={error.facebook} onChange={onTextChange} />
+										<Input label="Instagram" name="instagram" type="text" text="(ex. http://www.instagram.com/church)" value={settings.instagram} error={error.instagram} onChange={onTextChange} />
+										<Input label="Twitter" name="twitter" type="text" text="(ex. http://www.twitter.com/church)" value={settings.twitter} error={error.twitter} onChange={onTextChange} />
+										<Input label="Youtube" name="youtube" type="text" text="(ex. http://www.youtube.com/church)" value={settings.youtube} error={error.youtube} onChange={onTextChange} />
 									</div>
 
 									<hr className="mg-y-30" />
