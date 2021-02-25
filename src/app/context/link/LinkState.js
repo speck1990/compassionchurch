@@ -2,6 +2,8 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import LinkContext from "./linkContext";
 import linkReducer from "./linkReducer";
+import { validator } from "../../validation/validator";
+import * as Yup from "yup";
 import { GET_LINKS, SET_CURRENT, UPDATE_CURRENT, UPDATE_LINK, CLEAR_CURRENT, LINK_ERROR, ADD_LINK, SET_LOADING, DELETE_LINK, CLEAR_ERRORS } from "../types";
 
 const LinkState = props => {
@@ -12,6 +14,15 @@ const LinkState = props => {
 		isSaved: false,
 		loading: false
 	};
+
+	const validationSchema = Yup.object({
+		label: Yup.string()
+			.required("Required")
+			.test("label", "Label already in use", function (value) {
+				return true;
+			}),
+		linkValue: Yup.string().required("Required")
+	});
 
 	const [state, dispatch] = useReducer(linkReducer, initalState);
 
@@ -39,6 +50,12 @@ const LinkState = props => {
 		};
 
 		try {
+			const errors = await validator(link, validationSchema);
+
+			if (errors) {
+				return dispatch({ type: LINK_ERROR, payload: errors });
+			}
+
 			const res = await axios.post(`http://localhost:5000/api/links`, link, config);
 			dispatch({ type: ADD_LINK, payload: res.data });
 		} catch (err) {
@@ -60,6 +77,12 @@ const LinkState = props => {
 		};
 
 		try {
+			const errors = await validator(link, validationSchema);
+
+			if (errors) {
+				return dispatch({ type: LINK_ERROR, payload: errors });
+			}
+
 			const res = await axios.put(`http://localhost:5000/api/links/${link._id}`, link, config);
 			dispatch({ type: UPDATE_LINK, payload: res.data });
 		} catch (err) {
