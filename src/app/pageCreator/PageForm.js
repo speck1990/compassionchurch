@@ -122,7 +122,7 @@ const PageForm = props => {
 
 										<hr className="mg-y-30" />
 
-										<SaveCancel onSave={handleSave} onCancel={handleCancel} />
+										<SaveCancel saveText="Save & Publish" onSave={handleSave} onCancel={handleCancel} />
 									</form>
 								</div>
 							) : (
