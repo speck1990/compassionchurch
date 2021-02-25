@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const SaveCancel = ({ onSave, onCancel, showCancel = true }) => {
+const SaveCancel = ({ onSave, onCancel, showCancel = true, saveText = "Save" }) => {
 	const [showModal, setShowModal] = useState(false);
 
 	const closeModal = () => {
@@ -16,7 +16,7 @@ const SaveCancel = ({ onSave, onCancel, showCancel = true }) => {
 	return (
 		<div className="wd-xl-50p">
 			<button className="btn btn-az-primary pd-x-30 mg-r-5" onClick={e => handleSave(onSave, e)}>
-				Save & Publish
+				{saveText}
 			</button>
 
 			{showCancel && (
