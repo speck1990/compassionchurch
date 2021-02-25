@@ -75,8 +75,8 @@ const LinkForm = props => {
 								)}
 								<form onSubmit={handleSave}>
 									<div className="wd-xl-50p">
-										<Input label="Link Label" name="label" type="text" value={current.label} onChange={onTextChange} />
-										<Radio onChange={onLinkChange} label="Type" name="type" options={options} checkedValue={current.type} />
+										<Input label="Link Label" name="label" type="text" value={current.label} error={error.label} onChange={onTextChange} />
+										<Radio onChange={onLinkChange} label="Type" name="type" options={options} error={error.type} checkedValue={current.type} />
 
 										{current.type === "page" ? (
 											<Select
@@ -85,12 +85,13 @@ const LinkForm = props => {
 												name="linkValue"
 												label="Link"
 												options={pages.map(page => ({ value: page.slug, label: page.title }))}
+												error={error.linkValue}
 											/>
 										) : (
-											<Input label="Link" name="linkValue" type="text" value={current.linkValue} onChange={onTextChange} placeholder="http://www.example.com" />
+											<Input label="Link" name="linkValue" type="text" value={current.linkValue} error={error.linkValue} onChange={onTextChange} placeholder="http://www.example.com" />
 										)}
 
-										<Checkbox name="newTab" label="Open in new tab" value={current.newTab} onCheckboxChange={onCheckboxChange} />
+										<Checkbox name="newTab" label="Open in new tab" value={current.newTab} error={error.newTab} onCheckboxChange={onCheckboxChange} />
 									</div>
 
 									<hr className="mg-y-30" />
