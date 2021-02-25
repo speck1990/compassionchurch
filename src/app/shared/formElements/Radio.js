@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 const Radio = props => {
 	return (
 		<div>
-			<div className="row row-xs mg-b-10">
+			<div className="row row-xs mg-b-15">
 				<div className="col-md-4">
 					<label htmlFor={props.name} className="form-label mg-b-0">
 						{props.label}

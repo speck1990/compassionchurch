@@ -21,7 +21,7 @@ const Select = props => {
 		})
 	};
 	return (
-		<div className="row row-xs mg-b-10">
+		<div className="row row-xs mg-b-15">
 			<div className="col-md-4">
 				<label htmlFor={props.name} className="form-label mg-b-0 mg-t-8">
 					{props.label}
