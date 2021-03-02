@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
+import { Form } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import PageContext from "../../../context/page/pageContext";
-
-// TODO: HAVE HEADING BE H1 BY DEFAULT WHEN CREATED
 
 const Heading = ({ block, index }) => {
 	const pageContext = useContext(PageContext);
@@ -18,7 +17,12 @@ const Heading = ({ block, index }) => {
 
 	const handleOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { _id: block._id, type: "heading", text: value } : el)) });
 
-	return <ReactQuill modules={modules} formats={formats} value={block.text || "<h1><br></h1>"} onChange={handleOnChange} />;
+	return (
+		<Fragment>
+			<ReactQuill modules={modules} formats={formats} value={block.text || "<h1><br></h1>"} onChange={handleOnChange} className="is-invalid" />
+			<Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+		</Fragment>
+	);
 };
 
 export default Heading;

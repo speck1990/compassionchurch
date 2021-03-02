@@ -92,21 +92,15 @@ const PageForm = props => {
 											</div>
 										)}
 									</h2>
-									{error.length > 0 && (
-										<Alert variant="danger">
-											{error.map((err, key) => (
-												<div key={key}>{err.msg}</div>
-											))}
-										</Alert>
-									)}
+									{!error && <Alert variant="danger">Please fix the errors before saving.</Alert>}
 									<form onSubmit={handleSave}>
 										<div className="wd-xl-50p">
-											<Input label="Title" name="title" type="text" value={current.title} onChange={onTitleChange} />
-											<Input label="Slug" name="slug" type="text" value={current.slug} onChange={onTextChange} disabled />
-											<Input label="Description" name="description" as="textarea" value={current.description} rows="3" onChange={onTextChange} />
+											<Input label="Title" name="title" type="text" value={current.title} error={error.title} onChange={onTitleChange} />
+											<Input label="Slug" name="slug" type="text" value={current.slug} error={error.slug} onChange={onTextChange} disabled />
+											<Input label="Description" name="description" as="textarea" value={current.description} error={error.description} rows="3" onChange={onTextChange} />
 											<Image label="Main Image" onDrop={onImageDrop} onDelete={onImageDelete} image={current.hero} />
-											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} onChange={onDateChange} />
-											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} onChange={onDateChange} />
+											<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} error={error.publish} onChange={onDateChange} />
+											<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} error={error.unpublish} onChange={onDateChange} />
 											<Checkbox name="visible" label="Visible" value={current.visible} onCheckboxChange={onCheckboxChange} />
 										</div>
 
