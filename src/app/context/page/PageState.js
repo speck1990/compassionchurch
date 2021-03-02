@@ -3,18 +3,31 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import PageContext from "./pageContext";
 import pageReducer from "./pageReducer";
+import * as Yup from "yup";
+import { validator } from "../../validation/validator";
 import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, CLEAR_ERRORS, ADD_PAGE, SET_LOADING, DELETE_PAGE } from "../types";
 
-const pageSchema = { title: "", slug: "", hero: null, description: "", publish: "", unpublish: "", visible: true, content: "" };
+const pageSchema = { title: "", slug: "", hero: null, description: "", publish: null, unpublish: null, visible: true, content: [] };
 
 const PageState = props => {
 	const initalState = {
 		pages: [],
 		current: null,
-		error: [],
+		error: "",
 		isSaved: false,
 		loading: false
 	};
+
+	const validationSchema = Yup.object({
+		title: Yup.string().required("Required"),
+		description: Yup.string().required("Required"),
+		publish: Yup.date().nullable().default(null),
+		unpublish: Yup.date()
+			.nullable()
+			.default(null)
+			.when("publish", (publish, schema) => (publish ? schema.min(publish, "Unpublish must be after publish date") : schema)),
+		content: Yup.array().min(1, "You must add at least one block")
+	});
 
 	const [state, dispatch] = useReducer(pageReducer, initalState);
 
@@ -42,6 +55,11 @@ const PageState = props => {
 		};
 
 		try {
+			const errors = await validator(page, validationSchema);
+			if (errors) {
+				return dispatch({ type: PAGE_ERROR, payload: errors });
+			}
+
 			const res = await axios.post("http://localhost:5000/api/pages", page, config);
 			dispatch({ type: ADD_PAGE, payload: res.data });
 		} catch (err) {
@@ -63,13 +81,18 @@ const PageState = props => {
 		};
 
 		try {
+			const errors = await validator(page, validationSchema);
+			if (errors) {
+				return dispatch({ type: PAGE_ERROR, payload: errors });
+			}
+
 			const res = await axios.put(`http://localhost:5000/api/pages/${page._id}`, page, config);
-			console.log(res.data);
 			dispatch({ type: UPDATE_PAGE, payload: res.data });
 		} catch (err) {
+			console.log(err);
 			dispatch({
 				type: PAGE_ERROR,
-				payload: err.response.data.errors
+				payload: err
 			});
 		}
 	};
