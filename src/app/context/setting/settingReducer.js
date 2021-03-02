@@ -1,4 +1,4 @@
-import { GET_SETTINGS, UPDATE_CURRENT, UPDATE_SETTINGS, SETTING_ERROR, SET_LOADING, SET_ERRORS } from "../types";
+import { GET_SETTINGS, UPDATE_CURRENT, UPDATE_SETTINGS, SETTING_ERROR, SET_LOADING } from "../types";
 
 const linkReducer = (state, action) => {
 	switch (action.type) {
