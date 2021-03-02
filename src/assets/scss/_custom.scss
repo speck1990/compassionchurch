@@ -78,3 +78,14 @@
   padding: 70px 20px 20px 20px; 
   border: 1px solid #ccc;
 }
+
+
+
+
+.datepicker.is-invalid {
+  background-position: right calc(0.375em + 1.55rem) center !important;
+}
+
+.datepicker-invalid {
+  border-color: red !important;
+}

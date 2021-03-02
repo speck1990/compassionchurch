@@ -25,9 +25,10 @@ const Input = props => {
 								minDate={moment().toDate() - 1}
 								selected={props.value ? moment(props.value).toDate() : null}
 								onChange={date => props.onChange(date, props)}
-								className={props.error ? "form-control is-invalid" : "form-control"}
+								className={props.error ? "form-control datepicker is-invalid" : "form-control"}
 								placeholderText={props.placeholderText}
 								style={{ "z-index": 3 }}
+								wrapperClassName={props.error && "datepicker-invalid"}
 								showTimeSelect
 								isClearable
 								dateFormat="MM/dd/yyyy h:mm aa"
