@@ -26,7 +26,31 @@ const PageState = props => {
 			.nullable()
 			.default(null)
 			.when("publish", (publish, schema) => (publish ? schema.min(publish, "Unpublish must be after publish date") : schema)),
-		content: Yup.array().min(1, "You must add at least one block")
+		content: Yup.array().of(
+			Yup.lazy(value => {
+				switch (value.type) {
+					case "heading":
+						return Yup.object().shape({
+							text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Heading Required")
+						});
+					case "paragraph":
+						return Yup.object().shape({
+							text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Paragraph Required")
+						});
+					case "button":
+						return Yup.object().shape({
+							label: Yup.string()
+								.required("Required")
+								.test("label", "Label already in use", function (value) {
+									return true;
+								}),
+							buttonValue: Yup.string().required("Required")
+						});
+					default:
+						return false;
+				}
+			})
+		)
 	});
 
 	const [state, dispatch] = useReducer(pageReducer, initalState);
