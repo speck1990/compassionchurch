@@ -96,7 +96,6 @@ const PageState = props => {
 
 	const updatePage = async page => {
 		setLoading();
-		clearErrors();
 
 		const config = {
 			headers: {
