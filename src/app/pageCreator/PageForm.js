@@ -18,7 +18,7 @@ const PageForm = props => {
 	const { id } = useParams();
 	const pageContext = useContext(PageContext);
 
-	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, addBlock, loading, error, isSaved } = pageContext;
+	const { current, setCurrent, clearCurrent, updateCurrent, updatePage, addPage, addBlock, loading, error, isSaved, clearErrors } = pageContext;
 
 	useEffect(() => {
 		if (id !== null) {
@@ -74,6 +74,9 @@ const PageForm = props => {
 			default:
 				break;
 		}
+
+		// TODO: Have errors persist after block is moved or added instead of clearing errors
+		clearErrors();
 	};
 
 	return (
