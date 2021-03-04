@@ -10,6 +10,11 @@ const Button = ({ block, index }) => {
 
 	const { current, updateCurrent, pages, getPages, error } = pageContext;
 
+	const err = {
+		label: error?.[`content[${index}].label`],
+		buttonValue: error?.[`content[${index}].buttonValue`]
+	};
+
 	useEffect(() => {
 		getPages();
 		// eslint-disable-next-line
@@ -29,8 +34,8 @@ const Button = ({ block, index }) => {
 		<div className="pd-30 pd-sm-40 bg-gray-200 wd-xl-100p">
 			<div className="row row-xs">
 				<div className="col-md-6">
-					<Input label="Button Label" name="label" type="text" value={block.label} error={error.label} onChange={onTextChange} />
-					<Radio onChange={onLinkChange} label="Type" name={`buttonType-${index}`} options={options} error={error.type} checkedValue={block.buttonType} />
+					<Input label="Button Label" name="label" type="text" value={block.label} error={err.label} onChange={onTextChange} />
+					<Radio onChange={onLinkChange} label="Type" name={`buttonType-${index}`} options={options} error={err.type} checkedValue={block.buttonType} />
 
 					{block.buttonType === "page" ? (
 						<Select
@@ -39,13 +44,13 @@ const Button = ({ block, index }) => {
 							name="buttonValue"
 							label="Button"
 							options={pages.map(page => ({ value: page.slug, label: page.title }))}
-							error={error.buttonValue}
+							error={err.buttonValue}
 						/>
 					) : (
-						<Input label="Button" name="buttonValue" type="text" value={block.buttonValue} error={error.buttonValue} onChange={onTextChange} placeholder="http://www.example.com" />
+						<Input label="Button" name="buttonValue" type="text" value={block.buttonValue} error={err.buttonValue} onChange={onTextChange} placeholder="http://www.example.com" />
 					)}
 
-					<Checkbox name={`newTab-${index}`} label="Open in new tab" value={block.newTab} error={error.newTab} index={index} onCheckboxChange={onCheckboxChange} />
+					<Checkbox name={`newTab-${index}`} label="Open in new tab" value={block.newTab} error={err.newTab} index={index} onCheckboxChange={onCheckboxChange} />
 				</div>
 			</div>
 		</div>

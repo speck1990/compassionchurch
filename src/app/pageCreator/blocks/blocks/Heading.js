@@ -7,7 +7,9 @@ import PageContext from "../../../context/page/pageContext";
 const Heading = ({ block, index }) => {
 	const pageContext = useContext(PageContext);
 
-	const { current, updateCurrent } = pageContext;
+	const { current, updateCurrent, error } = pageContext;
+
+	const err = error?.[`content[${index}].text`];
 
 	const modules = {
 		toolbar: [[{ header: [1, 2] }], [{ align: [false, "center", "right"] }]]
@@ -19,8 +21,8 @@ const Heading = ({ block, index }) => {
 
 	return (
 		<Fragment>
-			<ReactQuill modules={modules} formats={formats} value={block.text || "<h1><br></h1>"} onChange={handleOnChange} className="is-invalid" />
-			<Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+			<ReactQuill modules={modules} formats={formats} value={block.text || "<h1><br></h1>"} onChange={handleOnChange} className={err && "is-invalid"} />
+			<Form.Control.Feedback type="invalid">{err}</Form.Control.Feedback>
 		</Fragment>
 	);
 };
