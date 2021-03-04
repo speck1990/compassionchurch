@@ -80,12 +80,15 @@
 }
 
 
+.quill.is-invalid {
+    border: 1px solid #dc3545 !important;
 
+}
 
 .datepicker.is-invalid {
   background-position: right calc(0.375em + 1.55rem) center !important;
 }
 
 .datepicker-invalid {
-  border-color: red !important;
+  border-color: #dc3545 !important;
 }
