@@ -14,7 +14,7 @@ const linkReducer = (state, action) => {
 			return {
 				...state,
 				settings: action.payload,
-				error: [],
+				error: "",
 				isSaved: true,
 				loading: false
 			};

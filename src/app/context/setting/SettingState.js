@@ -10,7 +10,7 @@ const SettingState = props => {
 	const initalState = {
 		settings: null,
 		isSaved: false,
-		error: [],
+		error: "",
 		loading: false
 	};
 
