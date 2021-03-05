@@ -66,13 +66,7 @@ const LinkForm = props => {
 										</div>
 									)}
 								</h2>
-								{error.length > 0 && (
-									<Alert variant="danger">
-										{error.map((err, key) => (
-											<div key={key}>{err.msg}</div>
-										))}
-									</Alert>
-								)}
+								{error !== "" && <Alert variant="danger">Please fix the errors before saving.</Alert>}
 								<form onSubmit={handleSave}>
 									<div className="wd-xl-50p">
 										<Input label="Link Label" name="label" type="text" value={current.label} error={error.label} onChange={onTextChange} />
