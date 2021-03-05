@@ -38,6 +38,14 @@ const LinkForm = props => {
 		isSaved && history.push("/links");
 	}, [isSaved, history]);
 
+	useEffect(() => {
+		error !== "" &&
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth"
+			});
+	}, [error]);
+
 	const onTextChange = e => updateCurrent({ ...current, [e.target.name]: e.target.value });
 	const onSelectChange = e => updateCurrent({ ...current, linkValue: e.value });
 	const onLinkChange = e => updateCurrent({ ...current, linkValue: "", [e.target.name]: e.target.value });
