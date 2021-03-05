@@ -33,13 +33,7 @@ const Settings = () => {
 										</div>
 									)}
 								</h2>
-								{error.length > 0 && (
-									<Alert variant="danger">
-										{error.map((err, key) => (
-											<div key={key}>{err.msg}</div>
-										))}
-									</Alert>
-								)}
+								{error !== "" && <Alert variant="danger">Please fix the errors before saving.</Alert>}
 								{isSaved && <Alert variant="success">Settings Saved!</Alert>}
 								<form onSubmit={handleSave}>
 									<div className="wd-xl-50p">
