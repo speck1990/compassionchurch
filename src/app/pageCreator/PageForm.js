@@ -95,7 +95,7 @@ const PageForm = props => {
 											</div>
 										)}
 									</h2>
-									{!error && <Alert variant="danger">Please fix the errors before saving.</Alert>}
+									{error !== "" && <Alert variant="danger">Please fix the errors before saving.</Alert>}
 									<form onSubmit={handleSave}>
 										<div className="wd-xl-50p">
 											<Input label="Title" name="title" type="text" value={current.title} error={error.title} onChange={onTitleChange} />
