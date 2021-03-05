@@ -49,35 +49,15 @@ const Header = props => {
 									<i className="typcn typcn-chart-area-outline"></i> Dashboard
 								</Link>
 							</li>
-							<li className="nav-item">
-								<Dropdown className={isPathActive("/pages") ? "nav-item active" : "nav-item"}>
-									<Dropdown.Toggle as={"a"} className="nav-link with-sub">
-										<i className="typcn typcn-document"></i> Pages
-									</Dropdown.Toggle>
-									<Dropdown.Menu className="az-menu-sub">
-										<Link to="/pages" className={isPathActive("/pages") ? "nav-link active" : "nav-link"}>
-											All Pages
-										</Link>
-										<Link to="/pages/create" className={isPathActive("/pages/create") ? "nav-link active" : "nav-link"}>
-											Create Page
-										</Link>
-									</Dropdown.Menu>
-								</Dropdown>
+							<li className={isPathActive("/pages") ? "nav-item active" : "nav-item"}>
+								<Link to="/pages" className="nav-link">
+									<i className="typcn typcn-document"></i> Pages
+								</Link>
 							</li>
-							<li className="nav-item">
-								<Dropdown className={isPathActive("/links") || isPathActive("/form") || isPathActive("/charts") || isPathActive("/tables") ? "nav-item active" : "nav-item"}>
-									<Dropdown.Toggle as={"a"} className="nav-link with-sub">
-										<i className="typcn typcn-location-arrow-outline"></i> Navigation
-									</Dropdown.Toggle>
-									<Dropdown.Menu className="az-menu-sub">
-										<Link to="/links" className={isPathActive("/links") ? "nav-link active" : "nav-link"}>
-											All Links
-										</Link>
-										<Link to="/links/create" className={isPathActive("/links/create") ? "nav-link active" : "nav-link"}>
-											Create Link
-										</Link>
-									</Dropdown.Menu>
-								</Dropdown>
+							<li className={isPathActive("/links") ? "nav-item active" : "nav-item"}>
+								<Link to="/links" className="nav-link">
+									<i className="typcn typcn-location-arrow-outline"></i> Links
+								</Link>
 							</li>
 							<li className={isPathActive("/settings", true) ? "nav-item active" : "nav-item"}>
 								<Link to="/settings" className="nav-link">
