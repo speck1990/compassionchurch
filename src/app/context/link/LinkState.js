@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import LinkContext from "./linkContext";
 import linkReducer from "./linkReducer";
-import { validator } from "../../validation/validator";
+import { useValidator } from "../../utils/hooks/useValidator";
 import * as Yup from "yup";
 import { GET_LINKS, SET_CURRENT, UPDATE_CURRENT, UPDATE_LINK, CLEAR_CURRENT, LINK_ERROR, ADD_LINK, SET_LOADING, DELETE_LINK, CLEAR_ERRORS } from "../types";
 
@@ -23,6 +23,8 @@ const LinkState = props => {
 			}),
 		linkValue: Yup.string().required("Required")
 	});
+
+	const validate = useValidator(validationSchema);
 
 	const [state, dispatch] = useReducer(linkReducer, initalState);
 
@@ -50,7 +52,7 @@ const LinkState = props => {
 		};
 
 		try {
-			const errors = await validator(link, validationSchema);
+			const errors = await validate(link);
 
 			if (errors) {
 				return dispatch({ type: LINK_ERROR, payload: errors });
@@ -76,7 +78,7 @@ const LinkState = props => {
 		};
 
 		try {
-			const errors = await validator(link, validationSchema);
+			const errors = await validate(link);
 
 			if (errors) {
 				return dispatch({ type: LINK_ERROR, payload: errors });

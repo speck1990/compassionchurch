@@ -3,7 +3,7 @@ import axios from "axios";
 import SettingContext from "./settingContext";
 import settingReducer from "./settingReducer";
 import * as Yup from "yup";
-import { validator } from "../../validation/validator";
+import { useValidator } from "../../utils/hooks/useValidator";
 import { GET_SETTINGS, UPDATE_CURRENT, UPDATE_SETTINGS, SETTING_ERROR, SET_LOADING } from "../types";
 
 const SettingState = props => {
@@ -38,6 +38,8 @@ const SettingState = props => {
 			})
 	});
 
+	const validate = useValidator(validationSchema);
+
 	const [state, dispatch] = useReducer(settingReducer, initalState);
 
 	const getSettings = async () => {
@@ -64,7 +66,7 @@ const SettingState = props => {
 		};
 
 		try {
-			const errors = await validator(settings, validationSchema);
+			const errors = await validate(settings, validationSchema);
 
 			if (errors) {
 				return dispatch({ type: SETTING_ERROR, payload: errors });
