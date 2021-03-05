@@ -14,6 +14,14 @@ const Settings = () => {
 		// eslint-disable-next-line
 	}, []);
 
+	useEffect(() => {
+		error !== "" &&
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth"
+			});
+	}, [error]);
+
 	const onTextChange = e => updateCurrent({ ...settings, [e.target.name]: e.target.value });
 
 	const handleSave = () => updateSettings(settings);
