@@ -20,7 +20,7 @@ VALIDATION FOR PAGE FORM
 
 const validPage = () => {
 	return check("slug").custom((value, { req }) => {
-		return Page.findOne({ slug: value, user: req.user.id }).then(page => {
+		return Page.findOne({ slug: value, location: req.user.location }).then(page => {
 			if (page) {
 				if (!req.params.id) {
 					return Promise.reject("Slug already in use.");
@@ -54,7 +54,7 @@ VALIDATION FOR LINK FORM
 
 const validLink = () => {
 	return check("label").custom((value, { req }) => {
-		return Link.findOne({ label: value, user: req.user.id }).then(link => {
+		return Link.findOne({ label: value, location: req.user.location }).then(link => {
 			if (link) {
 				if (!req.params.id) {
 					return Promise.reject("Label already in use.");
@@ -73,9 +73,9 @@ const validLink = () => {
 const linkValidationRules = req => {
 	return [
 		// All fields are required
-		check("label", "Label is required").notEmpty(),
-		check("type", "Type is required").notEmpty(),
-		check("linkValue", "Link is required").notEmpty(),
+		check("label", "Required").notEmpty(),
+		check("type", "Required").notEmpty(),
+		check("linkValue", "Required").notEmpty(),
 		// Link should be valid
 		validLink()
 	];
@@ -97,7 +97,10 @@ const validate = (req, res, next) => {
 		return next();
 	}
 
-	return res.status(422).json({ errors: errors.array() }); //1: Page has errors (page validation from middleware)
+	let err = {};
+	errors.array().forEach(e => (err[e.param] = e.msg));
+
+	return res.status(422).json({ errors: err }); //1: Page has errors (page validation from middleware)
 };
 
 module.exports = {
