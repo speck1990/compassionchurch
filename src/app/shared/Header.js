@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import logo from "../../assets/images/logo.png";
+import user from "../../assets/images/img1.jpg";
 
 const Header = props => {
 	const closeMenu = e => {
@@ -69,7 +70,7 @@ const Header = props => {
 					<div className="az-header-right">
 						<Dropdown className="az-profile-menu">
 							<Dropdown.Toggle as={"a"} className="az-img-user">
-								<img src={require("../../assets/images/img1.jpg")} alt=""></img>
+								<img src={user} alt="" />
 							</Dropdown.Toggle>
 							<Dropdown.Menu>
 								<div className="az-dropdown-header d-sm-none">
@@ -79,7 +80,7 @@ const Header = props => {
 								</div>
 								<div className="az-header-profile">
 									<div className="az-img-user">
-										<img src={require("../../assets/images/img1.jpg")} alt=""></img>
+										<img src={user} alt="" />
 									</div>
 									<h6>Aziana Pechon</h6>
 									<span>Premium Member</span>
