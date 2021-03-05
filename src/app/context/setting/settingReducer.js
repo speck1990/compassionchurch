@@ -1,4 +1,4 @@
-import { GET_SETTINGS, UPDATE_CURRENT, UPDATE_SETTINGS, SETTING_ERROR, SET_LOADING } from "../types";
+import { GET_SETTINGS, UPDATE_CURRENT, UPDATE_SETTINGS, SETTING_ERROR, SET_LOADING, CLEAR_ERRORS } from "../types";
 
 const linkReducer = (state, action) => {
 	switch (action.type) {
@@ -32,6 +32,12 @@ const linkReducer = (state, action) => {
 				...state,
 				error: action.payload,
 				loading: false
+			};
+
+		case CLEAR_ERRORS:
+			return {
+				...state,
+				error: ""
 			};
 
 		case SET_LOADING:

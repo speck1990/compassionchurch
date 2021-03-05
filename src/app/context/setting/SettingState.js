@@ -4,7 +4,7 @@ import SettingContext from "./settingContext";
 import settingReducer from "./settingReducer";
 import * as Yup from "yup";
 import { useValidator } from "../../utils/hooks/useValidator";
-import { GET_SETTINGS, UPDATE_CURRENT, UPDATE_SETTINGS, SETTING_ERROR, SET_LOADING } from "../types";
+import { GET_SETTINGS, UPDATE_CURRENT, UPDATE_SETTINGS, SETTING_ERROR, SET_LOADING, CLEAR_ERRORS } from "../types";
 
 const SettingState = props => {
 	const initalState = {
@@ -44,6 +44,7 @@ const SettingState = props => {
 
 	const getSettings = async () => {
 		setLoading();
+		clearErrors();
 
 		try {
 			const res = await axios.get("http://localhost:5000/api/settings");
@@ -85,6 +86,8 @@ const SettingState = props => {
 	const updateCurrent = current => {
 		dispatch({ type: UPDATE_CURRENT, payload: current });
 	};
+
+	const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
 	const setLoading = () => dispatch({ type: SET_LOADING });
 
