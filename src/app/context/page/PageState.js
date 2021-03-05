@@ -20,7 +20,7 @@ const PageState = props => {
 
 	const validationSchema = Yup.object({
 		title: Yup.string().required("Required"),
-		description: Yup.string().required("Required"),
+		description: Yup.string(),
 		publish: Yup.date().nullable().default(null),
 		unpublish: Yup.date()
 			.nullable()
@@ -31,11 +31,11 @@ const PageState = props => {
 				switch (value.type) {
 					case "heading":
 						return Yup.object().shape({
-							text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Heading Required")
+							text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
 						});
 					case "paragraph":
 						return Yup.object().shape({
-							text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Paragraph Required")
+							text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
 						});
 					case "button":
 						return Yup.object().shape({
@@ -139,6 +139,7 @@ const PageState = props => {
 
 	const setCurrent = async id => {
 		setLoading();
+		clearErrors();
 
 		if (id) {
 			try {
