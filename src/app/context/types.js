@@ -10,6 +10,7 @@ export const GET_PAGES = "GET_PAGES";
 export const SET_CURRENT = "SET_CURRENT";
 export const UPDATE_CURRENT = "UPDATE_CURRENT";
 export const UPDATE_PAGE = "UPDATE_PAGE";
+export const SET_HOME = "SET_HOME";
 export const CLEAR_CURRENT = "CLEAR_CURRENT";
 export const PAGE_ERROR = "PAGE_ERROR";
 export const ADD_PAGE = "ADD_PAGE";

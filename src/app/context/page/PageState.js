@@ -5,9 +5,9 @@ import PageContext from "./pageContext";
 import pageReducer from "./pageReducer";
 import * as Yup from "yup";
 import { useValidator } from "../../utils/hooks/useValidator";
-import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, CLEAR_ERRORS, ADD_PAGE, SET_LOADING, DELETE_PAGE } from "../types";
+import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, CLEAR_ERRORS, ADD_PAGE, SET_LOADING, DELETE_PAGE, SET_HOME } from "../types";
 
-const pageSchema = { title: "", slug: "", hero: null, description: "", publish: null, unpublish: null, visible: true, content: [] };
+const pageSchema = { title: "", slug: "", home: false, hero: null, description: "", publish: null, unpublish: null, visible: true, content: [] };
 
 const PageState = props => {
 	const initalState = {
@@ -164,6 +164,21 @@ const PageState = props => {
 		dispatch({ type: UPDATE_CURRENT, payload: current });
 	};
 
+	const setHomePage = async id => {
+		setLoading();
+
+		try {
+			const res = await axios.get(`http://localhost:5000/api/pages/home/${id}`);
+			dispatch({ type: SET_HOME, payload: res.data });
+		} catch (err) {
+			console.log(err);
+			dispatch({
+				type: PAGE_ERROR,
+				payload: err
+			});
+		}
+	};
+
 	const addBlock = (block, position) => {
 		block._id = uuidv4();
 
@@ -194,6 +209,7 @@ const PageState = props => {
 				getPages,
 				addPage,
 				setCurrent,
+				setHomePage,
 				updateCurrent,
 				clearCurrent,
 				addBlock,

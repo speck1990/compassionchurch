@@ -8,6 +8,7 @@ const PageSchema = new mongoose.Schema({
 	slug: {
 		type: String
 	},
+	home: Boolean,
 	title: {
 		type: String,
 		trim: true

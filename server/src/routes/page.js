@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
+const slugify = require("slugify");
 const auth = require("../middleware/auth");
 const { pageValidationRules, validate } = require("../middleware/validation");
 
@@ -74,6 +75,37 @@ router.put("/:id", auth, pageValidationRules(), validate, async (req, res) => {
 		}
 
 		page = await Page.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
+
+		res.json(page);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).json({ msg: err.message });
+	}
+});
+
+// @route       GET api/pages/home/:id
+// @desc        Set page as home page
+// @access      Private
+router.get("/home/:id", auth, async (req, res) => {
+	const id = req.params.id;
+
+	try {
+		let page = await Page.findById(id);
+
+		if (!page) return res.status(404).json({ msg: "Page not found" });
+
+		// Make sure location owns page
+		if (page.location.toString() !== req.user.location) {
+			return res.status(401).json({ msg: "Not authorized" });
+		}
+
+		let home = await Page.findOne({ home: true, location: req.user.location });
+		const slug = slugify(home.title, { lower: true });
+
+		await Page.findByIdAndUpdate(home._id, { home: false, slug });
+		page = await Page.findByIdAndUpdate(req.params.id, { home: true, slug: "/" }, { new: true });
+
+		console.log(page);
 
 		res.json(page);
 	} catch (err) {
