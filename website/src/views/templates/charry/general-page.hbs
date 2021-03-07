@@ -1,0 +1,61 @@
+<div class="page-title parallax parallax4" style="background-image:url({{page.hero}})">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-title-heading">
+					<h2 class="title">{{page.title}}</h2>
+				</div>
+				<!-- /.page-title-heading -->
+			</div>
+			<!-- /.col-md-12 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container -->
+</div>
+<!-- /page-title parallax -->
+
+{{#each page.content}}
+
+{{#switch type}}
+
+{{#case 'section'}}
+
+<section class="flat-row">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+
+				{{#each content}}
+				{{> blocks}}
+				{{/each}}
+
+			</div>
+		</div>
+	</div>
+</section>
+
+{{/case}}
+
+
+
+
+{{#case 'heading'}} <div class="title-section">{{{text}}}</div>{{/case}}
+
+{{#case 'paragraph'}} {{{text}}} {{/case}}
+
+{{#case 'button'}}
+<div class="mt-2 mb-5"><a class="btn btn-primary" {{#if newTab}}target="_blank" {{/if}} href="/{{buttonValue}}"
+		role="button">{{label}}</a></div>
+{{/case}}
+
+{{#case 'image'}} <img src="{{url}}" alt="image" class="img-fluid mb-5 rounded" /> {{/case}}
+
+
+
+{{/switch}}
+
+
+
+
+{{/each}}
