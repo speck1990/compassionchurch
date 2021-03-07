@@ -285,7 +285,7 @@
     margin-left: -23px;
     width: 45px;
     height: 6px;
-    background-color: #ffd71a;
+    background-color: #ff6700;
 }
 
 .title-section h4 {
@@ -361,7 +361,7 @@
     bottom: 0;
     width: 100%;
     height: 6px;
-    background-color: #ffd71a;
+    background-color: #ff6700;
 }
 
 .causes:after {
@@ -554,7 +554,7 @@
 }
 
 .featured-causes .causes-post h4.title-post a:hover {
-    color: #ffd71a;
+    color: #ff6700;
 }
 
 .featured-causes .causes-post .donation-amount .donation-v1 {
@@ -600,7 +600,7 @@
 }
 
 .featured-causes .causes-post .more a:hover {
-    color: #ffd71a;
+    color: #ff6700;
 }
 
 .featured-causes .causes-post .title-post {
@@ -649,7 +649,7 @@
     width: 410px;
     height: 410px;
     content: "";
-    background-color: #ffd71a;
+    background-color: #ff6700;
 }
 
 .flat-about-charry .img-single img {
@@ -771,7 +771,7 @@
 }
 
 .flat-events .entry .content-post .entry-post .more a:hover {
-    color: #ffd71a;
+    color: #ff6700;
 }
 
 .flat-our-events .about-button {
@@ -817,7 +817,7 @@
     float: left;
     height: 85px;
     width: 85px;
-    background-color: #ffd71a;
+    background-color: #ff6700;
     text-align: left;
     font-size: 16px;
     color: #fff;
@@ -967,7 +967,7 @@
     font-family: "Poppins", sans-serif;
     font-size: 21px;
     font-weight: 600;
-    color: #ffd71a;
+    color: #ff6700;
     padding-bottom: 15px;
 }
 
@@ -1010,7 +1010,7 @@
     margin-right: 20px;
     font-size: 30px;
     line-height: 36px;
-    color: #ffd71a;
+    color: #ff6700;
     -webkit-transition: all 0.4s ease-in-out;
             transition: all 0.4s ease-in-out;
 }
@@ -1046,13 +1046,13 @@
 .icon-square {
     position: relative;
     float: left;
-    border: 2px solid #ffd71a;
+    border: 2px solid #ff6700;
     width: 65px;
     height: 65px;
     text-align: center;
     font-size: 30px;
     line-height: 63px;
-    color: #ffd71a;
+    color: #ff6700;
     margin-right: 15px;
 }
 
@@ -1069,7 +1069,7 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: #ffd71a;
+    background: #ff6700;
     -webkit-transform: scale(0);
     -ms-transform: scale(0);
     transform: scale(0);
@@ -1104,7 +1104,7 @@
 }
 
 .icon-post h6:hover {
-    color: #ffd71a;
+    color: #ff6700;
 }
 
 .icon-post p {
@@ -1120,7 +1120,7 @@
 }
 
 .icon-post .more a:hover {
-    color: #ffd71a;
+    color: #ff6700;
 }
 
 /* Icon style1 */
@@ -1136,7 +1136,7 @@
     margin: 0 auto;
     width: 73px;
     height: 73px;
-    background-color: #ffd71a;
+    background-color: #ff6700;
     -webkit-border-radius: 50%;
        -moz-border-radius: 50%;
         -ms-border-radius: 50%;
@@ -1226,7 +1226,7 @@
 }
 
 .recent-causes .post h6.title-post:hover {
-    color: #ffd71a;
+    color: #ff6700;
 }
 
 .recent-causes .post .donation-amount {
@@ -1284,7 +1284,7 @@
 }
 
 .flat-progress .progress-animate {
-    background-color: #ffd71a;
+    background-color: #ff6700;
     height: 4px;
     width: 0;
 }
@@ -1379,7 +1379,7 @@
     margin-left: -17px;
     width: 36px;
     height: 6px;
-    background-color: #ffd71a;
+    background-color: #ff6700;
 }
 
 .page-title.parallax2 .flat-counter .name-count p {
@@ -1475,7 +1475,7 @@
 }
 
 .page-title.parallax6 .page-title-heading h2 span {
-    color: #ffd71a;
+    color: #ff6700;
 }
 
 .page-title.parallax6 .parallax-button.style2 .flat-button {
@@ -1522,7 +1522,7 @@
 }
 
 .page-title.parallax9 .page-title-heading h2 span {
-    color: #ffd71a;
+    color: #ff6700;
 }
 
 .page-title.parallax9 .parallax-button.style2 .flat-button {
@@ -1641,7 +1641,7 @@
     margin-left: -17px;
     width: 30px;
     height: 2px;
-    background-color: #ffd71a;
+    background-color: #ff6700;
 }
 
 .flat-member .flat-member-carousel .owl-controls  {
@@ -1682,7 +1682,7 @@
     font-family: "Open Sans", sans-serif;
     font-size: 72px;
     line-height: 28px;
-    color: #ffd71a;
+    color: #ff6700;
 }
 
 .flat-testimonial ul li .title-testimonial {
@@ -2007,7 +2007,7 @@
     top: 18px;
     width: 85%;
     height: 85%;
-    background-color: #ffd71a;
+    background-color: #ff6700;
     content: '';
     z-index: 1; 
     box-sizing: border-box;
@@ -2150,7 +2150,7 @@
 .support-icon i {
     font-size: 30px;
     line-height: 36px;
-    color: #ffd71a;
+    color: #ff6700;
 }
 
 .flat-support .support-icon .icon h6.title-post {
@@ -2197,8 +2197,8 @@
     font-size: 30px;
     line-height: 72px;
     border-radius: 50%;
-    border: 2px solid #ffd71a;
-    color: #ffd71a;
+    border: 2px solid #ff6700;
+    color: #ff6700;
     -webkit-transition: all 0.12s ease;
           transition: all 0.12s ease;
     margin-bottom: 25px;
@@ -2217,7 +2217,7 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: #ffd71a;
+    background: #ff6700;
     border-radius: 50%;
     -webkit-transform: scale(0);
       -ms-transform: scale(0);
@@ -2475,7 +2475,7 @@ button.flat-button {
 }
 
 .flat-countdown .square {
-    background-color: #ffd71a;
+    background-color: #ff6700;
     display: block;
     font-size: 48px;
     line-height: 48px;
@@ -2592,7 +2592,7 @@ button.flat-button {
 }
 
 .block-loader {
-    background-color: #ffd71a;
+    background-color: #ff6700;
     float:left;
     height:24px;
     margin-left:7px;
