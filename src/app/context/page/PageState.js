@@ -196,8 +196,15 @@ const PageState = props => {
 		dispatch({ type: UPDATE_CURRENT, payload: updatedCurrent });
 	};
 
-	const deleteBlock = id => {
-		const updatedContent = state.current.content.filter(block => block._id !== id);
+	const deleteBlock = (id, parent = null) => {
+		let updatedContent = state.current.content.filter(block => block._id !== id);
+
+		if (parent) {
+			const newParent = state.current.content.find(section => section._id === parent._id);
+			newParent.content = parent.content.filter(block => block._id !== id);
+			updatedContent = state.current.content.map(section => (section._id === parent._id ? newParent : section));
+		}
+
 		const updatedCurrent = { ...state.current, content: updatedContent };
 		dispatch({ type: UPDATE_CURRENT, payload: updatedCurrent });
 	};

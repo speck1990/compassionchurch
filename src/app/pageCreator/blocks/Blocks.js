@@ -37,7 +37,7 @@ const Blocks = ({ blocks, parent, isDropDisabled }) => {
 											<i className="fas fa-arrows-alt"></i>
 										</div>
 
-										<Button variant="btn-icon" onClick={() => deleteBlock(block._id)}>
+										<Button variant="btn-icon" onClick={() => deleteBlock(block._id, parent)}>
 											<i className="fas fa-times"></i>
 										</Button>
 									</div>
