@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Fragment } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import Blocks from "../Blocks";
+import PageContext from "../../../context/page/pageContext";
 
 const Section = ({ block, isDropDisabled, index }) => {
+	const pageContext = useContext(PageContext);
+
+	const { error } = pageContext;
+
+	const err = error?.[`content[${index}].content`];
+
 	const parent = {
 		...block,
 		index
@@ -20,7 +27,8 @@ const Section = ({ block, isDropDisabled, index }) => {
 								<div
 									className="no-blocks bg-gray-100"
 									style={{
-										background: snapshot.isDraggingOver && "lightblue"
+										background: snapshot.isDraggingOver && "lightblue",
+										border: err && "1px solid #dc3545"
 									}}
 								>
 									<p>Drag and drop content block here.</p>

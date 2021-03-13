@@ -28,31 +28,34 @@ const PageState = props => {
 			.when("publish", (publish, schema) => (publish ? schema.min(publish, "Unpublish must be after publish date") : schema)),
 		content: Yup.array().of(
 			Yup.object().shape({
-				content: Yup.array().of(
-					Yup.lazy(value => {
-						switch (value.type) {
-							case "heading":
-								return Yup.object().shape({
-									text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
-								});
-							case "paragraph":
-								return Yup.object().shape({
-									text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
-								});
-							case "button":
-								return Yup.object().shape({
-									label: Yup.string()
-										.required("Required")
-										.test("label", "Label already in use", function (value) {
-											return true;
-										}),
-									buttonValue: Yup.string().required("Required")
-								});
-							default:
-								return false;
-						}
-					})
-				)
+				content: Yup.array()
+					.min(1, "Add at least one block")
+					.of(
+						Yup.lazy(value => {
+							switch (value.type) {
+								case "heading":
+									return Yup.object().shape({
+										text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
+									});
+								case "paragraph":
+									return Yup.object().shape({
+										text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
+									});
+								case "button":
+									return Yup.object().shape({
+										label: Yup.string()
+											.required("Required")
+											.test("label", "Label already in use", function (value) {
+												return true;
+											}),
+										buttonValue: Yup.string().required("Required")
+									});
+								default:
+									return false;
+							}
+						})
+					)
+					.required("Required")
 			})
 		)
 	});
