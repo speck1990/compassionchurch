@@ -11,7 +11,7 @@ const Toolbox = () => {
 					{provided => (
 						<div className="az-icon-group bg-gray-200 mg-b-40" ref={provided.innerRef}>
 							{blockTypes.map(({ type, icon }, key) => (
-								<Draggable key={type} draggableId={`draggable-${type}`} index={key}>
+								<Draggable key={type} draggableId={type} index={key}>
 									{(provided, snapshot) => (
 										<Fragment>
 											<div className="toolbox-item bg-gray-300" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={provided.draggableProps.style}>

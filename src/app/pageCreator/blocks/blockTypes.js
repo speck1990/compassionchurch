@@ -1,11 +1,21 @@
+import Section from "./blocks/Section";
 import Heading from "./blocks/Heading";
 import Paragraph from "./blocks/Paragraph";
 import Image from "./blocks/Image";
 import Button from "./blocks/Button";
-// import Columns from "./blocks/Columns";
+// import Column from "./blocks/Column";
 import * as Yup from "yup";
 
 const blockTypes = [
+	{
+		type: "section",
+		component: Section,
+		icon: "fas fa-puzzle-piece",
+		validation: null,
+		template: {
+			content: []
+		}
+	},
 	{
 		type: "heading",
 		component: Heading,

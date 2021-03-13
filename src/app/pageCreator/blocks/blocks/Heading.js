@@ -4,20 +4,47 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import PageContext from "../../../context/page/pageContext";
 
-const Heading = ({ block, index }) => {
+let Quill = ReactQuill.Quill;
+
+let BlockBlot = Quill.import("blots/block");
+
+// class BoldBlot extends Inline {}
+// BoldBlot.blotName = "bold";
+// BoldBlot.tagName = "h1";
+// BoldBlot.className = "custom-bold";
+
+class HeaderBlot extends BlockBlot {}
+HeaderBlot.blotName = "header";
+HeaderBlot.tagName = ["H2", "H3"];
+
+// class HeaderBlot extends BlockBlot {}
+// HeaderBlot.blotName = "header";
+// HeaderBlot.tagName = "p";
+
+Quill.register(HeaderBlot);
+
+const Heading = ({ block, parent, index }) => {
 	const pageContext = useContext(PageContext);
 
 	const { current, updateCurrent, error } = pageContext;
 
-	const err = error?.[`content[${index}].text`];
+	const err = error?.[`content[${parent.index}].content[${index}].text`];
 
 	const modules = {
-		toolbar: [[{ header: [1, 2] }], [{ align: [false, "center", "right"] }]]
+		toolbar: [[{ header: [1, 2] }], [{ align: [false, "center", "right"] }], ["bold"]]
 	};
 
-	const formats = ["header", "align"];
+	const formats = ["header", "align", "bold"];
 
-	const handleOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { _id: block._id, type: "heading", text: value } : el)) });
+	const handleOnChange = value => {
+		const updatedBlock = { _id: block._id, type: "heading", text: value };
+
+		const parentSection = current.content.find(section => section._id === parent._id);
+		const newBlocks = parentSection.content.map(bl => (bl._id === block._id ? updatedBlock : bl));
+		parentSection.content = newBlocks;
+
+		updateCurrent({ ...current, content: current.content.map(section => (section._id === parent._id ? parentSection : section)) });
+	};
 
 	return (
 		<Fragment>

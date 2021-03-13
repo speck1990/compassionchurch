@@ -11,6 +11,7 @@ import { useParams, useHistory } from "react-router-dom";
 import Checkbox from "../shared/formElements/Checkbox";
 import slugify from "slugify";
 import Toolbox from "./blocks/Toolbox";
+import { v4 as uuidv4 } from "uuid";
 import blockTypes from "./blocks/blockTypes";
 
 const PageForm = props => {
@@ -73,26 +74,118 @@ const PageForm = props => {
 
 	const handleCancel = () => history.push("/pages");
 
-	const onDragEnd = ({ destination, source }) => {
+	const reorder = (list, startIndex, endIndex) => {
+		const result = Array.from(list);
+		const [removed] = result.splice(startIndex, 1);
+		result.splice(endIndex, 0, removed);
+
+		return result;
+	};
+
+	const [isDropDisabled, setIsDropDisabled] = useState(true);
+
+	const onDragStart = start => {
+		(start.draggableId === "section" || start.source.droppableId === "canvas") && setIsDropDisabled(false);
+	};
+
+	const onDragEnd = result => {
+		setIsDropDisabled(true);
+
+		const { destination, source } = result;
+
+		// Draggables were being dropped outside of droppable
 		if (!destination) return;
 
-		switch (source.droppableId) {
-			case destination.droppableId:
-				const updatedContent = Array.from(current.content);
-				const [removed] = updatedContent.splice(source.index, 1);
-				updatedContent.splice(destination.index, 0, removed);
+		if (source.droppableId === "canvas") {
+			// Sections are being dragged
+			const items = reorder(current.content, source.index, destination.index);
+			updateCurrent({ ...current, content: items });
+		} else {
+			// Blocks within sections are being dragged
 
-				updateCurrent({ ...current, content: updatedContent });
-				break;
+			// Create section map that uses id as an object key
+			const sectionBlocksMap = current.content.reduce((acc, section) => {
+				acc[section._id] = section.content;
+				return acc;
+			}, {});
 
-			case "toolbox":
-				addBlock({ type: blockTypes[source.index].type, ...blockTypes[source.index].template }, destination.index);
-				break;
+			// Use sectionBlockMap to get blocks from source and destination sections
+			const sourceBlocks = sectionBlocksMap[source.droppableId];
+			const destBlocks = sectionBlocksMap[destination.droppableId];
 
-			default:
-				break;
+			// Create duplicate of sections
+			let newSections = [...current.content];
+
+			if (source.droppableId === "toolbox") {
+				// Blocks are being dragged from the toolbox
+
+				if (destination.droppableId === "canvas") {
+					return addBlock({ type: blockTypes[source.index].type, ...blockTypes[source.index].template }, destination.index);
+				}
+
+				// Create a duplicate of the destination section's blocks
+				let newDestBlocks = [...destBlocks];
+				// Create new block
+				const newBlock = { _id: uuidv4(), type: blockTypes[source.index].type, ...blockTypes[source.index].template };
+				// Add the dragged block to the destination copy
+				newDestBlocks.splice(destination.index, 0, newBlock);
+
+				// Map through each section
+				newSections = newSections.map(section => {
+					// Check if the section is the section the block is being added to
+					if (section._id === destination.droppableId) {
+						// Replace the destination section content with content plus dragged block
+						section.content = newDestBlocks;
+					}
+					return section;
+				});
+			} else if (source.droppableId === destination.droppableId) {
+				// Blocks are being dragged within the same section
+
+				// Create a new array with the blocks reordered
+				const reorderedBlocks = reorder(sourceBlocks, source.index, destination.index);
+
+				// Map through each section
+				newSections = newSections.map(section => {
+					// Check if the section is the section being reordered
+					if (section._id === source.droppableId) {
+						// Replace the section's content with the reordered blocks
+						section.content = reorderedBlocks;
+					}
+					return section;
+				});
+			} else {
+				// Blocks are being dragged into a different section
+
+				// Create a duplicate of the source section's blocks
+				let newSourceBlocks = [...sourceBlocks];
+				// Remove the dragged block from source copy
+				let [draggedBlock] = newSourceBlocks.splice(source.index, 1);
+
+				// Create a duplciate of the destination section's blocks
+				let newDestBlocks = [...destBlocks];
+				// Add the dragged block to the destination copy
+				newDestBlocks.splice(destination.index, 0, draggedBlock);
+
+				// Map through each section
+				newSections = newSections.map(section => {
+					// Check if the section is the section the block is being removed from
+					if (section._id === source.droppableId) {
+						// Replace the source section content with content less the dragged block
+						section.content = newSourceBlocks;
+
+						// Check if gthe section is the section the block is being added to
+					} else if (section._id === destination.droppableId) {
+						// Replace the destination section content with content plus dragged block
+						section.content = newDestBlocks;
+					}
+					return section;
+				});
+			}
+
+			// Update the current content with the new sections
+			updateCurrent({ ...current, content: newSections });
 		}
-
 		// TODO: Have errors persist after block is moved or added instead of clearing errors
 		clearErrors();
 	};
@@ -101,7 +194,7 @@ const PageForm = props => {
 		<div>
 			<div className="container d-flex p-md-0">
 				<div className="az-content-body pd-lg-l-40 d-flex flex-column">
-					<DragDropContext onDragEnd={onDragEnd}>
+					<DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
 						<div>
 							{current !== null ? (
 								<div>
@@ -180,7 +273,7 @@ const PageForm = props => {
 
 										<div className="block-container">
 											<Toolbox />
-											<Canvas blocks={current.content} />
+											<Canvas blocks={current.content} isDropDisabled={isDropDisabled} />
 										</div>
 
 										<hr className="mg-y-30" />

@@ -4,12 +4,12 @@ import { Form } from "react-bootstrap";
 import "react-quill/dist/quill.snow.css";
 import PageContext from "../../../context/page/pageContext";
 
-const Paragraph = ({ block, index }) => {
+const Paragraph = ({ block, parent, index }) => {
 	const pageContext = useContext(PageContext);
 
 	const { current, updateCurrent, error } = pageContext;
 
-	const err = error?.[`content[${index}].text`];
+	const err = error?.[`content[${parent.index}].content[${index}].text`];
 
 	const modules = {
 		toolbar: [["bold", "italic", "underline"], [{ align: [false, "center", "right"] }], ["link"], [{ indent: "-1" }, { indent: "+1" }], ["clean"], [{ list: "ordered" }, { list: "bullet" }]]
@@ -17,7 +17,15 @@ const Paragraph = ({ block, index }) => {
 
 	const formats = ["bold", "italic", "underline", "indent", "link", "align", "list"];
 
-	const handleOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { _id: block._id, type: "paragraph", text: value } : el)) });
+	const handleOnChange = value => {
+		const updatedBlock = { _id: block._id, type: "paragraph", text: value };
+
+		const parentSection = current.content.find(section => section._id === parent._id);
+		const newBlocks = parentSection.content.map(bl => (bl._id === block._id ? updatedBlock : bl));
+		parentSection.content = newBlocks;
+
+		updateCurrent({ ...current, content: current.content.map(section => (section._id === parent._id ? parentSection : section)) });
+	};
 
 	return (
 		<Fragment>

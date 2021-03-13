@@ -5,14 +5,14 @@ import Checkbox from "../../../shared/formElements/Checkbox";
 import Radio from "../../../shared/formElements/Radio";
 import PageContext from "../../../context/page/pageContext";
 
-const Button = ({ block, index }) => {
+const Button = ({ block, parent, index }) => {
 	const pageContext = useContext(PageContext);
 
 	const { current, updateCurrent, pages, getPages, error } = pageContext;
 
 	const err = {
-		label: error?.[`content[${index}].label`],
-		buttonValue: error?.[`content[${index}].buttonValue`]
+		label: error?.[`content[${parent.index}].content[${index}].label`],
+		buttonValue: error?.[`content[${parent.index}].content[${index}].buttonValue`]
 	};
 
 	useEffect(() => {
@@ -20,10 +20,18 @@ const Button = ({ block, index }) => {
 		// eslint-disable-next-line
 	}, []);
 
-	const onTextChange = e => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, [e.target.name]: e.target.value } : el)) });
-	const onLinkChange = e => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, buttonValue: "", buttonType: e.target.value } : el)) });
-	const onSelectChange = e => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, buttonValue: e.value } : el)) });
-	const onCheckboxChange = (value, e) => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, newTab: !value } : el)) });
+	const onChange = newBlock => {
+		const parentSection = current.content.find(section => section._id === parent._id);
+		const newBlocks = parentSection.content.map(bl => (bl._id === block._id ? newBlock : bl));
+		parentSection.content = newBlocks;
+
+		updateCurrent({ ...current, content: current.content.map(section => (section._id === parent._id ? parentSection : section)) });
+	};
+
+	const onTextChange = e => onChange({ ...block, [e.target.name]: e.target.value });
+	const onLinkChange = e => onChange({ ...block, buttonValue: "", buttonType: e.target.value });
+	const onSelectChange = e => onChange({ ...block, buttonValue: e.value });
+	const onCheckboxChange = value => onChange({ ...block, newTab: !value });
 
 	const options = [
 		{ name: "page", value: "page", label: "Link to page" },
