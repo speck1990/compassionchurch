@@ -5,8 +5,13 @@
 {{#case 'paragraph'}} {{{text}}} {{/case}}
 
 {{#case 'button'}}
-<div class="mt-2 mb-5"><a class="btn btn-primary" {{#if newTab}}target="_blank" {{/if}} href="/{{buttonValue}}"
-                role="button">{{label}}</a></div>
+<div class="mt-2 mb-5 text-center">
+
+    <button class="flat-button button-style button" onclick="window.location.href='/{{buttonValue}}'">{{label}}</button>
+    {{!-- <a class="btn btn-primary" {{#if newTab}}target="_blank" {{/if}} href="/{{buttonValue}}"
+        role="button">{{label}}</a> --}}
+
+</div>
 {{/case}}
 
 {{#case 'image'}} <img src="{{url}}" alt="image" class="img-fluid mb-5 rounded" /> {{/case}}
