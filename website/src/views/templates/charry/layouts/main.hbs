@@ -71,11 +71,10 @@
 				<nav id="mainnav" class="mainnav">
 					<ul class="menu">
 
-						<li class="home"><a href="/">Home</a></li>
-
+						<li {{#ifEquals slug "home" }}class="home" {{/ifEquals}}><a href="/">Home</a></li>
 						{{#each links}}
 
-						<li>
+						<li {{#ifEquals ../page.slug linkValue }}class="home" {{/ifEquals}}>
 							<a {{#if newTab}}target="_blank" {{/if}} {{#ifEquals type "page" }}href="/{{linkValue}}"
 								{{else}}href="{{linkValue}}" {{/ifEquals}}>{{label}}</a>
 						</li>
