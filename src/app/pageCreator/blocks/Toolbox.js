@@ -5,7 +5,7 @@ import { uppercase } from "../../utils/helpers";
 
 const Toolbox = () => {
 	return (
-		<div className="toolbox-container">
+		<div className="toolbox-container z-index-100">
 			<div className="toolbox">
 				<Droppable droppableId="toolbox" isDropDisabled={true}>
 					{provided => (
