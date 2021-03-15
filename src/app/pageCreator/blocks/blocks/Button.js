@@ -43,7 +43,7 @@ const Button = ({ block, parent, index }) => {
 			<div className="row row-xs">
 				<div className="col-md-6">
 					<Input label="Button Label" name="label" type="text" value={block.label} error={err.label} onChange={onTextChange} />
-					<Radio onChange={onLinkChange} label="Type" name={`buttonType-${index}`} options={options} error={err.type} checkedValue={block.buttonType} />
+					<Radio onChange={onLinkChange} label="Type" name={`buttonType-${parent._id}-${index}`} options={options} error={err.type} checkedValue={block.buttonType} />
 
 					{block.buttonType === "page" ? (
 						<Select
@@ -58,7 +58,7 @@ const Button = ({ block, parent, index }) => {
 						<Input label="Button" name="buttonValue" type="text" value={block.buttonValue} error={err.buttonValue} onChange={onTextChange} placeholder="http://www.example.com" />
 					)}
 
-					<Checkbox name={`newTab-${index}`} label="Open in new tab" value={block.newTab} error={err.newTab} index={index} onCheckboxChange={onCheckboxChange} />
+					<Checkbox name={`newTab-${parent._id}-${index}`} label="Open in new tab" value={block.newTab} error={err.newTab} index={index} onCheckboxChange={onCheckboxChange} />
 				</div>
 			</div>
 		</div>
