@@ -16,4 +16,34 @@
 
 {{#case 'image'}} <img src="{{url}}" alt="image" class="img-fluid mb-5 rounded" /> {{/case}}
 
+{{#case 'form'}}
+
+<form>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" aria-describedby="nameHelp">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="phone" aria-describedby="phoneHelp">
+            </div>
+            <div class="mb-3 form-check">
+                <label for="comments" class="form-label">Comments</label>
+                <textarea class="form-control" id="comments" rows="5" aria-describedby="commentsHelp"></textarea>
+            </div>
+            <button type="submit" class="flat-button button-style button">Submit</button>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</form>
+
+{{/case}}
+
 {{/switch}}
