@@ -31,10 +31,10 @@ const Heading = ({ block, parent, index }) => {
 	const err = error?.[`content[${parent.index}].content[${index}].text`];
 
 	const modules = {
-		toolbar: [[{ header: [1, 2] }], [{ align: [false, "center", "right"] }], ["bold"]]
+		toolbar: [[{ header: [1, 2] }], [{ align: [false, "center", "right"] }]]
 	};
 
-	const formats = ["header", "align", "bold"];
+	const formats = ["header", "align"];
 
 	const handleOnChange = value => {
 		const updatedBlock = { _id: block._id, type: "heading", text: value };
