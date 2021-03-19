@@ -7,9 +7,11 @@ router.get("/:slug?", async (req, res, next) => {
 	const slug = req.params.slug;
 
 	const { pages, links, settings, location } = await getLocation(req.headers.host);
-	const page = pages.find(page => page.slug === slug);
 
-	res.render("templates/charry/general-page", { page, links, site: settings, location, layout: "templates/charry/layouts/main" });
+	const page = !slug ? pages.find(page => page.slug === "/") : pages.find(page => page.slug === slug);
+	const template = !slug ? "home-page" : "general-page";
+
+	res.render(`templates/charry/${template}`, { page, links, site: settings, location, layout: "templates/charry/layouts/main" });
 });
 
 module.exports = router;
