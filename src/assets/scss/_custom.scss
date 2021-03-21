@@ -89,6 +89,6 @@
   background-position: right calc(0.375em + 1.55rem) center !important;
 }
 
-.datepicker-invalid {
+.datepicker-invalid, .dropzone-invalid {
   border-color: #dc3545 !important;
 }

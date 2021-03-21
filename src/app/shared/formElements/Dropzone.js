@@ -29,7 +29,7 @@ const rejectStyle = {
 	borderColor: "#ff1744"
 };
 
-const Dropzone = ({ onDrop, onDelete = null, image = null }) => {
+const Dropzone = ({ onDrop, onDelete = null, image = null, className }) => {
 	const uploadImage = async file => {
 		let formData = new FormData();
 
@@ -64,7 +64,7 @@ const Dropzone = ({ onDrop, onDelete = null, image = null }) => {
 	return (
 		<Fragment>
 			{image === null ? (
-				<div {...getRootProps({ style })}>
+				<div {...getRootProps({ style })} className={className}>
 					<input {...getInputProps()} />
 					<p>
 						Drag 'n' drop an image here,

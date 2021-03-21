@@ -50,6 +50,10 @@ const PageState = props => {
 											}),
 										buttonValue: Yup.string().required("Required")
 									});
+								case "image":
+									return Yup.object().shape({
+										url: Yup.string().nullable().required("Required")
+									});
 								case "form":
 									return Yup.object().shape({});
 								default:
