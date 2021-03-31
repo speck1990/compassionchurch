@@ -8,7 +8,11 @@ const SettingSchema = new mongoose.Schema({
 	facebook: String,
 	instagram: String,
 	twitter: String,
-	youtube: String
+	youtube: String,
+	giving: Boolean,
+	givingLink: String,
+	livestream: Boolean,
+	livestreamLink: String
 });
 
 module.exports = mongoose.model("Setting", SettingSchema);

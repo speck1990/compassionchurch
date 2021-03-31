@@ -35,7 +35,15 @@ const SettingState = props => {
 			.url("Please enter a valid url")
 			.test("youtube", "Please enter a valid youtube url", function (value) {
 				return !value || /youtube.com/.test(value);
-			})
+			}),
+		giving: Yup.boolean(),
+		givingLink: Yup.string()
+			.url("Please enter a valid url")
+			.when("giving", { is: true, then: Yup.string().required("Required") }),
+		livestream: Yup.boolean(),
+		livestreamLink: Yup.string()
+			.url("Please enter a valid url")
+			.when("livestream", { is: true, then: Yup.string().required("Required") })
 	});
 
 	const validate = useValidator(validationSchema);
