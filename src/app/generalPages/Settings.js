@@ -55,6 +55,11 @@ const Settings = () => {
 									</div>
 
 									<div className="wd-xl-50p">
+										<h4 className="mg-y-20">Site</h4>
+										<Input label="Footer Note" name="footerNote" as="textarea" value={settings.footerNote} error={error.footerNote} rows="3" onChange={onTextChange} />
+									</div>
+
+									<div className="wd-xl-50p">
 										<h4 className="mg-y-20">Giving</h4>
 										<Checkbox name="giving" small={true} label="Show giving button in Navigation bar" value={settings.giving} error={error.giving} onCheckboxChange={onCheckboxChange} />
 										{settings.giving && <Input label="Link" name="givingLink" type="text" text="(ex. https://churchname.churchcenter.com/giving)" value={settings.givingLink} error={error.givingLink} onChange={onTextChange} />}

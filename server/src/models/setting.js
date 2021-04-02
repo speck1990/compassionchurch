@@ -9,6 +9,7 @@ const SettingSchema = new mongoose.Schema({
 	instagram: String,
 	twitter: String,
 	youtube: String,
+	footerNote: String,
 	giving: Boolean,
 	givingLink: String,
 	livestream: Boolean,
