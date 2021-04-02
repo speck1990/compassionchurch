@@ -50,12 +50,19 @@ const Pages = () => {
 										pages.map((page, key) => (
 											<tr key={page._id}>
 												<td className="col-sm-10">
+													{page.home && (
+														<span>
+															<i className="fas fa-home"></i>{" "}
+														</span>
+													)}
 													<Link to={`/pages/${page._id}`}>{page.title}</Link>
 												</td>
 												<td className="col-sm-2">
-													<Button onClick={e => handleClick(page._id, e)} variant="btn-icon" className="list-action-button">
-														<i className="far fa-trash-alt"></i>
-													</Button>
+													{!page.home && (
+														<Button onClick={e => handleClick(page._id, e)} variant="btn-icon" className="list-action-button">
+															<i className="far fa-trash-alt"></i>
+														</Button>
+													)}
 												</td>
 											</tr>
 										))
