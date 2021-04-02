@@ -16,6 +16,15 @@ const PageSchema = new mongoose.Schema({
 	hero: {
 		type: String
 	},
+	heroTagline: {
+		type: String
+	},
+	heroButtonLabel: {
+		type: String
+	},
+	heroButtonLink: {
+		type: String
+	},
 	description: {
 		type: String,
 		trim: true

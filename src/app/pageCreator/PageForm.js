@@ -7,6 +7,7 @@ import Canvas from "./blocks/Canvas";
 import SaveCancel from "../shared/formElements/SaveCancel";
 import Input from "../shared/formElements/Input";
 import Image from "../shared/formElements/Image";
+import Select from "../shared/formElements/Select";
 import { useParams, useHistory } from "react-router-dom";
 import Checkbox from "../shared/formElements/Checkbox";
 import slugify from "slugify";
@@ -19,9 +20,11 @@ const PageForm = props => {
 	const { id } = useParams();
 	const pageContext = useContext(PageContext);
 
-	const { current, setCurrent, clearCurrent, updateCurrent, setHomePage, updatePage, addPage, addBlock, loading, error, isSaved, clearErrors } = pageContext;
+	const { pages, getPages, current, setCurrent, clearCurrent, updateCurrent, setHomePage, updatePage, addPage, addBlock, loading, error, isSaved, clearErrors } = pageContext;
 
 	useEffect(() => {
+		getPages();
+
 		if (id !== null) {
 			setCurrent(id);
 		} else {
@@ -52,6 +55,8 @@ const PageForm = props => {
 		const slug = current.home ? "/" : slugify(e.target.value, { lower: true });
 		updateCurrent({ ...current, title: e.target.value, slug });
 	};
+
+	const onSelectChange = e => updateCurrent({ ...current, heroButtonLink: e.value });
 
 	const onDateChange = (date, { name }) => updateCurrent({ ...current, [name]: date });
 
@@ -257,11 +262,24 @@ const PageForm = props => {
 											<Input label="Slug" name="slug" type="text" value={current.slug} error={error.slug} onChange={onTextChange} disabled />
 											<Input label="Description" name="description" as="textarea" value={current.description} error={error.description} rows="3" onChange={onTextChange} />
 											<Image label="Main Image" onDrop={onImageDrop} onDelete={onImageDelete} image={current.hero} />
-											{!current.home && (
+											{!current.home ? (
 												<Fragment>
 													<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} error={error.publish} onChange={onDateChange} />
 													<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} error={error.unpublish} onChange={onDateChange} />
 													<Checkbox name="visible" label="Visible" value={current.visible} onCheckboxChange={onCheckboxChange} />
+												</Fragment>
+											) : (
+												<Fragment>
+													<Input label="Tagline" name="heroTagline" type="text" value={current.heroTagline} error={error.heroTagline} onChange={onTextChange} />
+													<Input label="Button Label" name="heroButtonLabel" type="text" value={current.heroButtonLabel} error={error.heroButtonLabel} onChange={onTextChange} />
+													<Select
+														defaultValue={pages.filter(page => page.slug === current.heroButtonLink).map(page => ({ value: page.slug, label: page.title }))}
+														onChange={onSelectChange}
+														name="heroButtonLink"
+														label="Button Link"
+														options={pages.map(page => ({ value: page.slug, label: page.title }))}
+														error={error.heroButtonLink}
+													/>
 												</Fragment>
 											)}
 										</div>
