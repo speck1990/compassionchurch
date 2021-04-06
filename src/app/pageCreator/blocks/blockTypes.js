@@ -1,3 +1,4 @@
+import TwoColumnImageText from "./sections/TwoColumnImageText";
 import Section from "./blocks/Section";
 import Heading from "./blocks/Heading";
 import Paragraph from "./blocks/Paragraph";
@@ -7,6 +8,15 @@ import Button from "./blocks/Button";
 import * as Yup from "yup";
 
 const blockTypes = [
+	{
+		type: "Two",
+		component: TwoColumnImageText,
+		icon: "fas fa-puzzle-piece",
+		validation: null,
+		template: {
+			content: []
+		}
+	},
 	{
 		type: "section",
 		component: Section,
