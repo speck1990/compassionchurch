@@ -2,10 +2,10 @@ import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import Blocks from "./Blocks";
 
-const Canvas = ({ blocks, isDropDisabled }) => {
+const Canvas = ({ blocks }) => {
 	return (
 		<div className="block-item-container">
-			<Droppable droppableId="canvas" isDropDisabled={isDropDisabled}>
+			<Droppable droppableId="canvas">
 				{(provided, snapshot) => (
 					<div ref={provided.innerRef} {...provided.droppableProps}>
 						{blocks.length === 0 ? (
@@ -18,7 +18,7 @@ const Canvas = ({ blocks, isDropDisabled }) => {
 								<p>Drag and drop content block here.</p>
 							</div>
 						) : (
-							<Blocks blocks={blocks} isDropDisabled={!isDropDisabled} />
+							<Blocks blocks={blocks} />
 						)}
 
 						{provided.placeholder}
