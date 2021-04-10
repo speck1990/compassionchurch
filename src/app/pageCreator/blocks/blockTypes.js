@@ -46,7 +46,7 @@ const blockTypes = [
 		component: ThreeColumnWithIcon,
 		image: threeColumnWithIcon,
 		icon: "fas fa-puzzle-piece",
-		validation: null,
+		validation: Yup.object().shape({ text: Yup.string().required("Required"), buttonLabel: Yup.string().required("Required"), buttonLink: Yup.string().url("Enter a valid url").required("Required") }),
 		template: {
 			title: "Three Column With Icon"
 		}
