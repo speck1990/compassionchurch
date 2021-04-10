@@ -35,7 +35,10 @@ const blockTypes = [
 		}),
 		template: {
 			imageUrl: null,
-			heading: ""
+			heading: "",
+			body: "",
+			buttonLabel: "",
+			buttonLink: ""
 		}
 	},
 	{
@@ -53,9 +56,11 @@ const blockTypes = [
 		component: LargeImageSectionWithButton,
 		image: largeImageSectionWithButton,
 		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ text: Yup.string().required("Text is required"), buttonLabel: Yup.string().required("Label is required"), buttonLink: Yup.string().url("Enter a valid url").required("Link is required") }),
+		validation: Yup.object().shape({ text: Yup.string().required("Required"), buttonLabel: Yup.string().required("Required"), buttonLink: Yup.string().url("Enter a valid url").required("Required") }),
 		template: {
-			title: "Large Image Section With Button"
+			text: "",
+			buttonLabel: "",
+			buttonLink: ""
 		}
 	},
 	{
