@@ -16,6 +16,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/public", express.static(path.join(__dirname, "../public")));
 
+app.use("/", require("./routes/index"));
+app.use("/api/users", require("./routes/user"));
 app.use("/api/users", require("./routes/user"));
 app.use("/api/locations", require("./routes/location"));
 app.use("/api/pages", require("./routes/page"));
