@@ -30,7 +30,7 @@ const Blocks = ({ blocks }) => {
 				<div key={block._id}>
 					<Draggable draggableId={block._id} index={key}>
 						{provided => (
-							<div {...provided.draggableProps} ref={provided.innerRef} className="bg-white mg-b-30">
+							<div {...provided.draggableProps} ref={provided.innerRef} className="bg-white mg-b-30 block-item-wrapper">
 								<div className="block-item">
 									<div className="btn-icon-list block-options">
 										<div {...provided.dragHandleProps}>

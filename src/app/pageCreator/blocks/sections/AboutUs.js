@@ -1,39 +1,48 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Image from "./blocks/Image";
 import Input from "./blocks/Input";
+import Paragraph from "./blocks/Paragraph";
 import PageContext from "../../../context/page/pageContext";
 
-const AboutUs = ({ block }) => {
+const AboutUs = ({ block, index }) => {
 	const pageContext = useContext(PageContext);
 
-	const { current, updateCurrent } = pageContext;
+	const { current, updateCurrent, error } = pageContext;
 
-	const { data, setData } = useState(block);
-
-	const handleOnChange = e => {
-		setData({
-			...data
-		});
-		updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { _id: block._id, type: "about-us", heading: e.target.value } : el)) });
+	const err = {
+		imageUrl: error?.[`content[${index}].imageUrl`],
+		heading: error?.[`content[${index}].heading`],
+		body: error?.[`content[${index}].body`],
+		buttonLabel: error?.[`content[${index}].buttonLabel`],
+		buttonLink: error?.[`content[${index}].buttonLink`]
 	};
 
-	const onDelete = () => {
-		console.log("delete");
-	};
+	const handleOnChange = e => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, [e.target.name]: e.target.value } : el)) });
 
-	const onDrop = () => {
-		console.log("drop");
-	};
+	const paragraphOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, body: value } : el)) });
+
+	const onImageDelete = () => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, imageUrl: null } : el)) });
+
+	const onImageDrop = url => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, imageUrl: url } : el)) });
 
 	return (
 		<div className="container-fluid">
 			<div className="row">
 				<div className="col-md-6">
-					<Image image={block.imageUrl} onDelete={onDelete} onDrop={onDrop} />
+					<Image image={block.imageUrl} onDelete={onImageDelete} onDrop={onImageDrop} error={err.imageUrl} />
 				</div>
 				<div className="col-md-6">
-					<Input label="Heading" name="heading" type="text" value={block.heading} error={null} onChange={handleOnChange} />
-					<Input label="Paragraph 1" name="paragraph1" as="textarea" type="text" value={block.paragraph1} error={null} onChange={onChange} />
+					<Input label="Heading" name="heading" type="text" value={block.heading} error={err.heading} onChange={handleOnChange} />
+					<Paragraph label="Body" name="body" value={block.body} error={err.body} onChange={paragraphOnChange} />
+
+					<div class="row">
+						<div class="col-md-6">
+							<Input label="Button Label" name="buttonLabel" type="text" value={block.buttonLabel} error={err.buttonLabel} onChange={handleOnChange} />
+						</div>
+						<div class="col-md-6">
+							<Input label="Button Link" name="buttonLink" type="text" text="(i.e. http://www.example.com)" value={block.buttonLink} error={err.buttonLink} onChange={handleOnChange} />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

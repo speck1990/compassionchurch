@@ -11,22 +11,17 @@
         <div class="about-charry">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="images/about/1.jpg" alt="image">
+                    <img src="{{imageUrl}}" alt="image">
                 </div>
                 <div class="col-md-6">
                     <div class="about-charry-post">
                         <h4 class="title-post">
                             <a href="#">{{heading}}</a>
                         </h4>
-                        <p class="style-v1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore</p>
-                        <p>magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                            aliquip ex ea commodo consequat. Duis aute irure</p>
-                        <p>ugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                            officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error
-                            sit voluptatem accusantium dolore</p>
+                        {{{body}}}
                         <div class="about-button">
-                            <button class="flat-button button-style">Learn More</button>
+                            <button onclick="window.location.href='{{buttonLink}}'"
+                                class="flat-button button-style">{{buttonLabel}}</button>
                         </div>
                     </div>
                 </div>

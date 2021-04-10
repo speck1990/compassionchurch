@@ -1,15 +1,17 @@
-<div class="page-title parallax parallax1">
-<div class="overlay"></div>            
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">                    
-            <div class="page-title-heading">
-                <h2 class="title white">Lets make the world<br> better together</h2>
-            </div><!-- /.page-title-heading -->
-            <div class="parallax-button">
-                <button class="flat-button button-style">Become a Volunteer</button>
-            </div>
-        </div><!-- /.col-md-12 -->  
-    </div><!-- /.row -->  
-</div><!-- /.container -->          
+<div class="page-title parallax parallax1" style="background-image: url({{imageUrl}})">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
+                <div class="page-title-heading">
+                    <h2 class="title white">{{text}}</h2>
+                </div><!-- /.page-title-heading -->
+                <div class="parallax-button">
+                    <button onclick="window.location.href='{{buttonLink}}'"
+                        class="flat-button button-style">{{buttonLabel}}</button>
+                </div>
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
 </div><!-- /page-title parallax parallax1 -->

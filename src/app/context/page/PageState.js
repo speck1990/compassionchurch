@@ -5,6 +5,7 @@ import PageContext from "./pageContext";
 import pageReducer from "./pageReducer";
 import * as Yup from "yup";
 import { useValidator } from "../../utils/hooks/useValidator";
+import blockTypes from "../../pageCreator/blocks/blockTypes";
 import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, CLEAR_ERRORS, ADD_PAGE, SET_LOADING, DELETE_PAGE, SET_HOME } from "../types";
 
 const pageSchema = { title: "", slug: "", home: false, hero: null, description: "", publish: null, unpublish: null, visible: true, content: [] };
@@ -53,11 +54,11 @@ const PageState = props => {
 					case "form":
 						return Yup.object().shape({});
 					case "about-us":
-						return Yup.object().shape({ title: Yup.string() });
+						return blockTypes[0].validation;
 					case "three-column-with-icon":
 						return Yup.object().shape({ title: Yup.string() });
 					case "large-image-section-with-button":
-						return Yup.object().shape({ title: Yup.string() });
+						return blockTypes[2].validation;
 					case "our-programs":
 						return Yup.object().shape({ title: Yup.string() });
 					case "staff":
@@ -129,6 +130,7 @@ const PageState = props => {
 		try {
 			const errors = await validate(page, validationSchema);
 			if (errors) {
+				console.log(errors);
 				return dispatch({ type: PAGE_ERROR, payload: errors });
 			}
 

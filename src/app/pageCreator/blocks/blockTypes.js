@@ -10,14 +10,29 @@ import Statistics from "./sections/Statistics";
 // import Paragraph from "./blocks/Paragraph";
 // import Image from "./blocks/Image";
 // import Button from "./blocks/Button";
-// import * as Yup from "yup";
+import * as Yup from "yup";
+
+import aboutUsImage from "./sections/images/about-us.png";
+import threeColumnWithIcon from "./sections/images/three-column-with-icon.png";
+import largeImageSectionWithButton from "./sections/images/large-image-section-with-button.png";
+import statistics from "./sections/images/statistics.png";
+import staff from "./sections/images/staff.png";
+import ourPrograms from "./sections/images/our-programs.png";
+import twoByTwoInformation from "./sections/images/two-by-two-information.png";
 
 const blockTypes = [
 	{
 		type: "about-us",
 		component: AboutUs,
+		image: aboutUsImage,
 		icon: "fas fa-puzzle-piece",
-		validation: null,
+		validation: Yup.object().shape({
+			heading: Yup.string().required("Required"),
+			body: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required"),
+			buttonLabel: Yup.string().required("Required"),
+			buttonLink: Yup.string().url("Enter a valid url").required("Required"),
+			imageUrl: Yup.string().nullable().required("Required")
+		}),
 		template: {
 			imageUrl: null,
 			heading: ""
@@ -26,6 +41,7 @@ const blockTypes = [
 	{
 		type: "three-column-with-icon",
 		component: ThreeColumnWithIcon,
+		image: threeColumnWithIcon,
 		icon: "fas fa-puzzle-piece",
 		validation: null,
 		template: {
@@ -35,8 +51,9 @@ const blockTypes = [
 	{
 		type: "large-image-section-with-button",
 		component: LargeImageSectionWithButton,
+		image: largeImageSectionWithButton,
 		icon: "fas fa-puzzle-piece",
-		validation: null,
+		validation: Yup.object().shape({ text: Yup.string().required("Text is required"), buttonLabel: Yup.string().required("Label is required"), buttonLink: Yup.string().url("Enter a valid url").required("Link is required") }),
 		template: {
 			title: "Large Image Section With Button"
 		}
@@ -44,6 +61,7 @@ const blockTypes = [
 	{
 		type: "our-programs",
 		component: OurPrograms,
+		image: ourPrograms,
 		icon: "fas fa-puzzle-piece",
 		validation: null,
 		template: {
@@ -53,6 +71,7 @@ const blockTypes = [
 	{
 		type: "staff",
 		component: Staff,
+		image: staff,
 		icon: "fas fa-puzzle-piece",
 		validation: null,
 		template: {
@@ -62,6 +81,7 @@ const blockTypes = [
 	{
 		type: "statistics",
 		component: Statistics,
+		image: statistics,
 		icon: "fas fa-puzzle-piece",
 		validation: null,
 		template: {
@@ -71,6 +91,7 @@ const blockTypes = [
 	{
 		type: "two-by-two-information",
 		component: TwoByTwoInformation,
+		image: twoByTwoInformation,
 		icon: "fas fa-puzzle-piece",
 		validation: null,
 		template: {

@@ -12,6 +12,7 @@ import { useParams, useHistory } from "react-router-dom";
 import Checkbox from "../shared/formElements/Checkbox";
 import slugify from "slugify";
 import Toolbox from "./blocks/Toolbox";
+import Sections from "./blocks/sections/Sections";
 import { v4 as uuidv4 } from "uuid";
 import blockTypes from "./blocks/blockTypes";
 
@@ -87,6 +88,14 @@ const PageForm = props => {
 		return result;
 	};
 
+	const [showSectionModal, setShowSectionModal] = useState(false);
+
+	const closeSectionModal = () => {
+		setShowSectionModal(false);
+	};
+
+	const [addLocation, setAddLocation] = useState(0);
+
 	const onDragEnd = ({ destination, source }) => {
 		if (!destination) return;
 
@@ -100,7 +109,9 @@ const PageForm = props => {
 				break;
 
 			case "toolbox":
-				addBlock({ type: blockTypes[source.index].type, ...blockTypes[source.index].template }, destination.index);
+				setShowSectionModal(true);
+				setAddLocation(destination.index);
+				// addBlock({ type: blockTypes[source.index].type, ...blockTypes[source.index].template }, destination.index);
 				break;
 
 			default:
@@ -207,6 +218,23 @@ const PageForm = props => {
 
 										<div className="block-container">
 											<Toolbox />
+
+											<Modal show={showSectionModal} size="lg" dialogClassName="modal-75w" onHide={closeSectionModal}>
+												<Modal.Header closeButton>
+													<Modal.Title>Select a Section Template</Modal.Title>
+												</Modal.Header>
+
+												<Modal.Body>
+													<Sections addLocation={addLocation} closeModal={closeSectionModal} />
+												</Modal.Body>
+
+												<Modal.Footer>
+													<Button variant="outline-light" onClick={closeSectionModal}>
+														Cancel
+													</Button>
+												</Modal.Footer>
+											</Modal>
+
 											<Canvas blocks={current.content} />
 										</div>
 

@@ -293,7 +293,7 @@
     font-size: 18px;
     line-height: 30px;
     font-weight: 700;
-    color: #bfa113;
+    color: #ff6700;
     text-transform: uppercase;
     margin: 0 0 17px 9px;
 }
@@ -434,7 +434,7 @@
 .causes .causes-post .donation-amount .donation-v1 p {
     float: left;
     padding-right: 8px;
-    color: #bfa113;
+    color: #ff6700;
 }
 
 .causes .causes-post .donation-amount .donation-v1 span {
@@ -565,7 +565,7 @@
 
 .featured-causes .causes-post .donation-amount .donation-v1 p {
     padding-right: 8px;
-    color: #bfa113;
+    color: #ff6700;
 }
 
 .featured-causes .causes-post .donation-amount .donation-v1,
@@ -928,7 +928,7 @@
 .flat-event-style1 .event-title .title-1 {
     font-size: 14px;
     font-family: "Open Sans", sans-serif;
-    color: #bfa113;
+    color: #ff6700;
     font-weight: 700;
     text-transform: uppercase;
     padding-bottom: 15px;
@@ -1242,7 +1242,7 @@
 .recent-causes .post .donation-amount .donation-v1 p {
     float: left;
     padding-right: 8px;
-    color: #bfa113;
+    color: #ff6700;
 }
 
 .recent-causes .post .donation-amount .donation-v1 span {
@@ -1628,7 +1628,7 @@
 
 .flat-member .flat-member-carousel .position {
     position: relative;
-    color: #bfa113;
+    color: #ff6700;
     text-transform: uppercase;
     font-weight: 700;
 }

@@ -28,3 +28,8 @@
 .content-container .ql-align-right {
 	text-align: right;
 }
+
+.about-charry .about-charry-post p:first-of-type {
+	font-size: 18px;
+	line-height: 30px;
+}

@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 
 const baseStyle = {
+	height: "95%",
 	textAlign: "center",
 	padding: "20px",
 	borderWidth: 2,
