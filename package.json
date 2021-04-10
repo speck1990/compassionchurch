@@ -51,6 +51,7 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
+		"deploy": "react-scripts build && scp -r ./build/* root@104.236.78.116:/var/www/html",
 		"server": "npm run dev --prefix server",
 		"website": "npm run dev --prefix website",
 		"dev": "concurrently \"npm run server\" \"npm run website\" \"npm start\""
