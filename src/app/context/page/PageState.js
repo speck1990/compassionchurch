@@ -5,6 +5,7 @@ import PageContext from "./pageContext";
 import pageReducer from "./pageReducer";
 import * as Yup from "yup";
 import { useValidator } from "../../utils/hooks/useValidator";
+import blockTypes from "../../pageCreator/blocks/blockTypes";
 import { GET_PAGES, SET_CURRENT, UPDATE_CURRENT, UPDATE_PAGE, CLEAR_CURRENT, PAGE_ERROR, CLEAR_ERRORS, ADD_PAGE, SET_LOADING, DELETE_PAGE, SET_HOME } from "../types";
 
 const pageSchema = { title: "", slug: "", home: false, hero: null, description: "", publish: null, unpublish: null, visible: true, content: [] };
@@ -27,41 +28,48 @@ const PageState = props => {
 			.default(null)
 			.when("publish", (publish, schema) => (publish ? schema.min(publish, "Unpublish must be after publish date") : schema)),
 		content: Yup.array().of(
-			Yup.object().shape({
-				content: Yup.array()
-					.min(1, "Add at least one block")
-					.of(
-						Yup.lazy(value => {
-							switch (value.type) {
-								case "heading":
-									return Yup.object().shape({
-										text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
-									});
-								case "paragraph":
-									return Yup.object().shape({
-										text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
-									});
-								case "button":
-									return Yup.object().shape({
-										label: Yup.string()
-											.required("Required")
-											.test("label", "Label already in use", function (value) {
-												return true;
-											}),
-										buttonValue: Yup.string().required("Required")
-									});
-								case "image":
-									return Yup.object().shape({
-										url: Yup.string().nullable().required("Required")
-									});
-								case "form":
-									return Yup.object().shape({});
-								default:
-									return false;
-							}
-						})
-					)
-					.required("Required")
+			Yup.lazy(value => {
+				switch (value.type) {
+					case "heading":
+						return Yup.object().shape({
+							text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
+						});
+					case "paragraph":
+						return Yup.object().shape({
+							text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
+						});
+					case "button":
+						return Yup.object().shape({
+							label: Yup.string()
+								.required("Required")
+								.test("label", "Label already in use", function (value) {
+									return true;
+								}),
+							buttonValue: Yup.string().required("Required")
+						});
+					case "image":
+						return Yup.object().shape({
+							url: Yup.string().nullable().required("Required")
+						});
+					case "form":
+						return Yup.object().shape({});
+					case "about-us":
+						return blockTypes[0].validation;
+					case "three-column-with-icon":
+						return Yup.object().shape({ title: Yup.string() });
+					case "large-image-section-with-button":
+						return blockTypes[2].validation;
+					case "our-programs":
+						return Yup.object().shape({ title: Yup.string() });
+					case "staff":
+						return Yup.object().shape({ title: Yup.string() });
+					case "statistics":
+						return Yup.object().shape({ title: Yup.string() });
+					case "two-by-two-information":
+						return Yup.object().shape({ title: Yup.string() });
+					default:
+						return false;
+				}
 			})
 		)
 	});
@@ -96,6 +104,7 @@ const PageState = props => {
 		try {
 			const errors = await validate(page, validationSchema);
 			if (errors) {
+				console.log(errors);
 				return dispatch({ type: PAGE_ERROR, payload: errors });
 			}
 
@@ -121,6 +130,7 @@ const PageState = props => {
 		try {
 			const errors = await validate(page, validationSchema);
 			if (errors) {
+				console.log(errors);
 				return dispatch({ type: PAGE_ERROR, payload: errors });
 			}
 

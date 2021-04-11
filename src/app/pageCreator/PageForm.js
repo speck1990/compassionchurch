@@ -12,6 +12,7 @@ import { useParams, useHistory } from "react-router-dom";
 import Checkbox from "../shared/formElements/Checkbox";
 import slugify from "slugify";
 import Toolbox from "./blocks/Toolbox";
+import Sections from "./blocks/sections/Sections";
 import { v4 as uuidv4 } from "uuid";
 import blockTypes from "./blocks/blockTypes";
 
@@ -87,110 +88,36 @@ const PageForm = props => {
 		return result;
 	};
 
-	const [isDropDisabled, setIsDropDisabled] = useState(true);
+	const [showSectionModal, setShowSectionModal] = useState(false);
 
-	const onDragStart = start => {
-		(start.draggableId === "section" || start.source.droppableId === "canvas") && setIsDropDisabled(false);
+	const closeSectionModal = () => {
+		setShowSectionModal(false);
 	};
 
-	const onDragEnd = result => {
-		setIsDropDisabled(true);
+	const [addLocation, setAddLocation] = useState(0);
 
-		const { destination, source } = result;
-
-		// Draggables were being dropped outside of droppable
+	const onDragEnd = ({ destination, source }) => {
 		if (!destination) return;
 
-		if (source.droppableId === "canvas") {
-			// Sections are being dragged
-			const items = reorder(current.content, source.index, destination.index);
-			updateCurrent({ ...current, content: items });
-		} else {
-			// Blocks within sections are being dragged
+		switch (source.droppableId) {
+			case destination.droppableId:
+				const updatedContent = Array.from(current.content);
+				const [removed] = updatedContent.splice(source.index, 1);
+				updatedContent.splice(destination.index, 0, removed);
 
-			// Create section map that uses id as an object key
-			const sectionBlocksMap = current.content.reduce((acc, section) => {
-				acc[section._id] = section.content;
-				return acc;
-			}, {});
+				updateCurrent({ ...current, content: updatedContent });
+				break;
 
-			// Use sectionBlockMap to get blocks from source and destination sections
-			const sourceBlocks = sectionBlocksMap[source.droppableId];
-			const destBlocks = sectionBlocksMap[destination.droppableId];
+			case "toolbox":
+				setShowSectionModal(true);
+				setAddLocation(destination.index);
+				// addBlock({ type: blockTypes[source.index].type, ...blockTypes[source.index].template }, destination.index);
+				break;
 
-			// Create duplicate of sections
-			let newSections = [...current.content];
-
-			if (source.droppableId === "toolbox") {
-				// Blocks are being dragged from the toolbox
-
-				if (destination.droppableId === "canvas") {
-					return addBlock({ type: blockTypes[source.index].type, ...blockTypes[source.index].template }, destination.index);
-				}
-
-				// Create a duplicate of the destination section's blocks
-				let newDestBlocks = [...destBlocks];
-				// Create new block
-				const newBlock = { _id: uuidv4(), type: blockTypes[source.index].type, ...blockTypes[source.index].template };
-				// Add the dragged block to the destination copy
-				newDestBlocks.splice(destination.index, 0, newBlock);
-
-				// Map through each section
-				newSections = newSections.map(section => {
-					// Check if the section is the section the block is being added to
-					if (section._id === destination.droppableId) {
-						// Replace the destination section content with content plus dragged block
-						section.content = newDestBlocks;
-					}
-					return section;
-				});
-			} else if (source.droppableId === destination.droppableId) {
-				// Blocks are being dragged within the same section
-
-				// Create a new array with the blocks reordered
-				const reorderedBlocks = reorder(sourceBlocks, source.index, destination.index);
-
-				// Map through each section
-				newSections = newSections.map(section => {
-					// Check if the section is the section being reordered
-					if (section._id === source.droppableId) {
-						// Replace the section's content with the reordered blocks
-						section.content = reorderedBlocks;
-					}
-					return section;
-				});
-			} else {
-				// Blocks are being dragged into a different section
-
-				// Create a duplicate of the source section's blocks
-				let newSourceBlocks = [...sourceBlocks];
-				// Remove the dragged block from source copy
-				let [draggedBlock] = newSourceBlocks.splice(source.index, 1);
-
-				// Create a duplciate of the destination section's blocks
-				let newDestBlocks = [...destBlocks];
-				// Add the dragged block to the destination copy
-				newDestBlocks.splice(destination.index, 0, draggedBlock);
-
-				// Map through each section
-				newSections = newSections.map(section => {
-					// Check if the section is the section the block is being removed from
-					if (section._id === source.droppableId) {
-						// Replace the source section content with content less the dragged block
-						section.content = newSourceBlocks;
-
-						// Check if gthe section is the section the block is being added to
-					} else if (section._id === destination.droppableId) {
-						// Replace the destination section content with content plus dragged block
-						section.content = newDestBlocks;
-					}
-					return section;
-				});
-			}
-
-			// Update the current content with the new sections
-			updateCurrent({ ...current, content: newSections });
+			default:
+				break;
 		}
+
 		// TODO: Have errors persist after block is moved or added instead of clearing errors
 		clearErrors();
 	};
@@ -199,7 +126,7 @@ const PageForm = props => {
 		<div>
 			<div className="container d-flex p-md-0">
 				<div className="az-content-body pd-lg-l-40 d-flex flex-column">
-					<DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+					<DragDropContext onDragEnd={onDragEnd}>
 						<div>
 							{current !== null ? (
 								<div>
@@ -223,9 +150,9 @@ const PageForm = props => {
 										<div className="col-sm-2 col-md-2 mg-t-10 mg-sm-t-0">
 											{!current.home && (
 												<Fragment>
-													<Button variant="btn btn-az-primary btn-rounded btn-block" onClick={() => setShowModal(true)}>
+													{/* <Button variant="btn btn-az-primary btn-rounded btn-block" onClick={() => setShowModal(true)}>
 														Set As Homepage
-													</Button>
+													</Button> */}
 
 													<Modal show={showModal} size="md" onHide={() => closeModal("small")}>
 														<Modal.Header closeButton>
@@ -264,9 +191,9 @@ const PageForm = props => {
 											<Image label="Main Image" onDrop={onImageDrop} onDelete={onImageDelete} image={current.hero} />
 											{!current.home ? (
 												<Fragment>
-													<Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} error={error.publish} onChange={onDateChange} />
+													{/* <Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} error={error.publish} onChange={onDateChange} />
 													<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} error={error.unpublish} onChange={onDateChange} />
-													<Checkbox name="visible" label="Visible" value={current.visible} onCheckboxChange={onCheckboxChange} />
+													<Checkbox name="visible" label="Visible" value={current.visible} onCheckboxChange={onCheckboxChange} /> */}
 												</Fragment>
 											) : (
 												<Fragment>
@@ -291,7 +218,24 @@ const PageForm = props => {
 
 										<div className="block-container">
 											<Toolbox />
-											<Canvas blocks={current.content} isDropDisabled={isDropDisabled} />
+
+											<Modal show={showSectionModal} size="lg" dialogClassName="modal-75w" onHide={closeSectionModal}>
+												<Modal.Header closeButton>
+													<Modal.Title>Select a Section Template</Modal.Title>
+												</Modal.Header>
+
+												<Modal.Body>
+													<Sections addLocation={addLocation} closeModal={closeSectionModal} />
+												</Modal.Body>
+
+												<Modal.Footer>
+													<Button variant="outline-light" onClick={closeSectionModal}>
+														Cancel
+													</Button>
+												</Modal.Footer>
+											</Modal>
+
+											<Canvas blocks={current.content} />
 										</div>
 
 										<hr className="mg-y-30" />

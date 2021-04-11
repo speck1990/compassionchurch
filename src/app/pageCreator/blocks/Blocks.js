@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import PageContext from "../../context/page/pageContext";
 import blockTypes from "./blockTypes";
 
-const Blocks = ({ blocks, parent, isDropDisabled }) => {
+const Blocks = ({ blocks }) => {
 	const pageContext = useContext(PageContext);
 	const { deleteBlock } = pageContext;
 
@@ -21,7 +21,7 @@ const Blocks = ({ blocks, parent, isDropDisabled }) => {
 			);
 		}
 
-		return React.createElement(component, { block, parent, isDropDisabled, index: key });
+		return React.createElement(component, { block, index: key });
 	};
 
 	return (
@@ -30,14 +30,14 @@ const Blocks = ({ blocks, parent, isDropDisabled }) => {
 				<div key={block._id}>
 					<Draggable draggableId={block._id} index={key}>
 						{provided => (
-							<div {...provided.draggableProps} ref={provided.innerRef} className="bg-white mg-b-30">
+							<div {...provided.draggableProps} ref={provided.innerRef} className="bg-white mg-b-30 block-item-wrapper">
 								<div className="block-item">
 									<div className="btn-icon-list block-options">
 										<div {...provided.dragHandleProps}>
 											<i className="fas fa-arrows-alt"></i>
 										</div>
 
-										<Button variant="btn-icon" onClick={() => deleteBlock(block._id, parent)}>
+										<Button variant="btn-icon" onClick={() => deleteBlock(block._id)}>
 											<i className="fas fa-times"></i>
 										</Button>
 									</div>

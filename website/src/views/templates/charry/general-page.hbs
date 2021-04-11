@@ -17,27 +17,6 @@
 
 {{#each page.content}}
 
-{{#switch type}}
-
-{{#case 'section'}}
-
-<section class="flat-row">
-	<div class="container content-container">
-		<div class="row">
-
-			{{#each content}}
-			{{> blocks}}
-			{{/each}}
-
-		</div>
-	</div>
-</section>
-
-{{/case}}
-
-{{/switch}}
-
-
-
+{{> blocks}}
 
 {{/each}}
