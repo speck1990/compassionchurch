@@ -32,7 +32,7 @@ const LinkState = props => {
 		setLoading();
 
 		try {
-			const res = await axios.get("http://localhost:5000/api/links");
+			const res = await axios.get(`http://${process.env.REACT_APP_URL}:5000/api/links`);
 			dispatch({ type: GET_LINKS, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -58,7 +58,7 @@ const LinkState = props => {
 				return dispatch({ type: LINK_ERROR, payload: errors });
 			}
 
-			const res = await axios.post(`http://localhost:5000/api/links`, link, config);
+			const res = await axios.post(`http://${process.env.REACT_APP_URL}:5000/api/links`, link, config);
 			dispatch({ type: ADD_LINK, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -84,7 +84,7 @@ const LinkState = props => {
 				return dispatch({ type: LINK_ERROR, payload: errors });
 			}
 
-			const res = await axios.put(`http://localhost:5000/api/links/${link._id}`, link, config);
+			const res = await axios.put(`http://${process.env.REACT_APP_URL}:5000/api/links/${link._id}`, link, config);
 			dispatch({ type: UPDATE_LINK, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -98,7 +98,7 @@ const LinkState = props => {
 		setLoading();
 
 		try {
-			await axios.delete(`http://localhost:5000/api/links/${id}`);
+			await axios.delete(`http://${process.env.REACT_APP_URL}:5000/api/links/${id}`);
 		} catch (err) {
 			dispatch({
 				type: LINK_ERROR,
@@ -115,7 +115,7 @@ const LinkState = props => {
 
 		if (id) {
 			try {
-				const res = await axios.get(`http://localhost:5000/api/links/${id}`);
+				const res = await axios.get(`http://${process.env.REACT_APP_URL}:5000/api/links/${id}`);
 				dispatch({ type: SET_CURRENT, payload: res.data });
 			} catch (err) {
 				dispatch({

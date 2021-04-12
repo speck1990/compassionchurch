@@ -25,7 +25,7 @@ const AuthState = props => {
 		}
 
 		try {
-			const res = await axios.get("http://localhost:5000/api/users");
+			const res = await axios.get(`http://${process.env.REACT_APP_URL}:5000/api/users`);
 
 			dispatch({
 				type: USER_LOADED,
@@ -47,7 +47,7 @@ const AuthState = props => {
 		};
 
 		try {
-			const res = await axios.post("http://localhost:5000/api/users/login", formData, config);
+			const res = await axios.post(`http://${process.env.REACT_APP_URL}:5000/api/users/login`, formData, config);
 
 			dispatch({
 				type: LOGIN_SUCCESS,

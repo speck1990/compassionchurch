@@ -36,13 +36,13 @@ const Dropzone = ({ onDrop, onDelete = null, image = null, className }) => {
 
 		formData.append("image", file);
 
-		const upload = await axios.post(`http://localhost:5000/api/pages/upload`, formData);
+		const upload = await axios.post(`http://${process.env.REACT_APP_URL}:5000/api/pages/upload`, formData);
 		return upload.data.path;
 	};
 
 	const handleOnDrop = async (files, rejectedFiles) => {
 		const url = await uploadImage(files[0]);
-		onDrop(`http://localhost:5000/${url}`);
+		onDrop(`http://${process.env.REACT_APP_URL}:5000/${url}`);
 	};
 
 	const handleOnImageDelete = async (e, image) => {

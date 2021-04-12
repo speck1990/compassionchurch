@@ -55,7 +55,7 @@ const SettingState = props => {
 		clearErrors();
 
 		try {
-			const res = await axios.get("http://localhost:5000/api/settings");
+			const res = await axios.get(`http://${process.env.REACT_APP_URL}:5000/api/settings`);
 			dispatch({ type: GET_SETTINGS, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -81,7 +81,7 @@ const SettingState = props => {
 				return dispatch({ type: SETTING_ERROR, payload: errors });
 			}
 
-			const res = await axios.put(`http://localhost:5000/api/settings`, settings, config);
+			const res = await axios.put(`http://${process.env.REACT_APP_URL}:5000/api/settings`, settings, config);
 			dispatch({ type: UPDATE_SETTINGS, payload: res.data });
 		} catch (err) {
 			dispatch({

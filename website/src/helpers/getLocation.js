@@ -24,7 +24,7 @@ const getLocation = async h => {
 
 	location = "okc";
 
-	let url = `http://localhost:5000/api/locations/${location}`;
+	let url = `http://${process.env.IP}:5000/api/locations/${location}`;
 
 	return axios
 		.get(url)
