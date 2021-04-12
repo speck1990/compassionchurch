@@ -15,13 +15,18 @@ app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/public", express.static(path.join(__dirname, "../public")));
+app.use(express.static(`${__dirname}/../../build`));
 
-app.use("/", require("./routes/index"));
+// app.use("/", require("./routes/index"));
 app.use("/api/users", require("./routes/user"));
 app.use("/api/users", require("./routes/user"));
 app.use("/api/locations", require("./routes/location"));
 app.use("/api/pages", require("./routes/page"));
 app.use("/api/links", require("./routes/link"));
 app.use("/api/settings", require("./routes/setting"));
+
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "../../build/index.html"));
+});
 
 module.exports = app;
