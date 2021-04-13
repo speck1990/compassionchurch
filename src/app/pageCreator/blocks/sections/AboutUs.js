@@ -35,11 +35,11 @@ const AboutUs = ({ block, index }) => {
 					<Input label="Heading" name="heading" type="text" value={block.heading} error={err.heading} onChange={handleOnChange} />
 					<Paragraph label="Body" name="body" value={block.body} error={err.body} onChange={paragraphOnChange} />
 
-					<div class="row">
-						<div class="col-md-6">
+					<div className="row">
+						<div className="col-md-6">
 							<Input label="Button Label" name="buttonLabel" type="text" value={block.buttonLabel} error={err.buttonLabel} onChange={handleOnChange} />
 						</div>
-						<div class="col-md-6">
+						<div className="col-md-6">
 							<Input label="Button Link" name="buttonLink" type="text" text="(i.e. http://www.example.com)" value={block.buttonLink} error={err.buttonLink} onChange={handleOnChange} />
 						</div>
 					</div>

@@ -25,11 +25,11 @@ const ThreeColumnWithIcon = ({ block }) => {
 					<Icon name="icon1" label="Icon" value={block.icon1} onChange={icon => onIconChange("icon1", icon)} />
 					<Input label="Heading" name="heading1" type="text" value={block.heading1} error={null} onChange={handleOnChange} />
 					<Input label="Paragraph 1" name="paragraph1" as="textarea" rows={4} type="text" value={block.paragraph1} error={null} onChange={handleOnChange} />
-					<div class="row">
-						<div class="col-md-6">
+					<div className="row">
+						<div className="col-md-6">
 							<Input label="Link Label" name="linkLabel1" type="text" value={block.linkLabel1} error={null} onChange={handleOnChange} />
 						</div>
-						<div class="col-md-6">
+						<div className="col-md-6">
 							<Input label="Link Url" name="linkUrl1" type="text" value={block.linkUrl1} text="(i.e. www.example.com)" error={null} onChange={handleOnChange} />
 						</div>
 					</div>
