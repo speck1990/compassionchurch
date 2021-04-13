@@ -27,7 +27,7 @@ router.get("/", auth, async (req, res) => {
 // @route       PUT api/setting/:id
 // @desc        Update settings
 // @access      Private
-router.put("/", auth, settingValidationRules(), validate, async (req, res) => {
+router.put("/", auth, validate, async (req, res) => {
 	try {
 		let settings = await Setting.findOne({ location: req.user.location });
 
