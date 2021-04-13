@@ -17,6 +17,6 @@
 
 {{#each page.content}}
 
-{{> blocks}}
+{{> (lookup . 'type') }}
 
 {{/each}}
