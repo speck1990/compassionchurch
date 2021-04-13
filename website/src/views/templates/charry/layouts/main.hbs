@@ -183,12 +183,12 @@
 						<div class="widget contact-info">
 							<h4 class="widget-title">Address</h4>
 							<ul>
-								{{#if location.address}}<li class="address"><a href="#">{{location.address}}</a></li>
+								{{#if site.address}}<li class="address"><a href="#">{{site.address}}</a></li>
 								{{/if}}
-								{{#if location.city}}<li class="address1"><a href="#">{{location.city}},
-										{{location.state}}</a></li>{{/if}}
-								{{#if location.phone}}<li class="phone"><a href="#">{{location.phone}}</a></li>{{/if}}
-								{{#if location.email}}<li class="email"><a href="#">{{location.email}}</a></li>{{/if}}
+								{{#if site.city}}<li class="address1"><a href="#">{{site.city}},
+										{{site.state}} {{site.zip}}</a></li>{{/if}}
+								{{#if site.phone}}<li class="phone"><a href="#">{{site.phone}}</a></li>{{/if}}
+								{{#if site.email}}<li class="email"><a href="#">{{site.email}}</a></li>{{/if}}
 							</ul>
 						</div>
 					</div>

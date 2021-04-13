@@ -60,6 +60,16 @@ const Settings = () => {
 									</div>
 
 									<div className="wd-xl-50p">
+										<h4 className="mg-y-20">Contact</h4>
+										<Input label="Address" type="text" name="address" value={settings.address} error={error.address} onChange={onTextChange} />
+										<Input label="City" type="text" name="city" value={settings.city} error={error.city} onChange={onTextChange} />
+										<Input label="State" type="text" name="state" value={settings.state} error={error.state} onChange={onTextChange} />
+										<Input label="Zip" type="text" name="zip" value={settings.zip} error={error.zip} onChange={onTextChange} />
+										<Input label="Phone" type="text" name="phone" value={settings.phone} error={error.phone} onChange={onTextChange} />
+										<Input label="Email" type="text" name="email" value={settings.email} error={error.email} onChange={onTextChange} />
+									</div>
+
+									<div className="wd-xl-50p">
 										<h4 className="mg-y-20">Giving</h4>
 										<Checkbox name="giving" small={true} label="Show giving button in Navigation bar" value={settings.giving} error={error.giving} onCheckboxChange={onCheckboxChange} />
 										{settings.giving && <Input label="Link" name="givingLink" type="text" text="(ex. https://churchname.churchcenter.com/giving)" value={settings.givingLink} error={error.givingLink} onChange={onTextChange} />}
