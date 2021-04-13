@@ -1,8 +1,12 @@
 {{#switch type}}
 
-{{#case 'heading'}} <div class="title-section">{{{text}}}</div>{{/case}}
+{{#case 'heading'}}
+<div class="title-section">{{{text}}}</div>
+{{/case}}
 
-{{#case 'paragraph'}} {{{text}}} {{/case}}
+{{#case 'paragraph'}}
+{{{text}}}
+{{/case}}
 
 {{#case 'button'}}
 <div class="mt-2 mb-5 text-center">
@@ -14,10 +18,11 @@
 </div>
 {{/case}}
 
-{{#case 'image'}} <img src="{{url}}" alt="image" class="img-fluid mb-5 rounded" /> {{/case}}
+{{#case 'image'}}
+<img src="{{url}}" alt="image" class="img-fluid mb-5 rounded" />
+{{/case}}
 
 {{#case 'form'}}
-
 <form>
     <div class="row">
         <div class="col-md-2"></div>
@@ -43,47 +48,42 @@
         <div class="col-md-2"></div>
     </div>
 </form>
-
 {{/case}}
 
 {{#case 'about-us'}}
-
 {{> aboutUs}}
-
 {{/case}}
 
 {{#case 'three-column-with-icon'}}
-
 {{> threeColumnWithIcon}}
-
 {{/case}}
 
 {{#case 'large-image-section-with-button'}}
-
 {{> largeImageSectionWithButton}}
-
 {{/case}}
+
 {{#case 'our-programs'}}
-
 {{> ourPrograms}}
-
 {{/case}}
+
 {{#case 'staff'}}
-
 {{> staff}}
-
 {{/case}}
+
 {{#case 'statistics'}}
-
 {{> statistics}}
-
 {{/case}}
+
 {{#case 'two-by-two-information'}}
-
 {{> twoByTwoInformation}}
-
 {{/case}}
 
+{{#case 'paragraph-with-heading'}}
+{{> paragraphWithHeading }}
+{{/case}}
 
+{{#case 'body'}}
+{{> body }}
+{{/case}}
 
 {{/switch}}
