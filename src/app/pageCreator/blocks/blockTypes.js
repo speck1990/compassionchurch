@@ -1,4 +1,6 @@
 import AboutUs from "./sections/AboutUs";
+import Body from "./sections/Body";
+import ParagraphWithHeading from "./sections/ParagraphWithHeading";
 import ThreeColumnWithIcon from "./sections/ThreeColumnWithIcon";
 import LargeImageSectionWithButton from "./sections/LargeImageSectionWithButton";
 import TwoByTwoInformation from "./sections/TwoByTwoInformation";
@@ -13,16 +15,18 @@ import Statistics from "./sections/Statistics";
 import * as Yup from "yup";
 
 import aboutUsImage from "./sections/images/about-us.png";
+import paragraphWithHeading from "./sections/images/paragraph-with-heading.png";
 import threeColumnWithIcon from "./sections/images/three-column-with-icon.png";
 import largeImageSectionWithButton from "./sections/images/large-image-section-with-button.png";
 import statistics from "./sections/images/statistics.png";
 import staff from "./sections/images/staff.png";
 import ourPrograms from "./sections/images/our-programs.png";
 import twoByTwoInformation from "./sections/images/two-by-two-information.png";
+import Paragraph from "./sections/blocks/Paragraph";
 
 const blockTypes = [
 	{
-		type: "about-us",
+		type: "aboutUs",
 		component: AboutUs,
 		image: aboutUsImage,
 		icon: "fas fa-puzzle-piece",
@@ -42,17 +46,32 @@ const blockTypes = [
 		}
 	},
 	{
-		type: "three-column-with-icon",
+		type: "paragraphWithHeading",
+		component: ParagraphWithHeading,
+		image: paragraphWithHeading,
+		icon: "fas fa-puzzle-piece",
+		validation: Yup.object().shape({
+			heading: Yup.string().required("Required"),
+			body: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
+		}),
+		template: {
+			subHeading: "",
+			heading: "",
+			body: ""
+		}
+	},
+	{
+		type: "threeColumnWithIcon",
 		component: ThreeColumnWithIcon,
 		image: threeColumnWithIcon,
 		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ text: Yup.string().required("Required"), buttonLabel: Yup.string().required("Required"), buttonLink: Yup.string().url("Enter a valid url").required("Required") }),
+		validation: Yup.object().shape({ title: Yup.string() }),
 		template: {
 			title: "Three Column With Icon"
 		}
 	},
 	{
-		type: "large-image-section-with-button",
+		type: "largeImageSectionWithButton",
 		component: LargeImageSectionWithButton,
 		image: largeImageSectionWithButton,
 		icon: "fas fa-puzzle-piece",
@@ -64,11 +83,11 @@ const blockTypes = [
 		}
 	},
 	{
-		type: "our-programs",
+		type: "ourPrograms",
 		component: OurPrograms,
 		image: ourPrograms,
 		icon: "fas fa-puzzle-piece",
-		validation: null,
+		validation: Yup.object().shape({ title: Yup.string() }),
 		template: {
 			title: "Our Programs"
 		}
@@ -78,7 +97,7 @@ const blockTypes = [
 		component: Staff,
 		image: staff,
 		icon: "fas fa-puzzle-piece",
-		validation: null,
+		validation: Yup.object().shape({ title: Yup.string() }),
 		template: {
 			title: "Our Staff"
 		}
@@ -88,19 +107,29 @@ const blockTypes = [
 		component: Statistics,
 		image: statistics,
 		icon: "fas fa-puzzle-piece",
-		validation: null,
+		validation: Yup.object().shape({ title: Yup.string() }),
 		template: {
 			title: "Statistics"
 		}
 	},
 	{
-		type: "two-by-two-information",
+		type: "twoByTwoInformation",
 		component: TwoByTwoInformation,
 		image: twoByTwoInformation,
 		icon: "fas fa-puzzle-piece",
-		validation: null,
+		validation: Yup.object().shape({ title: Yup.string() }),
 		template: {
 			title: "two by two information"
+		}
+	},
+	{
+		type: "body",
+		component: Body,
+		image: statistics,
+		icon: "fas fa-puzzle-piece",
+		validation: Yup.object().shape({ body: Yup.string() }),
+		template: {
+			body: ""
 		}
 	}
 	// {
