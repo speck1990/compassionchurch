@@ -1,6 +1,7 @@
 import AboutUs from "./sections/AboutUs";
 import Body from "./sections/Body";
 import ParagraphWithHeading from "./sections/ParagraphWithHeading";
+import ParagraphWithHeadingAndButton from "./sections/ParagraphWithHeadingAndButton";
 import ThreeColumnWithIcon from "./sections/ThreeColumnWithIcon";
 import LargeImageSectionWithButton from "./sections/LargeImageSectionWithButton";
 import TwoByTwoInformation from "./sections/TwoByTwoInformation";
@@ -15,7 +16,9 @@ import Statistics from "./sections/Statistics";
 import * as Yup from "yup";
 
 import aboutUsImage from "./sections/images/about-us.png";
+import body from "./sections/images/body.png";
 import paragraphWithHeading from "./sections/images/paragraph-with-heading.png";
+import paragraphWithHeadingAndButton from "./sections/images/paragraph-with-heading-and-button.png";
 import threeColumnWithIcon from "./sections/images/three-column-with-icon.png";
 import largeImageSectionWithButton from "./sections/images/large-image-section-with-button.png";
 import statistics from "./sections/images/statistics.png";
@@ -31,6 +34,8 @@ const blockTypes = [
 		image: aboutUsImage,
 		icon: "fas fa-puzzle-piece",
 		validation: Yup.object().shape({
+			title: Yup.string().required("Required"),
+			subTitle: Yup.string().required("Required"),
 			heading: Yup.string().required("Required"),
 			body: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required"),
 			buttonLabel: Yup.string().required("Required"),
@@ -39,6 +44,8 @@ const blockTypes = [
 		}),
 		template: {
 			imageUrl: null,
+			title: "",
+			subTitle: "",
 			heading: "",
 			body: "",
 			buttonLabel: "",
@@ -53,6 +60,23 @@ const blockTypes = [
 		validation: Yup.object().shape({
 			heading: Yup.string().required("Required"),
 			body: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
+		}),
+		template: {
+			subHeading: "",
+			heading: "",
+			body: ""
+		}
+	},
+	{
+		type: "paragraphWithHeadingAndButton",
+		component: ParagraphWithHeadingAndButton,
+		image: paragraphWithHeadingAndButton,
+		icon: "fas fa-puzzle-piece",
+		validation: Yup.object().shape({
+			heading: Yup.string().required("Required"),
+			body: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required"),
+			buttonLabel: Yup.string().required("Required"),
+			buttonLink: Yup.string().url("Enter a valid url").required("Required")
 		}),
 		template: {
 			subHeading: "",
@@ -125,7 +149,7 @@ const blockTypes = [
 	{
 		type: "body",
 		component: Body,
-		image: statistics,
+		image: body,
 		icon: "fas fa-puzzle-piece",
 		validation: Yup.object().shape({ body: Yup.string() }),
 		template: {

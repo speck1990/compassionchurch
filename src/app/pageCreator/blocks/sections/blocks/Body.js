@@ -5,7 +5,7 @@ import "react-quill/dist/quill.snow.css";
 
 const Body = ({ value, text, onChange, name, label, error }) => {
 	const modules = {
-		toolbar: [[{ header: [1, 2] }], ["bold", "italic", "underline"], [{ align: [false, "center", "right"] }], ["link"], [{ indent: "-1" }, { indent: "+1" }], ["clean"], [{ list: "ordered" }, { list: "bullet" }]]
+		toolbar: [[{ header: [1, false] }], ["bold", "italic", "underline"], [{ align: [false, "center", "right"] }], ["link"], [{ indent: "-1" }, { indent: "+1" }], ["clean"], [{ list: "ordered" }, { list: "bullet" }]]
 	};
 
 	const formats = ["header", "bold", "italic", "underline", "indent", "link", "align", "list"];

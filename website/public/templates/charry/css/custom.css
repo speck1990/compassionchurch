@@ -33,3 +33,21 @@
 	font-size: 18px;
 	line-height: 30px;
 }
+
+.about-charry .about-charry-post h2 + p {
+	font-size: 18px;
+	line-height: 30px;
+}
+
+.about-charry h2.title-post {
+	font-family: "Poppins", sans-serif;
+	font-size: 30px;
+	line-height: 24px;
+	font-weight: 700;
+	margin-bottom: 20px;
+	color: #222222;
+}
+
+.about-charry h4.title-post {
+	color: #222222;
+}

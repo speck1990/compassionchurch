@@ -14,9 +14,16 @@ let BlockBlot = Quill.import("blots/block");
 // BoldBlot.tagName = "h1";
 // BoldBlot.className = "custom-bold";
 
-class HeaderBlot extends BlockBlot {}
+class HeaderBlot extends BlockBlot {
+	static create(value) {
+		let node = super.create();
+		node.setAttribute("class", "title-post");
+		return node;
+	}
+}
+
 HeaderBlot.blotName = "header";
-HeaderBlot.tagName = ["H2", "H3"];
+HeaderBlot.tagName = ["H2"];
 
 // class HeaderBlot extends BlockBlot {}
 // HeaderBlot.blotName = "header";

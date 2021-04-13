@@ -28,6 +28,10 @@ const AboutUs = ({ block, index }) => {
 	return (
 		<div className="container-fluid">
 			<div className="row">
+				<div className="col-md-12">
+					<Input label="Title" name="title" type="text" value={block.title} error={err.title} onChange={handleOnChange} />
+					<Input label="Subtitle" name="subTitle" type="text" value={block.subTitle} error={err.subTitle} onChange={handleOnChange} />
+				</div>
 				<div className="col-md-6">
 					<Image image={block.imageUrl} onDelete={onImageDelete} onDrop={onImageDrop} error={err.imageUrl} />
 				</div>
