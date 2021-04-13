@@ -27,51 +27,7 @@ const PageState = props => {
 			.nullable()
 			.default(null)
 			.when("publish", (publish, schema) => (publish ? schema.min(publish, "Unpublish must be after publish date") : schema)),
-		content: Yup.array().of(
-			Yup.lazy(value => {
-				switch (value.type) {
-					case "heading":
-						return Yup.object().shape({
-							text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
-						});
-					case "paragraph":
-						return Yup.object().shape({
-							text: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
-						});
-					case "button":
-						return Yup.object().shape({
-							label: Yup.string()
-								.required("Required")
-								.test("label", "Label already in use", function (value) {
-									return true;
-								}),
-							buttonValue: Yup.string().required("Required")
-						});
-					case "image":
-						return Yup.object().shape({
-							url: Yup.string().nullable().required("Required")
-						});
-					case "form":
-						return Yup.object().shape({});
-					case "about-us":
-						return blockTypes[0].validation;
-					case "three-column-with-icon":
-						return Yup.object().shape({ title: Yup.string() });
-					case "large-image-section-with-button":
-						return blockTypes[2].validation;
-					case "our-programs":
-						return Yup.object().shape({ title: Yup.string() });
-					case "staff":
-						return Yup.object().shape({ title: Yup.string() });
-					case "statistics":
-						return Yup.object().shape({ title: Yup.string() });
-					case "two-by-two-information":
-						return Yup.object().shape({ title: Yup.string() });
-					default:
-						return false;
-				}
-			})
-		)
+		content: Yup.array().of(Yup.lazy(value => blockTypes.find(t => t.type === value.type).validation))
 	});
 
 	const validate = useValidator(validationSchema);
