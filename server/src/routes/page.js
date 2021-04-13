@@ -100,9 +100,12 @@ router.get("/home/:id", auth, async (req, res) => {
 		}
 
 		let home = await Page.findOne({ home: true, location: req.user.location });
-		const slug = slugify(home.title, { lower: true });
 
-		await Page.findByIdAndUpdate(home._id, { home: false, slug });
+		if (home) {
+			const slug = slugify(home.title, { lower: true });
+			await Page.findByIdAndUpdate(home._id, { home: false, slug });
+		}
+
 		page = await Page.findByIdAndUpdate(req.params.id, { home: true, slug: "/" }, { new: true });
 
 		console.log(page);
