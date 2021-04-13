@@ -1,5 +1,7 @@
 import AboutUs from "./sections/AboutUs";
 import Body from "./sections/Body";
+import Slider from "./sections/Slider";
+import PictureAndText from "./sections/PictureAndText";
 import ParagraphWithHeading from "./sections/ParagraphWithHeading";
 import ParagraphWithHeadingAndButton from "./sections/ParagraphWithHeadingAndButton";
 import ThreeColumnWithIcon from "./sections/ThreeColumnWithIcon";
@@ -17,10 +19,12 @@ import * as Yup from "yup";
 
 import aboutUsImage from "./sections/images/about-us.png";
 import body from "./sections/images/body.png";
+import pictureAndText from "./sections/images/pictureAndText.png";
 import paragraphWithHeading from "./sections/images/paragraph-with-heading.png";
 import paragraphWithHeadingAndButton from "./sections/images/paragraph-with-heading-and-button.png";
 import threeColumnWithIcon from "./sections/images/three-column-with-icon.png";
 import largeImageSectionWithButton from "./sections/images/large-image-section-with-button.png";
+import slider from "./sections/images/slider.png";
 import statistics from "./sections/images/statistics.png";
 import staff from "./sections/images/staff.png";
 import ourPrograms from "./sections/images/our-programs.png";
@@ -85,6 +89,16 @@ const blockTypes = [
 		}
 	},
 	{
+		type: "slider",
+		component: Slider,
+		image: slider,
+		icon: "fas fa-puzzle-piece",
+		validation: Yup.object().shape({ title: Yup.string() }),
+		template: {
+			title: "Three Column With Icon"
+		}
+	},
+	{
 		type: "threeColumnWithIcon",
 		component: ThreeColumnWithIcon,
 		image: threeColumnWithIcon,
@@ -110,6 +124,16 @@ const blockTypes = [
 		type: "ourPrograms",
 		component: OurPrograms,
 		image: ourPrograms,
+		icon: "fas fa-puzzle-piece",
+		validation: Yup.object().shape({ title: Yup.string() }),
+		template: {
+			title: "Our Programs"
+		}
+	},
+	{
+		type: "pictureAndText",
+		component: PictureAndText,
+		image: pictureAndText,
 		icon: "fas fa-puzzle-piece",
 		validation: Yup.object().shape({ title: Yup.string() }),
 		template: {
