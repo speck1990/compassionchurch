@@ -1,3 +1,4 @@
+import PageHeader from "./sections/PageHeader";
 import AboutUs from "./sections/AboutUs";
 import Body from "./sections/Body";
 import Slider from "./sections/Slider";
@@ -17,6 +18,7 @@ import Statistics from "./sections/Statistics";
 // import Button from "./blocks/Button";
 import * as Yup from "yup";
 
+import pageHeader from "./sections/images/pageHeader.png";
 import aboutUsImage from "./sections/images/about-us.png";
 import body from "./sections/images/body.png";
 import pictureAndText from "./sections/images/pictureAndText.png";
@@ -32,6 +34,20 @@ import twoByTwoInformation from "./sections/images/two-by-two-information.png";
 import Paragraph from "./sections/blocks/Paragraph";
 
 const blockTypes = [
+	{
+		type: "pageHeader",
+		component: PageHeader,
+		image: pageHeader,
+		icon: "fas fa-puzzle-piece",
+		validation: Yup.object().shape({
+			title: Yup.string().required("Required"),
+			imageUrl: Yup.string().nullable().required("Required")
+		}),
+		template: {
+			imageUrl: null,
+			title: ""
+		}
+	},
 	{
 		type: "aboutUs",
 		component: AboutUs,

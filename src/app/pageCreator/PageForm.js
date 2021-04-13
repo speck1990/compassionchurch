@@ -150,9 +150,9 @@ const PageForm = props => {
 										<div className="col-sm-2 col-md-2 mg-t-10 mg-sm-t-0">
 											{!current.home && (
 												<Fragment>
-													{/* <Button variant="btn btn-az-primary btn-rounded btn-block" onClick={() => setShowModal(true)}>
+													<Button variant="btn btn-az-primary btn-rounded btn-block" onClick={() => setShowModal(true)}>
 														Set As Homepage
-													</Button> */}
+													</Button>
 
 													<Modal show={showModal} size="md" onHide={() => closeModal("small")}>
 														<Modal.Header closeButton>
@@ -187,8 +187,8 @@ const PageForm = props => {
 										<div className="wd-xl-50p">
 											<Input label="Title" name="title" type="text" value={current.title} error={error.title} onChange={onTitleChange} />
 											<Input label="Slug" name="slug" type="text" value={current.slug} error={error.slug} onChange={onTextChange} disabled />
-											<Input label="Description" name="description" as="textarea" value={current.description} error={error.description} rows="3" onChange={onTextChange} />
-											<Image label="Main Image" onDrop={onImageDrop} onDelete={onImageDelete} image={current.hero} />
+											{/* <Input label="Description" name="description" as="textarea" value={current.description} error={error.description} rows="3" onChange={onTextChange} /> */}
+											{/* <Image label="Main Image" onDrop={onImageDrop} onDelete={onImageDelete} image={current.hero} /> */}
 											{!current.home ? (
 												<Fragment>
 													{/* <Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} error={error.publish} onChange={onDateChange} />
@@ -197,7 +197,7 @@ const PageForm = props => {
 												</Fragment>
 											) : (
 												<Fragment>
-													<Input label="Tagline" name="heroTagline" type="text" value={current.heroTagline} error={error.heroTagline} onChange={onTextChange} />
+													{/* <Input label="Tagline" name="heroTagline" type="text" value={current.heroTagline} error={error.heroTagline} onChange={onTextChange} />
 													<Input label="Button Label" name="heroButtonLabel" type="text" value={current.heroButtonLabel} error={error.heroButtonLabel} onChange={onTextChange} />
 													<Select
 														defaultValue={pages.filter(page => page.slug === current.heroButtonLink).map(page => ({ value: page.slug, label: page.title }))}
@@ -206,7 +206,7 @@ const PageForm = props => {
 														label="Button Link"
 														options={pages.map(page => ({ value: page.slug, label: page.title }))}
 														error={error.heroButtonLink}
-													/>
+													/> */}
 												</Fragment>
 											)}
 										</div>
