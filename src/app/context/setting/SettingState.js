@@ -21,7 +21,6 @@ const SettingState = props => {
 				return !value || /facebook.com/.test(value);
 			}),
 		instagram: Yup.string()
-			.required("Required")
 			.url("Please enter a valid url")
 			.test("instagram", "Please enter a valid instagram url", function (value) {
 				return !value || /instagram.com/.test(value);
