@@ -10,6 +10,7 @@ const AboutUs = ({ block, index }) => {
 	const { current, updateCurrent, error } = pageContext;
 
 	const err = {
+		title: error?.[`content[${index}].title`],
 		imageUrl: error?.[`content[${index}].imageUrl`],
 		heading: error?.[`content[${index}].heading`],
 		body: error?.[`content[${index}].body`],

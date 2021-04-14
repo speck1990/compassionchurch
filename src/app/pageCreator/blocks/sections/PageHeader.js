@@ -10,7 +10,7 @@ const PageHeader = ({ block, index }) => {
 
 	const err = {
 		imageUrl: error?.[`content[${index}].imageUrl`],
-		title: error?.[`content[${index}].text`]
+		title: error?.[`content[${index}].title`]
 	};
 
 	const handleOnChange = e => {
@@ -25,7 +25,7 @@ const PageHeader = ({ block, index }) => {
 		<div className="container-fluid">
 			<div className="row">
 				<div className="col-md-12">
-					<Image image={block.imageUrl} onDelete={onImageDelete} onDrop={onImageDrop} />
+					<Image image={block.imageUrl} onDelete={onImageDelete} error={err.imageUrl} onDrop={onImageDrop} />
 				</div>
 				<div className="col-md-12">
 					<Input label="Title" name="title" type="text" value={block.title} error={err.title} onChange={handleOnChange} />

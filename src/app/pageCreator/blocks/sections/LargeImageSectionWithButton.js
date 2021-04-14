@@ -9,6 +9,7 @@ const LargeImageSectionWithButton = ({ block, index }) => {
 	const { current, updateCurrent, error } = pageContext;
 
 	const err = {
+		imageUrl: error?.[`content[${index}].imageUrl`],
 		text: error?.[`content[${index}].text`],
 		buttonLabel: error?.[`content[${index}].buttonLabel`],
 		buttonLink: error?.[`content[${index}].buttonLink`]
@@ -26,7 +27,7 @@ const LargeImageSectionWithButton = ({ block, index }) => {
 		<div className="container-fluid">
 			<div className="row">
 				<div className="col-md-6">
-					<Image image={block.imageUrl} onDelete={onImageDelete} onDrop={onImageDrop} />
+					<Image image={block.imageUrl} error={err.imageUrl} onDelete={onImageDelete} onDrop={onImageDrop} />
 				</div>
 				<div className="col-md-6">
 					<Input label="Text" name="text" type="text" value={block.text} error={err.text} onChange={handleOnChange} />

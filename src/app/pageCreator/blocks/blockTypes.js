@@ -109,9 +109,17 @@ const blockTypes = [
 		component: Slider,
 		image: slider,
 		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ title: Yup.string() }),
+		validation: Yup.object().shape({
+			imageUrl: Yup.string().nullable().required("Required"),
+			heading: Yup.string().required("Required"),
+			buttonLabel: Yup.string().required("Required"),
+			buttonLink: Yup.string().url("Enter a valid url").required("Required")
+		}),
 		template: {
-			title: "Three Column With Icon"
+			imageUrl: null,
+			heading: "",
+			buttonLabel: "",
+			buttonLink: ""
 		}
 	},
 	{
@@ -119,9 +127,33 @@ const blockTypes = [
 		component: ThreeColumnWithIcon,
 		image: threeColumnWithIcon,
 		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ title: Yup.string() }),
+		validation: Yup.object().shape({
+			heading1: Yup.string().required("Required"),
+			paragraph1: Yup.string().required("Required"),
+			linkLabel1: Yup.string().required("Required"),
+			linkUrl1: Yup.string().url("Enter a valid url").required("Required"),
+			heading2: Yup.string().required("Required"),
+			paragraph2: Yup.string().required("Required"),
+			linkLabel2: Yup.string().required("Required"),
+			linkUrl2: Yup.string().url("Enter a valid url").required("Required"),
+			heading3: Yup.string().required("Required"),
+			paragraph3: Yup.string().required("Required"),
+			linkLabel3: Yup.string().required("Required"),
+			linkUrl3: Yup.string().url("Enter a valid url").required("Required")
+		}),
 		template: {
-			title: "Three Column With Icon"
+			heading1: "",
+			paragraph1: "",
+			linkLabel1: "",
+			linkUrl1: "",
+			heading2: "",
+			paragraph2: "",
+			linkLabel2: "",
+			linkUrl2: "",
+			heading3: "",
+			paragraph3: "",
+			linkLabel3: "",
+			linkUrl3: ""
 		}
 	},
 	{
@@ -129,7 +161,7 @@ const blockTypes = [
 		component: LargeImageSectionWithButton,
 		image: largeImageSectionWithButton,
 		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ text: Yup.string().required("Required"), buttonLabel: Yup.string().required("Required"), buttonLink: Yup.string().url("Enter a valid url").required("Required") }),
+		validation: Yup.object().shape({ imageUrl: Yup.string().nullable().required("Required"), text: Yup.string().required("Required"), buttonLabel: Yup.string().required("Required"), buttonLink: Yup.string().url("Enter a valid url").required("Required") }),
 		template: {
 			text: "",
 			buttonLabel: "",
@@ -141,9 +173,36 @@ const blockTypes = [
 		component: OurPrograms,
 		image: ourPrograms,
 		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ title: Yup.string() }),
+		validation: Yup.object().shape({
+			title: Yup.string().required("Required"),
+			heading1: Yup.string().required("Required"),
+			paragraph1: Yup.string().required("Required"),
+			heading2: Yup.string().required("Required"),
+			paragraph2: Yup.string().required("Required"),
+			heading3: Yup.string().required("Required"),
+			paragraph3: Yup.string().required("Required"),
+			heading4: Yup.string().required("Required"),
+			paragraph4: Yup.string().required("Required"),
+			heading5: Yup.string().required("Required"),
+			paragraph5: Yup.string().required("Required"),
+			heading6: Yup.string().required("Required"),
+			paragraph6: Yup.string().required("Required")
+		}),
 		template: {
-			title: "Our Programs"
+			title: "",
+			subTitle: "",
+			heading1: "",
+			paragraph1: "",
+			heading2: "",
+			paragraph2: "",
+			heading3: "",
+			paragraph3: "",
+			heading4: "",
+			paragraph4: "",
+			heading5: "",
+			paragraph5: "",
+			heading6: "",
+			paragraph6: ""
 		}
 	},
 	{
@@ -151,29 +210,53 @@ const blockTypes = [
 		component: PictureAndText,
 		image: pictureAndText,
 		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ title: Yup.string() }),
+		validation: Yup.object().shape({
+			imageUrl: Yup.string().nullable().required("Required"),
+			heading: Yup.string().required("Required"),
+			body: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required")
+		}),
 		template: {
-			title: "Our Programs"
+			imageUrl: null,
+			heading: "",
+			body: ""
 		}
 	},
-	{
-		type: "staff",
-		component: Staff,
-		image: staff,
-		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ title: Yup.string() }),
-		template: {
-			title: "Our Staff"
-		}
-	},
+	// {
+	// 	type: "staff",
+	// 	component: Staff,
+	// 	image: staff,
+	// 	icon: "fas fa-puzzle-piece",
+	// 	validation: Yup.object().shape({ title: Yup.string() }),
+	// 	template: {
+	// 		title: "Our Staff"
+	// 	}
+	// },
 	{
 		type: "statistics",
 		component: Statistics,
 		image: statistics,
 		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ title: Yup.string() }),
+		validation: Yup.object().shape({
+			imageUrl: Yup.string().nullable().required("Required"),
+			number1: Yup.string().required("Required"),
+			label1: Yup.string().required("Required"),
+			number2: Yup.string().required("Required"),
+			label2: Yup.string().required("Required"),
+			number3: Yup.string().required("Required"),
+			label3: Yup.string().required("Required"),
+			number4: Yup.string().required("Required"),
+			label4: Yup.string().required("Required")
+		}),
 		template: {
-			title: "Statistics"
+			imageUrl: null,
+			number1: "",
+			label1: "",
+			number2: "",
+			label2: "",
+			number3: "",
+			label3: "",
+			number4: "",
+			label4: ""
 		}
 	},
 	{
@@ -181,9 +264,31 @@ const blockTypes = [
 		component: TwoByTwoInformation,
 		image: twoByTwoInformation,
 		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ title: Yup.string() }),
+		validation: Yup.object().shape({
+			heading: Yup.string().required("Required"),
+			paragraph: Yup.string().required("Required"),
+			heading1: Yup.string().required("Required"),
+			paragraph1: Yup.string().required("Required"),
+			heading2: Yup.string().required("Required"),
+			paragraph2: Yup.string().required("Required"),
+			heading3: Yup.string().required("Required"),
+			paragraph3: Yup.string().required("Required"),
+			heading4: Yup.string().required("Required"),
+			paragraph4: Yup.string().required("Required"),
+			imageUrl: Yup.string().nullable().required("Required")
+		}),
 		template: {
-			title: "two by two information"
+			heading: "",
+			paragraph: "",
+			heading1: "",
+			paragraph1: "",
+			heading2: "",
+			paragraph2: "",
+			heading3: "",
+			paragraph3: "",
+			heading4: "",
+			paragraph4: "",
+			imageUrl: null
 		}
 	},
 	{
@@ -191,7 +296,7 @@ const blockTypes = [
 		component: Body,
 		image: body,
 		icon: "fas fa-puzzle-piece",
-		validation: Yup.object().shape({ body: Yup.string() }),
+		validation: Yup.object().shape({ body: Yup.string().matches(/(?<=>)[^<>]+(?=<\/)/, "Required") }),
 		template: {
 			body: ""
 		}

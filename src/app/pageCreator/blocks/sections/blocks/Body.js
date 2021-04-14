@@ -16,7 +16,6 @@ const Body = ({ value, text, onChange, name, label, error }) => {
 				{label}
 			</label>
 			<ReactQuill modules={modules} formats={formats} value={value || ""} onChange={onChange} className={error && "is-invalid"} />
-			<Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
 			{error ? (
 				<Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
 			) : (
