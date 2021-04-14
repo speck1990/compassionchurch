@@ -128,6 +128,9 @@ const blockTypes = [
 		image: threeColumnWithIcon,
 		icon: "fas fa-puzzle-piece",
 		validation: Yup.object().shape({
+			icon1: Yup.string().required("Required"),
+			icon2: Yup.string().required("Required"),
+			icon3: Yup.string().required("Required"),
 			heading1: Yup.string().required("Required"),
 			paragraph1: Yup.string().required("Required"),
 			linkLabel1: Yup.string().required("Required"),
@@ -142,6 +145,9 @@ const blockTypes = [
 			linkUrl3: Yup.string().url("Enter a valid url").required("Required")
 		}),
 		template: {
+			icon1: "",
+			icon2: "",
+			icon3: "",
 			heading1: "",
 			paragraph1: "",
 			linkLabel1: "",
@@ -265,6 +271,10 @@ const blockTypes = [
 		image: twoByTwoInformation,
 		icon: "fas fa-puzzle-piece",
 		validation: Yup.object().shape({
+			icon1: Yup.string().required("Required"),
+			icon2: Yup.string().required("Required"),
+			icon3: Yup.string().required("Required"),
+			icon4: Yup.string().required("Required"),
 			heading: Yup.string().required("Required"),
 			paragraph: Yup.string().required("Required"),
 			heading1: Yup.string().required("Required"),
@@ -278,6 +288,10 @@ const blockTypes = [
 			imageUrl: Yup.string().nullable().required("Required")
 		}),
 		template: {
+			icon1: "",
+			icon2: "",
+			icon3: "",
+			icon4: "",
 			heading: "",
 			paragraph: "",
 			heading1: "",
