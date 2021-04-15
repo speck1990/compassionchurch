@@ -1,5 +1,6 @@
 import PageHeader from "./sections/PageHeader";
 import AboutUs from "./sections/AboutUs";
+import Button from "./sections/Button";
 import Body from "./sections/Body";
 import Slider from "./sections/Slider";
 import PictureAndText from "./sections/PictureAndText";
@@ -102,6 +103,20 @@ const blockTypes = [
 			subHeading: "",
 			heading: "",
 			body: ""
+		}
+	},
+	{
+		type: "button",
+		component: Button,
+		image: slider,
+		icon: "fas fa-puzzle-piece",
+		validation: Yup.object().shape({
+			buttonLabel: Yup.string().required("Required"),
+			buttonLink: Yup.string().url("Enter a valid url").required("Required")
+		}),
+		template: {
+			buttonLabel: "",
+			buttonLink: ""
 		}
 	},
 	{

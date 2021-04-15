@@ -51,3 +51,7 @@
 .about-charry h4.title-post {
 	color: #222222;
 }
+
+section ~ .button-section {
+	padding-bottom: 10px;
+}
