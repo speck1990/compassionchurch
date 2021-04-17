@@ -38,7 +38,7 @@ const PageState = props => {
 		setLoading();
 
 		try {
-			const res = await axios.get(`http://${process.env.REACT_APP_URL}/api/pages`);
+			const res = await axios.get(`${process.env.REACT_APP_URL}/api/pages`);
 			dispatch({ type: GET_PAGES, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -64,7 +64,7 @@ const PageState = props => {
 				return dispatch({ type: PAGE_ERROR, payload: errors });
 			}
 
-			const res = await axios.post(`http://${process.env.REACT_APP_URL}/api/pages`, page, config);
+			const res = await axios.post(`${process.env.REACT_APP_URL}/api/pages`, page, config);
 			dispatch({ type: ADD_PAGE, payload: res.data });
 		} catch (err) {
 			dispatch({
@@ -90,7 +90,7 @@ const PageState = props => {
 				return dispatch({ type: PAGE_ERROR, payload: errors });
 			}
 
-			const res = await axios.put(`http://${process.env.REACT_APP_URL}/api/pages/${page._id}`, page, config);
+			const res = await axios.put(`${process.env.REACT_APP_URL}/api/pages/${page._id}`, page, config);
 			dispatch({ type: UPDATE_PAGE, payload: res.data });
 		} catch (err) {
 			console.log(err);
@@ -105,7 +105,7 @@ const PageState = props => {
 		setLoading();
 
 		try {
-			await axios.delete(`http://${process.env.REACT_APP_URL}/api/pages/${id}`);
+			await axios.delete(`${process.env.REACT_APP_URL}/api/pages/${id}`);
 		} catch (err) {
 			dispatch({
 				type: PAGE_ERROR,
@@ -122,7 +122,7 @@ const PageState = props => {
 
 		if (id) {
 			try {
-				const res = await axios.get(`http://${process.env.REACT_APP_URL}/api/pages/${id}`);
+				const res = await axios.get(`${process.env.REACT_APP_URL}/api/pages/${id}`);
 				dispatch({ type: SET_CURRENT, payload: res.data });
 			} catch (err) {
 				dispatch({
@@ -147,7 +147,7 @@ const PageState = props => {
 		setLoading();
 
 		try {
-			const res = await axios.get(`http://${process.env.REACT_APP_URL}/api/pages/home/${id}`);
+			const res = await axios.get(`${process.env.REACT_APP_URL}/api/pages/home/${id}`);
 			dispatch({ type: SET_HOME, payload: res.data });
 		} catch (err) {
 			console.log(err);
