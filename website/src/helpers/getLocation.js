@@ -22,7 +22,7 @@ const getLocation = async h => {
 		}
 	}
 
-	// location = "okc";
+	location = "okc";
 
 	let url = `${process.env.IP}/api/locations/${location}`;
 
