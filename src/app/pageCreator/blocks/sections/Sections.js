@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import aboutUsImage from "./images/about-us.png";
 import PageContext from "../../../context/page/pageContext";
 import blockTypes from "../blockTypes";
 
