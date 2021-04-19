@@ -55,3 +55,14 @@
 section ~ .button-section {
 	padding-bottom: 10px;
 }
+
+.page-title-heading h2.title {
+	width: 100%;
+	text-align: center;
+	padding: 275px 0 275px 0 !important;
+}
+
+.page-title-heading h2 button {
+	padding: 0 60px 0 58px;
+	font-size: 1rem;
+}
