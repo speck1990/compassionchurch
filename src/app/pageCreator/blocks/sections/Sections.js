@@ -9,7 +9,7 @@ const Sections = ({ addLocation, closeModal }) => {
 	const { addBlock } = pageContext;
 
 	const onClick = sourceIndex => {
-		addBlock({ type: blockTypes[sourceIndex].type, ...blockTypes[sourceIndex].template }, addLocation);
+		addBlock({ type: blockTypes[sourceIndex].type, ...blockTypes[sourceIndex].template });
 		closeModal();
 	};
 
