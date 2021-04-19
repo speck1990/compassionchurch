@@ -162,6 +162,8 @@ const PageState = props => {
 		block._id = uuidv4();
 
 		const updatedContent = [...state.current.content];
+		position = position || updatedContent.length;
+
 		updatedContent.splice(position, 0, block);
 		const updatedCurrent = { ...state.current, content: updatedContent };
 
