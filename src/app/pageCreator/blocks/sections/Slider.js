@@ -18,7 +18,7 @@ const Slider = ({ block, index }) => {
 
 	const handleOnChange = e => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, [e.target.name]: e.target.value } : el)) });
 
-	const paragraphOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, body: value } : el)) });
+	const paragraphOnChange = value => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, heading: value } : el)) });
 
 	const onImageDelete = () => updateCurrent({ ...current, content: current.content.map(el => (el._id === block._id ? { ...block, imageUrl: null } : el)) });
 
@@ -29,8 +29,7 @@ const Slider = ({ block, index }) => {
 			<div className="row">
 				<div className="col-md-12">
 					<Image image={block.imageUrl} onDelete={onImageDelete} onDrop={onImageDrop} error={err.imageUrl} />
-
-					<Input label="Heading" name="heading" type="text" value={block.heading1} error={err.heading} onChange={handleOnChange} />
+					<Paragraph label="Heading" name="heading" value={block.heading} error={err.heading} onChange={paragraphOnChange} />
 					<div className="row">
 						<div className="col-md-6">
 							<Input label="Button Label" name="buttonLabel" type="text" value={block.buttonLabel} error={err.buttonLabel} onChange={handleOnChange} />
