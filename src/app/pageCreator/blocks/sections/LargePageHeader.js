@@ -4,7 +4,7 @@ import Input from "./blocks/Input";
 import Paragraph from "./blocks/Paragraph";
 import PageContext from "../../../context/page/pageContext";
 
-const Slider = ({ block, index }) => {
+const LargePageHeader = ({ block, index }) => {
 	const pageContext = useContext(PageContext);
 
 	const { current, updateCurrent, error } = pageContext;
@@ -44,4 +44,4 @@ const Slider = ({ block, index }) => {
 	);
 };
 
-export default Slider;
+export default LargePageHeader;

@@ -2,7 +2,7 @@ import PageHeader from "./sections/PageHeader";
 import AboutUs from "./sections/AboutUs";
 import Button from "./sections/Button";
 import Body from "./sections/Body";
-import Slider from "./sections/Slider";
+import LargePageHeader from "./sections/LargePageHeader";
 import PictureAndText from "./sections/PictureAndText";
 import ParagraphWithHeading from "./sections/ParagraphWithHeading";
 import ParagraphWithHeadingAndButton from "./sections/ParagraphWithHeadingAndButton";
@@ -27,7 +27,7 @@ import paragraphWithHeading from "./sections/images/paragraph-with-heading.png";
 import paragraphWithHeadingAndButton from "./sections/images/paragraph-with-heading-and-button.png";
 import threeColumnWithIcon from "./sections/images/three-column-with-icon.png";
 import largeImageSectionWithButton from "./sections/images/large-image-section-with-button.png";
-import slider from "./sections/images/slider.png";
+import largePageHeader from "./sections/images/largePageHeader.png";
 import statistics from "./sections/images/statistics.png";
 import staff from "./sections/images/staff.png";
 import ourPrograms from "./sections/images/our-programs.png";
@@ -108,7 +108,7 @@ const blockTypes = [
 	{
 		type: "button",
 		component: Button,
-		image: slider,
+		image: largePageHeader,
 		icon: "fas fa-puzzle-piece",
 		validation: Yup.object().shape({
 			buttonLabel: Yup.string().required("Required"),
@@ -120,9 +120,9 @@ const blockTypes = [
 		}
 	},
 	{
-		type: "slider",
-		component: Slider,
-		image: slider,
+		type: "largePageHeader",
+		component: LargePageHeader,
+		image: largePageHeader,
 		icon: "fas fa-puzzle-piece",
 		validation: Yup.object().shape({
 			imageUrl: Yup.string().nullable().required("Required"),
