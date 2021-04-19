@@ -6,15 +6,10 @@ import { Alert, Button, Modal } from "react-bootstrap";
 import Canvas from "./blocks/Canvas";
 import SaveCancel from "../shared/formElements/SaveCancel";
 import Input from "../shared/formElements/Input";
-import Image from "../shared/formElements/Image";
-import Select from "../shared/formElements/Select";
 import { useParams, useHistory } from "react-router-dom";
-import Checkbox from "../shared/formElements/Checkbox";
+// import Checkbox from "../shared/formElements/Checkbox";
 import slugify from "slugify";
 import Toolbox from "./blocks/Toolbox";
-import Sections from "./blocks/sections/Sections";
-import { v4 as uuidv4 } from "uuid";
-import blockTypes from "./blocks/blockTypes";
 
 const PageForm = props => {
 	const history = useHistory();
@@ -57,14 +52,11 @@ const PageForm = props => {
 		updateCurrent({ ...current, title: e.target.value, slug });
 	};
 
-	const onSelectChange = e => updateCurrent({ ...current, heroButtonLink: e.value });
-
-	const onDateChange = (date, { name }) => updateCurrent({ ...current, [name]: date });
-
-	const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
-
-	const onImageDelete = () => updateCurrent({ ...current, hero: null });
-	const onImageDrop = url => updateCurrent({ ...current, hero: url });
+	// const onSelectChange = e => updateCurrent({ ...current, heroButtonLink: e.value });
+	// const onDateChange = (date, { name }) => updateCurrent({ ...current, [name]: date });
+	// const onCheckboxChange = (value, e) => updateCurrent({ ...current, [e.target.name]: !value });
+	// const onImageDelete = () => updateCurrent({ ...current, hero: null });
+	// const onImageDrop = url => updateCurrent({ ...current, hero: url });
 
 	const setAsHomePage = () => {
 		setHomePage(current._id);
@@ -80,43 +72,14 @@ const PageForm = props => {
 
 	const handleCancel = () => history.push("/pages");
 
-	const reorder = (list, startIndex, endIndex) => {
-		const result = Array.from(list);
-		const [removed] = result.splice(startIndex, 1);
-		result.splice(endIndex, 0, removed);
-
-		return result;
-	};
-
-	const [showSectionModal, setShowSectionModal] = useState(false);
-
-	const closeSectionModal = () => {
-		setShowSectionModal(false);
-	};
-
-	const [addLocation, setAddLocation] = useState(0);
-
 	const onDragEnd = ({ destination, source }) => {
 		if (!destination) return;
 
-		switch (source.droppableId) {
-			case destination.droppableId:
-				const updatedContent = Array.from(current.content);
-				const [removed] = updatedContent.splice(source.index, 1);
-				updatedContent.splice(destination.index, 0, removed);
+		const updatedContent = Array.from(current.content);
+		const [removed] = updatedContent.splice(source.index, 1);
+		updatedContent.splice(destination.index, 0, removed);
 
-				updateCurrent({ ...current, content: updatedContent });
-				break;
-
-			case "toolbox":
-				setShowSectionModal(true);
-				setAddLocation(destination.index);
-				// addBlock({ type: blockTypes[source.index].type, ...blockTypes[source.index].template }, destination.index);
-				break;
-
-			default:
-				break;
-		}
+		updateCurrent({ ...current, content: updatedContent });
 
 		// TODO: Have errors persist after block is moved or added instead of clearing errors
 		clearErrors();
@@ -188,53 +151,28 @@ const PageForm = props => {
 											<Input label="Title" name="title" type="text" value={current.title} error={error.title} onChange={onTitleChange} />
 											<Input label="Slug" name="slug" type="text" value={current.slug} error={error.slug} onChange={onTextChange} disabled />
 											{/* <Input label="Description" name="description" as="textarea" value={current.description} error={error.description} rows="3" onChange={onTextChange} /> */}
-											{/* <Image label="Main Image" onDrop={onImageDrop} onDelete={onImageDelete} image={current.hero} /> */}
-											{!current.home ? (
+											{!current.home && (
 												<Fragment>
 													{/* <Input label="Publish" name="publish" placeholderText="Immediately" type="date" value={current.publish} error={error.publish} onChange={onDateChange} />
 													<Input label="Unpublish" name="unpublish" placeholderText="Never" type="date" value={current.unpublish} error={error.unpublish} onChange={onDateChange} />
 													<Checkbox name="visible" label="Visible" value={current.visible} onCheckboxChange={onCheckboxChange} /> */}
-												</Fragment>
-											) : (
-												<Fragment>
-													{/* <Input label="Tagline" name="heroTagline" type="text" value={current.heroTagline} error={error.heroTagline} onChange={onTextChange} />
-													<Input label="Button Label" name="heroButtonLabel" type="text" value={current.heroButtonLabel} error={error.heroButtonLabel} onChange={onTextChange} />
-													<Select
-														defaultValue={pages.filter(page => page.slug === current.heroButtonLink).map(page => ({ value: page.slug, label: page.title }))}
-														onChange={onSelectChange}
-														name="heroButtonLink"
-														label="Button Link"
-														options={pages.map(page => ({ value: page.slug, label: page.title }))}
-														error={error.heroButtonLink}
-													/> */}
 												</Fragment>
 											)}
 										</div>
 
 										<hr className="mg-y-30" />
 
-										<div className="az-content-label mg-b-5">Page Content</div>
-										<p className="mg-b-20">Drag and drop content blocks onto the page.</p>
+										<div className="row">
+											<div className="col-md-10">
+												<div className="az-content-label mg-b-5">Page Content</div>
+												<p className="mg-b-20">Add content by clicking the button and selecting from the options.</p>
+											</div>
+											<div className="col-md-2">
+												<Toolbox />
+											</div>
+										</div>
 
 										<div className="block-container">
-											<Toolbox />
-
-											<Modal show={showSectionModal} size="lg" dialogClassName="modal-75w" onHide={closeSectionModal}>
-												<Modal.Header closeButton>
-													<Modal.Title>Select a Section Template</Modal.Title>
-												</Modal.Header>
-
-												<Modal.Body>
-													<Sections addLocation={addLocation} closeModal={closeSectionModal} />
-												</Modal.Body>
-
-												<Modal.Footer>
-													<Button variant="outline-light" onClick={closeSectionModal}>
-														Cancel
-													</Button>
-												</Modal.Footer>
-											</Modal>
-
 											<Canvas blocks={current.content} />
 										</div>
 
