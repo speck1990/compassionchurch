@@ -29,6 +29,7 @@ import threeColumnWithIcon from "./sections/images/three-column-with-icon.png";
 import largeImageSectionWithButton from "./sections/images/large-image-section-with-button.png";
 import largePageHeader from "./sections/images/largePageHeader.png";
 import statistics from "./sections/images/statistics.png";
+import button from "./sections/images/button.png";
 import staff from "./sections/images/staff.png";
 import ourPrograms from "./sections/images/our-programs.png";
 import twoByTwoInformation from "./sections/images/two-by-two-information.png";
@@ -108,7 +109,7 @@ const blockTypes = [
 	{
 		type: "button",
 		component: Button,
-		image: largePageHeader,
+		image: button,
 		icon: "fas fa-puzzle-piece",
 		validation: Yup.object().shape({
 			buttonLabel: Yup.string().required("Required"),
