@@ -52,8 +52,9 @@
 	color: #222222;
 }
 
-section ~ .button-section {
-	padding-bottom: 10px;
+.button-section {
+	margin-top: -100px;
+	padding-top: 25px;
 }
 
 .page-title-heading h2.title {
